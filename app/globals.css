@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F8FAFC;
+  --foreground: #1A1832;
+  --skeleton-base: 203 213 225;
+  --skeleton-opacity: 0.6;
+  --skeleton-opacity-dim: 0.3;
+  --skeleton-bg: rgb(var(--skeleton-base) / var(--skeleton-opacity));
+  --skeleton-bg-dim: rgb(var(--skeleton-base) / var(--skeleton-opacity-dim));
+}
+
+@layer base {
+  body {
+    @apply text-foreground font-body overflow-x-hidden selection:bg-primary/20 selection:text-primary;
+    background: var(--background);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .skeleton-block {
+    background-color: var(--skeleton-bg);
+    border-radius: 0.25rem;
+  }
+
+  .skeleton-pulse {
+    animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: var(--skeleton-bg);
+  }
+
+  .skeleton-text {
+    @apply skeleton-pulse h-[0.8em] rounded-sm;
+  }
+
+  .skeleton-circle {
+    @apply skeleton-pulse rounded-full;
+  }
+
+  .skeleton-rect {
+    @apply skeleton-pulse;
+  }
+
+  .touch-target {
+    @apply min-w-[44px] min-h-[44px] flex items-center justify-center;
+  }
+
+  .hero-title {
+    @apply font-headline text-foreground font-black tracking-tighter leading-[1.1];
+    font-size: clamp(3rem, 8vw, 5rem);
+  }
+
+  /* ============================================
+   * 🎯 BENTO CAROUSEL — Grid Areas (7×6)
+   * ============================================ */
+
+  .bento-grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1rem;
+    min-height: 600px;
+    max-height: 800px;
+  }
+
+  /* Slots de Historial (izquierda, 1×1 cada uno) */
+  .bento-slot-history-1 {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .bento-slot-history-2 {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+
+  .bento-slot-history-3 {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+
+  .bento-slot-history-4 {
+    grid-area: 4 / 1 / 5 / 2;
+  }
+
+  /* Slot Hero (CardFull) — 4 cols × 4 rows */
+  .bento-slot-hero {
+    grid-area: 1 / 2 / 5 / 6;
+  }
+
+  /* Slot Next (CardMin) — 2 cols × 4 rows */
+  .bento-slot-next {
+    grid-area: 1 / 6 / 5 / 8;
+  }
+
+  /* Slot Preview Max — 3 cols × 2 rows */
+  .bento-slot-prev-max {
+    grid-area: 5 / 1 / 7 / 4;
+  }
+
+  /* Slots Preview Pequeños — 2 cols × 2 rows cada uno */
+  .bento-slot-prev-1 {
+    grid-area: 5 / 4 / 7 / 6;
+  }
+
+  .bento-slot-prev-2 {
+    grid-area: 5 / 6 / 7 / 8;
+  }
+
+  /* Estado de historial (grayscale + opacity) */
+  .bento-history-inactive {
+    @apply grayscale opacity-50 transition-all duration-300 cursor-pointer;
+  }
+
+  .bento-history-inactive:hover {
+    @apply grayscale-0 opacity-100;
+  }
+
+  /* Slot base (todos los slots) */
+  .bento-slot {
+    @apply relative overflow-hidden rounded-clay h-full;
+  }
+
+  /* ============================================
+   * 🎯 BENTO CAROUSEL — Utilidades adicionales
+   * ============================================ */
+
+  /* History slot fade animation (CSS-only, no Framer Motion) */
+  .bento-history-fade {
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+  }
+
+  .bento-history-fade .product-card-inner {
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  /* Overlay text para cards con imagen de fondo */
+  .card-overlay-text {
+    @apply text-white drop-shadow-md;
+  }
+}
+
+/* ============================================
+ * 🎬 KEYFRAMES — Animaciones globales
+ * ============================================ */
+@keyframes skeleton-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    background-color: var(--skeleton-bg);
+  }
+
+  50% {
+    opacity: 0.5;
+    background-color: var(--skeleton-bg-dim);
+  }
+}
+
+/* ============================================
+ * 📜 UTILIDADES — Scrollbar hide
+ * ============================================ */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,822 @@
+{
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\next-env.d.ts": {
+    "mtime": 1776114930.347541,
+    "hash": "da547da2ebeb322abd0257ae82d0f1bf"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\next.config.js": {
+    "mtime": 1776115006.1880057,
+    "hash": "b305137d78619518475155605e34a906"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\postcss.config.js": {
+    "mtime": 1776115226.0558746,
+    "hash": "8640f9b2e6475cc3f5b1ff4548925765"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\tailwind.config.ts": {
+    "mtime": 1778256347.3627656,
+    "hash": "3381570faf8c2e398d84029b7bb1a11b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\app\\layout.tsx": {
+    "mtime": 1778250637.0111082,
+    "hash": "73541b480aa260ced5cf75b7d35e2e8a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\app\\page.tsx": {
+    "mtime": 1777858207.5383008,
+    "hash": "b35ac85acb466d18aff5ad544de8f1d9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\app\\debug\\page.tsx": {
+    "mtime": 1776351753.077874,
+    "hash": "6d7a879a79b9205103e65b2d0f138007"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\app\\debug\\skeleton\\page.tsx": {
+    "mtime": 1777560958.3708017,
+    "hash": "05868aaf3de7a0b087d3fbff9554fb5d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\index.ts": {
+    "mtime": 1777578489.7497456,
+    "hash": "d3840fb2f99a2030a6998bba009dbd26"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Avatar\\Avatar.tsx": {
+    "mtime": 1778269625.187271,
+    "hash": "086400d5da3f01ac2027963017abf4a4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Avatar\\Avatar.variants.ts": {
+    "mtime": 1778269613.2996085,
+    "hash": "208c811361487e1c2ca785fa34f77daa"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Avatar\\index.ts": {
+    "mtime": 1777578435.319572,
+    "hash": "411b173040abd7844a315e9b0bd9d2c7"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Badge\\Badge.tsx": {
+    "mtime": 1778257842.512351,
+    "hash": "2021facc134e192a4b56a340d7f0cf2e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Badge\\Badge.variants.ts": {
+    "mtime": 1778257845.398513,
+    "hash": "c6e49acaddd0f8ed77c2bae08ff1d7d7"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Badge\\BadgeSkeleton.tsx": {
+    "mtime": 1777563682.587321,
+    "hash": "687986b26c83b88dd940d4c6c00a7972"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Badge\\index.ts": {
+    "mtime": 1777331840.6364863,
+    "hash": "57c877f7090207e63205e941702f77b9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\BentoGrid\\BentoGrid.tsx": {
+    "mtime": 1778269823.2707262,
+    "hash": "4c2ce46580c74299adfe0dc0aefa44f3"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\BentoGrid\\BentoGrid.variants.ts": {
+    "mtime": 1778269802.326578,
+    "hash": "43f6c77da36b334be586451f9e31e3fd"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\BentoGrid\\index.ts": {
+    "mtime": 1777578485.18311,
+    "hash": "b7bbee6bc50c2e6f729a654ab03a79fc"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Button\\Button.tsx": {
+    "mtime": 1778270205.2529998,
+    "hash": "188f6d9153e5425778af5ea45f51d15f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Button\\Button.variants.ts": {
+    "mtime": 1778270223.5497673,
+    "hash": "335e5ec29f7dab95a632733f2a0db960"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Button\\ButtonSkeleton.tsx": {
+    "mtime": 1777563682.587321,
+    "hash": "4a0e63766ea0a97cfc5a7978760daf60"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Button\\index.ts": {
+    "mtime": 1776977369.2774992,
+    "hash": "73bde18142b60508e08d842984bb5aef"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Container\\Container.tsx": {
+    "mtime": 1778272337.4548454,
+    "hash": "40feb369b12ce4eb709cf3a725bfb98d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Container\\Container.variants.ts": {
+    "mtime": 1778270451.4397173,
+    "hash": "e4017583e20b148641956f4187287d60"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Container\\ContainerSkeleton.tsx": {
+    "mtime": 1776980343.328619,
+    "hash": "4b470a881f9270d125f54e42420d6571"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Container\\index.ts": {
+    "mtime": 1777331837.6320534,
+    "hash": "f2f07f8b55bc47deefa5c7b02986e1f9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\IconButton\\IconButton.tsx": {
+    "mtime": 1778272787.3431208,
+    "hash": "055e18f48c3e1571431a47639f6b6755"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\IconButton\\IconButton.variants.ts": {
+    "mtime": 1778272754.4548824,
+    "hash": "77fe45164e3d5ad8ad57477b1c113171"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\IconButton\\IconButtonSkeleton.tsx": {
+    "mtime": 1777563682.5848029,
+    "hash": "4e81fdc566f5fc3628efcff2b8106d32"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\IconButton\\index.ts": {
+    "mtime": 1776979614.4432771,
+    "hash": "c768e703f9704ec03a0cdd0119cf76a4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Input\\index.ts": {
+    "mtime": 1776979598.293326,
+    "hash": "7758222018cbc04415ab2eedac70478a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Input\\Input.tsx": {
+    "mtime": 1777643072.796589,
+    "hash": "6479b55cc4dff3221c6122bee52c6241"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Input\\Input.variants.ts": {
+    "mtime": 1777644468.5540876,
+    "hash": "3ffbca36d4d87db4e394113c5ff8f46b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Input\\InputSkeleton.tsx": {
+    "mtime": 1777644454.14607,
+    "hash": "94b858f0eb791a11c74a69a6416e8ccb"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Logo\\index.ts": {
+    "mtime": 1777331834.205743,
+    "hash": "416b732681aa4cc45dd853cb5112bd79"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Logo\\Logo.tsx": {
+    "mtime": 1776285689.5605686,
+    "hash": "12791941c42d61c85e2a7de3f9784131"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Logo\\Logo.variants.ts": {
+    "mtime": 1777679049.3884916,
+    "hash": "1c0887d8799732857767710195ba3713"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Logo\\LogoSkeleton.tsx": {
+    "mtime": 1777563682.5848029,
+    "hash": "f77a03e7a66208f415958b7ad33994fe"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Price\\index.ts": {
+    "mtime": 1776980966.5719125,
+    "hash": "50e1f929749727fde635145905e7b1f0"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Price\\Price.tsx": {
+    "mtime": 1776283615.059633,
+    "hash": "7d14253d1f5e5a449ae5b05f49001aa5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Price\\Price.variants.ts": {
+    "mtime": 1777644452.4326718,
+    "hash": "e567cf3c28e1604b7582bc8fd44aca8a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Price\\PriceSkeleton.tsx": {
+    "mtime": 1777650103.7848809,
+    "hash": "d5180f48c8eb98215cebecdf2d01530c"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Skeleton\\index.ts": {
+    "mtime": 1776285462.8614182,
+    "hash": "45d642ca4ce4f4ad08cd3386335d420a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Skeleton\\SkeletonBlock.tsx": {
+    "mtime": 1777643804.4805393,
+    "hash": "560daca1b9749733621321471065949d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Skeleton\\SkeletonCircle.tsx": {
+    "mtime": 1777643832.1045244,
+    "hash": "f49645eefcfebd87a02252deab5464a9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\StarRating\\index.ts": {
+    "mtime": 1777675733.7882557,
+    "hash": "2c54086ec2375c4df14e09c32e3f5b7d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\StarRating\\StarRating.tsx": {
+    "mtime": 1777675683.9654818,
+    "hash": "34f5c4383f1049bcfe6d79768ae76084"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\StarRating\\StarRatingSkeleton.tsx": {
+    "mtime": 1777675703.731659,
+    "hash": "019e8989d58a21607d4469d91c2f8478"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\GradientText.tsx": {
+    "mtime": 1776283097.3246114,
+    "hash": "5a80696749b7c61c27fa28575f0bb218"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\GradientTextSkeleton.tsx": {
+    "mtime": 1777643943.8261962,
+    "hash": "8bf4797d2199afd107f59f28cb29cf31"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\Heading.tsx": {
+    "mtime": 1777924740.3960328,
+    "hash": "97c0227adacea9088757e632102cba4c"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\HeadingSkeleton.tsx": {
+    "mtime": 1777643887.3877106,
+    "hash": "2302f54ba58d769aad7c3945869bd394"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\index.ts": {
+    "mtime": 1777644804.2845302,
+    "hash": "908b10c8727d556beafdd34db2267bbe"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\Text.tsx": {
+    "mtime": 1777931754.9869957,
+    "hash": "c598ee5b8543ca56be3ef6f6b113d027"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\TextSkeleton.tsx": {
+    "mtime": 1777643924.1448827,
+    "hash": "daf0820c716f4e16e4c5dd1156b5133d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\atoms\\Typography\\Typography.variants.ts": {
+    "mtime": 1777931706.7623868,
+    "hash": "2e3f7b4405500888fcbd3e3fbfd668dd"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\debug\\SkeletonDebugger.tsx": {
+    "mtime": 1777561858.0373664,
+    "hash": "f1a870955a2708c07fd7f8c3e286a7a4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Card\\Card.tsx": {
+    "mtime": 1777678154.375239,
+    "hash": "b8e38102a04682eca1041d786220588c"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Card\\Card.variants.ts": {
+    "mtime": 1777648426.360406,
+    "hash": "638b2175cca5d68450e549d1cdf6b4a3"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Card\\CardSkeleton.tsx": {
+    "mtime": 1777644018.4688573,
+    "hash": "85f0ac9a137d3bd861f86d7eb6e9e888"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Card\\index.ts": {
+    "mtime": 1777648478.8151462,
+    "hash": "8fbdf442777510e179e552f1f16c6550"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\CTAGroup\\CTAGroup.tsx": {
+    "mtime": 1776702534.5697024,
+    "hash": "f10227b3a266c1eae9fa775ee81fae22"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\CTAGroup\\CTAGroup.variants.ts": {
+    "mtime": 1776713661.968093,
+    "hash": "7e811c0bea06b1c08dfd3c3a93880659"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\CTAGroup\\CTAGroupSkeleton.tsx": {
+    "mtime": 1776982801.7486093,
+    "hash": "2bf3770d8330e101011cacf49790948d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\CTAGroup\\index.ts": {
+    "mtime": 1777649017.5680857,
+    "hash": "f4b70f5d08726bf101b22c658813c6cc"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\FormField\\FormField.tsx": {
+    "mtime": 1777643199.9880629,
+    "hash": "adaf6a27b055145ead3536ded0551fa8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\FormField\\FormField.variants.ts": {
+    "mtime": 1776287253.8704052,
+    "hash": "dd40c5de3c3ace8cf12a6765965af391"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\FormField\\FormFieldSkeleton.tsx": {
+    "mtime": 1777563943.984486,
+    "hash": "560fbd3074ff2463603a46e3da45cf9d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\FormField\\index.ts": {
+    "mtime": 1777648526.6976469,
+    "hash": "13afe3d3b0c262b3adb5e6ef841da577"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\HeroSideSkeleton\\HeroSideSkeleton.tsx": {
+    "mtime": 1777677091.9400258,
+    "hash": "8912f7c41bd068b3540d4c1b9fcad4ed"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\HeroSideSkeleton\\index.ts": {
+    "mtime": 1777677105.6648934,
+    "hash": "e3d975c931affef684b92eb4bdc924bc"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Nav\\index.ts": {
+    "mtime": 1777649014.7522717,
+    "hash": "8bdc9d1c8274ac87910c07f2804e3055"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Nav\\Nav.tsx": {
+    "mtime": 1777578745.3696876,
+    "hash": "220e23f0ee4498e6dbcf1d5c901b74aa"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Nav\\Nav.variants.ts": {
+    "mtime": 1776348654.2012172,
+    "hash": "8c5071345dc415e328fdb1ee127d121d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Nav\\NavSkeleton.tsx": {
+    "mtime": 1777648440.5610356,
+    "hash": "f59ae53699c380f07666ac2af62645b9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\PaginationDots\\index.ts": {
+    "mtime": 1777994849.9916937,
+    "hash": "a863c68dd7abd287d297e9de9e9cbaea"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\PaginationDots\\PaginationDots.tsx": {
+    "mtime": 1777998071.185781,
+    "hash": "6e3534e486fdb00adc99ea282bcb0a3d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\PaginationDots\\PaginationDots.variants.ts": {
+    "mtime": 1777994830.4487593,
+    "hash": "cdfa489bbb34d81d6b70ccc715c30634"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductCard\\index.ts": {
+    "mtime": 1777650092.990107,
+    "hash": "b001cd65b959c084ca75d03875868228"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductCard\\ProductCard.tsx": {
+    "mtime": 1778242309.5647924,
+    "hash": "ea930fa6b5cfbe3af27a9f091aa93726"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductCard\\ProductCard.variants.ts": {
+    "mtime": 1778239255.0776143,
+    "hash": "190b178857d5147838477b8387e8e3a8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductCard\\ProductCardSkeleton.tsx": {
+    "mtime": 1777933226.0952692,
+    "hash": "0cced53bb41d2528cb096fc3412bcaf0"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductInfo\\index.ts": {
+    "mtime": 1777648555.3362515,
+    "hash": "140f7d863d161a1db3b3c6cf0ffb6421"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductInfo\\ProductInfo.tsx": {
+    "mtime": 1776288671.4054663,
+    "hash": "bdc99f4f170b239780d00be82994fcaa"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductInfo\\ProductInfo.variants.ts": {
+    "mtime": 1776288002.1022053,
+    "hash": "137c1a17699b9991d04d43e668bef674"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\ProductInfo\\ProductInfoSkeleton.tsx": {
+    "mtime": 1777559812.3625157,
+    "hash": "3c606c01e6865eb4bb53e30f2646b9ef"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\SearchBar\\index.ts": {
+    "mtime": 1777648566.9654963,
+    "hash": "011fab9e1914eb3f8f0796eec4e5faf8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\SearchBar\\SearchBar.tsx": {
+    "mtime": 1776357778.6200988,
+    "hash": "4e867c35fc3efd574c86f98fb4b99d9f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\SearchBar\\SearchBar.variants.ts": {
+    "mtime": 1776285926.1747816,
+    "hash": "f9a8dd302f715ce5eef78320f49e45a4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\SearchBar\\SearchBarSkeleton.tsx": {
+    "mtime": 1777648458.063259,
+    "hash": "388183e083ed37b2496df82628498f63"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Skeleton\\index.ts": {
+    "mtime": 1776283461.9680958,
+    "hash": "6d6f4049daefaa4dca6abbfbbd89fed2"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Skeleton\\SkeletonCard.tsx": {
+    "mtime": 1776282043.9646034,
+    "hash": "79e5ccd18b9bf031c44d1b2145249a4b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\Skeleton\\SkeletonText.tsx": {
+    "mtime": 1776282062.5088432,
+    "hash": "297315e31fd19bf6a869945e5fa54c3a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\TestimonialCard\\index.ts": {
+    "mtime": 1777675814.9382887,
+    "hash": "0e0943c6511544b4a5b4da27d2ab94e8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\TestimonialCard\\TestimonialCard.tsx": {
+    "mtime": 1777675774.8370814,
+    "hash": "12cc9f84a8f5405c3cc5b5677822eb20"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\TestimonialCard\\TestimonialCardSkeleton.tsx": {
+    "mtime": 1777675796.0942109,
+    "hash": "875ba08503f02eeec72b6068ed355bf5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideoCard\\index.ts": {
+    "mtime": 1777654253.2404752,
+    "hash": "2ba3c394b28bebfbb3b8f97245c0b020"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideoCard\\VideoCard.tsx": {
+    "mtime": 1777654224.4271407,
+    "hash": "be1efc1eb24f49edf5e6fe2af1400ed5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideoCard\\VideoCardSkeleton.tsx": {
+    "mtime": 1777654221.406364,
+    "hash": "a53c9577ac7f6cd08e4dbb88dcbc0338"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideosSection\\index.ts": {
+    "mtime": 1777654350.1344104,
+    "hash": "431000b0b072206e370bb9a7709445af"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideosSection\\VideosSection.tsx": {
+    "mtime": 1777654301.9706607,
+    "hash": "03be0cd3d6f0e55b88787e50e15361b4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\molecules\\VideosSection\\VideosSectionSkeleton.tsx": {
+    "mtime": 1777654328.0276299,
+    "hash": "03a56655231bbc63447131314e57124f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\BentoCarousel\\BentoCarousel.tsx": {
+    "mtime": 1778010907.695554,
+    "hash": "26a52319ff7b1aee0aa0781c78812f87"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\BentoCarousel\\BentoCarousel.variants.ts": {
+    "mtime": 1778019151.6908855,
+    "hash": "592a48fb2363bf676b7a02bdb637a16d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\BentoCarousel\\index.ts": {
+    "mtime": 1777983525.4447541,
+    "hash": "fc96c01560e67ae5f11f874342484d7a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ContactSection\\ContactSection.tsx": {
+    "mtime": 1776717875.3140514,
+    "hash": "bf94d1b764c0b989d44a337ce5e54491"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ContactSection\\ContactSectionSkeleton.tsx": {
+    "mtime": 1777559163.7598467,
+    "hash": "ec556c00f1a5e97a791a4dda918b6512"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ContactSection\\index.ts": {
+    "mtime": 1777560461.4199648,
+    "hash": "7b47665d7da52300f447ee28dad2891e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Footer\\Footer.tsx": {
+    "mtime": 1777695349.4943213,
+    "hash": "1f699484dcc57af08a01d431e6d51f53"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Footer\\FooterSkeleton.tsx": {
+    "mtime": 1777695362.3831272,
+    "hash": "f598f48d89133ea553140f5a10e68490"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Footer\\index.ts": {
+    "mtime": 1777647099.4611268,
+    "hash": "1c8f23e32ee58c8475902bf08fa11a9a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Header\\Header.tsx": {
+    "mtime": 1777339433.1803946,
+    "hash": "937740551b083eff7de4000cc6320c0f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Header\\HeaderSkeleton.tsx": {
+    "mtime": 1777558807.5565162,
+    "hash": "f3e51b93b6fe2b161b6a903c0011b090"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Header\\index.ts": {
+    "mtime": 1777647103.8100054,
+    "hash": "14dfe02e2c6035175403fd02e81a2d07"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Hero\\Hero.tsx": {
+    "mtime": 1777412271.1122894,
+    "hash": "5f1a37ec2834c51bf40a1abc9bc79617"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Hero\\HeroSkeleton.tsx": {
+    "mtime": 1777558768.9079103,
+    "hash": "d2eba2e37956936ffdb5c646b38fb716"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Hero\\index.ts": {
+    "mtime": 1777559083.6665003,
+    "hash": "d3eb6d0959ab122a9bdde530279deeda"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\HeroSplit\\HeroSplit.tsx": {
+    "mtime": 1778254533.9014533,
+    "hash": "c137da79f2920c773107865981f46775"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\HeroSplit\\HeroSplitSkeleton.tsx": {
+    "mtime": 1777683009.9169838,
+    "hash": "5e205fd90d89968b22c9f016cb4bca33"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\HeroSplit\\index.ts": {
+    "mtime": 1777677124.961065,
+    "hash": "1d9612c7b57a13bf76c90cc4955ecd1b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NavbarSticky\\index.ts": {
+    "mtime": 1777677152.938955,
+    "hash": "e22308323a674a7f64e68fef14a8a541"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NavbarSticky\\NavbarSticky.tsx": {
+    "mtime": 1777682808.848668,
+    "hash": "a2bad8dcee9ba6476a46bdee61f5b1ce"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NavbarSticky\\NavbarStickySkeleton.tsx": {
+    "mtime": 1777682858.3580344,
+    "hash": "0a9a7ecf2f70d1f6a773ced18249754d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NewsSection\\index.ts": {
+    "mtime": 1777676966.1183417,
+    "hash": "ba4f82e3f51e9f782b976d8760525579"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NewsSection\\NewsSection.tsx": {
+    "mtime": 1777694707.7813451,
+    "hash": "f0f4f11cb9088c92387d5dc231f36875"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\NewsSection\\NewsSectionSkeleton.tsx": {
+    "mtime": 1777694732.3744764,
+    "hash": "0c2be14e7b3bc75fa67e4614df3e921f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ProductGrid\\index.ts": {
+    "mtime": 1777650460.392652,
+    "hash": "e1838a4e10a648517658a5df6d2d3489"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ProductGrid\\ProductGrid.tsx": {
+    "mtime": 1777850442.719698,
+    "hash": "5decfd9aec05da7c27b7f9d17edccd3d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\ProductGrid\\ProductGridSkeleton.tsx": {
+    "mtime": 1777683381.6444345,
+    "hash": "97cc230404a3df6f566f0f61d4ff4790"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Skeleton\\HeroSkeleton.tsx": {
+    "mtime": 1776282111.9915998,
+    "hash": "71e7b1701c1e0642502c3349301f062b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Skeleton\\index.ts": {
+    "mtime": 1776349229.2706764,
+    "hash": "daa22d99beebf9b57f2980cd53dbc71d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Skeleton\\PageSkeleton.tsx": {
+    "mtime": 1776283943.914247,
+    "hash": "3714895c245ed97eb6a28a09be4773c1"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Skeleton\\ProductSkeleton.tsx": {
+    "mtime": 1776282028.9999743,
+    "hash": "1bd4048eafadc803f02ad05591830aac"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Testimonials\\index.ts": {
+    "mtime": 1777676017.8544514,
+    "hash": "0d0cb9c89fcb86ca110d7fac42c8f959"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Testimonials\\Testimonials.tsx": {
+    "mtime": 1777730620.4483864,
+    "hash": "a608eb58e020976995180dd83ca70a76"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\Testimonials\\TestimonialsSkeleton.tsx": {
+    "mtime": 1777695075.7700088,
+    "hash": "e97264f5c75ef212819f9a988fb13fc8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\VideosSection\\index.ts": {
+    "mtime": 1777654350.1344104,
+    "hash": "431000b0b072206e370bb9a7709445af"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\VideosSection\\VideosSection.tsx": {
+    "mtime": 1777695173.7062066,
+    "hash": "5c4b4d078f9c329df591126c8774b7cb"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\VideosSection\\VideosSectionSkeleton.tsx": {
+    "mtime": 1777695194.0561492,
+    "hash": "0499120188ae5c15810db6bc08ef0531"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\WorkWithUs\\index.ts": {
+    "mtime": 1777676565.5926733,
+    "hash": "130a45b86e9031398c3ca8d6a023b6b4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\WorkWithUs\\WorkWithUs.tsx": {
+    "mtime": 1777694906.9220347,
+    "hash": "4d6c58211021ed0e1c8e814f20267ec3"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\organisms\\WorkWithUs\\WorkWithUsSkeleton.tsx": {
+    "mtime": 1777694928.5849023,
+    "hash": "31111aa9b07b78ae61fdec6b07775086"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\HomeTemplate.tsx": {
+    "mtime": 1777575628.702575,
+    "hash": "d6e946ac2275d19d886c6bdc5019be37"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\HomeTemplateSkeleton.tsx": {
+    "mtime": 1777559376.8341682,
+    "hash": "7b02c6b0a3ddd06f42dfbcbb2360334d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\index.ts": {
+    "mtime": 1777560464.6242797,
+    "hash": "d4f1b1ef40979f78a9c8a4c682eb431c"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\MarketTemplate.tsx": {
+    "mtime": 1776351360.6431413,
+    "hash": "358f3109a3093add8c73ef415964f992"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\ProductDetailTemplate.tsx": {
+    "mtime": 1776351382.8091016,
+    "hash": "7f103485c248a387be090c765efa77e6"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\HomeTemplateV2\\HomeTemplateV2.tsx": {
+    "mtime": 1777858166.1390193,
+    "hash": "9f077b837f1b555ef06ff6c064ef42cd"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\components\\templates\\HomeTemplateV2\\index.ts": {
+    "mtime": 1777677333.97666,
+    "hash": "b945991f290fb2c3f90752ac22dd2ea5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\index.ts": {
+    "mtime": 1777643165.829874,
+    "hash": "894a1de97e3511f82302b5482d91b45f"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useCart.ts": {
+    "mtime": 1776351170.4336495,
+    "hash": "e2a0cb003f0a2101cd3e8eccf55d1716"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useDebounce.ts": {
+    "mtime": 1776350751.2697906,
+    "hash": "106810c01f82a0c90be64da250bc345c"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useFavorites.ts": {
+    "mtime": 1776350844.4125295,
+    "hash": "501ecd279850d48e32df3d39932c5f67"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useImageFallback.ts": {
+    "mtime": 1777578706.6042068,
+    "hash": "a761fb2b52be36522fb22173f1ac34d8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useLocalStorage.ts": {
+    "mtime": 1776350742.6528256,
+    "hash": "4910d71a43aae4613c9fd07008f88c8e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\useMediaQuery.ts": {
+    "mtime": 1776350757.6917887,
+    "hash": "b500f1eb2c399fa6f4dc2e1502c1255e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\hooks\\usePasswordToggle.ts": {
+    "mtime": 1777643101.5079398,
+    "hash": "4e3257a6dba51cd18a54456e2a0928c6"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\lib\\data.ts": {
+    "mtime": 1778242391.177938,
+    "hash": "cfcda1b344dd0f820c8d25e83e55ef0b"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\lib\\utils\\cn.ts": {
+    "mtime": 1776200930.736831,
+    "hash": "d9837f38cc05303254571985e3164050"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\lib\\utils\\data.ts": {
+    "mtime": 1777647328.5377343,
+    "hash": "cd363481ed86ef4bf4447659f7a3dfe4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\lib\\utils\\index.ts": {
+    "mtime": 1777647321.7199633,
+    "hash": "8bf5d9f9cca587ae8af21a31dd073313"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\src\\lib\\utils\\api\\products.ts": {
+    "mtime": 1776350405.9142323,
+    "hash": "39785a601698495d65a38ed26303cb04"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\ARCHITECTURE.md": {
+    "mtime": 1778239531.0379632,
+    "hash": "00e1205da007b4ae774d83b9c5ddd236"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\01-SYMBOL-MAP.md": {
+    "mtime": 1778246933.738325,
+    "hash": "bd2c7862d30e159e39af4abae072365e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\02-COMPONENT-REGISTRY.md": {
+    "mtime": 1778246998.0294971,
+    "hash": "4fb2b4a55b50b427c0b045e3a6630925"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\03-CVA-DICTIONARY.md": {
+    "mtime": 1778247054.8161595,
+    "hash": "97b605b6888e8f6253fc47aab04a8188"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\04-DATA-LOGIC.md": {
+    "mtime": 1778247113.7283223,
+    "hash": "18802ac90a2ec3f4d28fdf9a1d3de5c4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\05-REFACTOR-RULES.md": {
+    "mtime": 1778248188.0186336,
+    "hash": "d3d87b30fc6cc2a1e546422b452d0ad0"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\CONTEXT\\06-DEBT-LOG.md": {
+    "mtime": 1778249812.2041957,
+    "hash": "e65d0d2ec377dd8a6221b713ea955b7e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\andres-felipe.jpg": {
+    "mtime": 1777678040.8285778,
+    "hash": "af2bdca70787a6dc1f4cb0f1899e21fd"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\carlos-eduardo.jpg": {
+    "mtime": 1777678041.2926805,
+    "hash": "c529624e0a2899814fc7bb32bcbd96d9"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\diana-patricia.jpg": {
+    "mtime": 1777678042.703788,
+    "hash": "d755b59f759f127b2100227070011501"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\jorge-enrique.jpg": {
+    "mtime": 1777678042.2265468,
+    "hash": "46a70f1500bbdb815e9a23c847095dee"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\luisa-fernanda.jpg": {
+    "mtime": 1777678040.342738,
+    "hash": "e2d7369e08cec9c2a4090bd28eae3c53"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\maria-camila.jpg": {
+    "mtime": 1777678039.8160717,
+    "hash": "84a3426f21f79aef67077483f058e88a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\artisans\\sofia-alejandra.jpg": {
+    "mtime": 1777678041.7596395,
+    "hash": "05592665fe8994590d0c83c8c94903c4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\hero\\comprador.jpg": {
+    "mtime": 1777678049.8275094,
+    "hash": "222c0fd5179df3ca91c1c44812bcf865"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\hero\\emprendedor.jpg": {
+    "mtime": 1777678049.3160117,
+    "hash": "013d54addfce456629935c229f41a104"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\logo\\JovenPro-by-ZonaPro.png": {
+    "mtime": 1777408720.8498182,
+    "hash": "cb260c3c145ff756bd1b9f2deee5bb79"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\news\\ceramica-colombiana.jpg": {
+    "mtime": 1777678043.1637864,
+    "hash": "aed16eab160dde85a5cb1c2e61e9b8b5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\news\\madera-andes.jpg": {
+    "mtime": 1777678045.692256,
+    "hash": "6392b747f6611ec6650dd87fbdba7ba2"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\news\\plata-esmeraldas.jpg": {
+    "mtime": 1777678046.1791663,
+    "hash": "30c0c346a16a2d06abf93e729dd1d956"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\news\\tejido-wayuu.jpg": {
+    "mtime": 1777678044.2297046,
+    "hash": "ced13ea336172b5e518a22652327ee12"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\aretes-plata.jpg": {
+    "mtime": 1777678036.8750556,
+    "hash": "a186476c2afcd5d065b24ee120287143"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\cartera-cuero.jpg": {
+    "mtime": 1777678037.8996017,
+    "hash": "3c45dc6c3917e69853991b21dc87e5c8"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\collar-esmeraldas.jpg": {
+    "mtime": 1777678039.3346374,
+    "hash": "dd4aecaaf090ad19b7b06ff7ff8f52bb"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\hamaca-santandereana.jpg": {
+    "mtime": 1777678038.858211,
+    "hash": "6ed2527b211084ccd3dacae01e6805dd"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\mochila-wayuu.jpg": {
+    "mtime": 1777678036.3815901,
+    "hash": "905495be1b2d00d4a3ce72b77357c681"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\tabla-nogal.jpg": {
+    "mtime": 1777678037.4076953,
+    "hash": "8bf3d458fc9a9918ca96cda75d163a5e"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\tetera-ceramica.jpg": {
+    "mtime": 1777678038.3806584,
+    "hash": "dfc96a58129be2b9b7f6cab4b6b59748"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\products\\vasija-raku.jpg": {
+    "mtime": 1777678035.8944118,
+    "hash": "1a3835c517bbc5d488db6a49cdc967cf"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\testimonials\\andres-lopez.jpg": {
+    "mtime": 1777678048.6918423,
+    "hash": "093e089e74bb5d382ecc100343090f18"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\testimonials\\camila-fernandez.jpg": {
+    "mtime": 1777678048.1398237,
+    "hash": "d9c01a5c81fcd0bb853bbb92b0f38bfe"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\testimonials\\esteban-murillo.jpg": {
+    "mtime": 1777678047.5762134,
+    "hash": "63bd0dcf61190da5ef6e3fd52503469d"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\testimonials\\valentina-rios.jpg": {
+    "mtime": 1777678047.1089575,
+    "hash": "cffa89d61e62dc697237ced97d8635e4"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\videos\\thumbnail-madera.jpg": {
+    "mtime": 1777678046.620373,
+    "hash": "6392b747f6611ec6650dd87fbdba7ba2"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\videos\\thumbnail-raku.jpg": {
+    "mtime": 1777678046.332741,
+    "hash": "aed16eab160dde85a5cb1c2e61e9b8b5"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\images\\videos\\thumbnail-wayuu.jpg": {
+    "mtime": 1777678046.4588134,
+    "hash": "ced13ea336172b5e518a22652327ee12"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\amigurumi.webp": {
+    "mtime": 1776116330.8418374,
+    "hash": "46842b3d9dce6b8f3e258fa02987ec5a"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\skillet-01.png": {
+    "mtime": 1776116241.190354,
+    "hash": "dc175e6b3865d0e68bdf5eedf0b50c48"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\skillet-02.png": {
+    "mtime": 1776116243.6920836,
+    "hash": "475b308a8a0c75d5994ffce3582002b7"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\skillet-03.png": {
+    "mtime": 1776116245.4315848,
+    "hash": "0c262084edd32eee5d119e7f884d01df"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\skillet-04.png": {
+    "mtime": 1776116248.603155,
+    "hash": "eb8fae43509561cdf0b3d0f90de0ceb0"
+  },
+  "C:\\Users\\reinaldo jose\\adso\\monitorias senova\\JovenPro_Fase1\\prototipado_interfaz\\back-up\\jovenpro-next-appV2\\public\\placeholders\\teapot-01.png": {
+    "mtime": 1776116229.8327796,
+    "hash": "4f7c6b2b6336f595f6a9a4d9bd724828"
+  }
+}
