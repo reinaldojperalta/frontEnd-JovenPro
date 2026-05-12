@@ -44,7 +44,7 @@ export const headingVariants = cva(
                 secondary: "text-secondary",
                 gradient:
                     "bg-gradient-to-r from-primary-dim to-primary bg-clip-text text-transparent",
-                muted: "text-muted",
+                muted: "text-muted-foreground",
                 inverted: "text-white",
                 skeleton:
                     "bg-white/20 backdrop-blur-md border border-white/30 shadow-inner shadow-white/40 animate-pulse cursor-wait text-transparent select-none",
@@ -96,13 +96,13 @@ export const textVariants = cva("leading-relaxed", {
         variant: {
             default: "text-foreground font-medium",
             body: "text-muted font-body",
-            lead: "text-muted text-xl lg:text-2xl font-medium",
+            lead: "text-muted-foreground text-xl lg:text-2xl font-medium",
             caption: "text-muted text-xs",
             overline:
                 "text-primary text-[10px] font-black uppercase tracking-[0.3em]",
             label:
                 "text-muted text-xs font-black uppercase tracking-[0.2em]",
-            muted: "text-muted",
+            muted: "text-muted-foreground",
             inverted: "text-white/80",
             link: "text-primary hover:text-primary-dim underline-offset-4 hover:underline cursor-pointer",
             success: "text-success font-medium",

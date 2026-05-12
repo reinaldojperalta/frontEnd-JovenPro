@@ -1,16 +1,21 @@
-// components/atoms/Input/index.ts
+// ============================================================================
+// INPUT SYSTEM — Barrel export
+// ============================================================================
+
 export { Input } from "./Input";
 export type { InputProps } from "./Input";
+
 export {
     inputVariants,
     inputWrapperVariants,
-    getIconPadding
+    getIconPadding,
 } from "./Input.variants";
+
 export type {
     InputVariant,
     InputSize,
-    InputState
+    InputState,
 } from "./Input.variants";
 
 export { InputSkeleton } from "./InputSkeleton";
-export type { InputSkeletonProps } from "./InputSkeleton";  
+export type { InputSkeletonProps } from "./InputSkeleton";

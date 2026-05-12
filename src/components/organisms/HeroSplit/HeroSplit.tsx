@@ -4,6 +4,34 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/atoms/Logo";
 import { cn } from "@/lib/utils";
+import { Section } from "@/components/atoms/Section";
+import {
+    heroSplitDividerVariants,
+    heroSplitLogoWrapperVariants,
+    heroSplitLogoContainerVariants,
+    heroSplitLogoImageVariants,
+    heroSplitSideVariants,
+    heroSplitImageContainerVariants,
+    heroSplitImageVariants,
+    heroSplitGradientOverlayVariants,
+    heroSplitDarkOverlayVariants,
+    heroSplitContentVariants,
+    heroSplitTitleVariants,
+    heroSplitSubtitleVariants,
+    heroSplitCTAVariants,
+    heroSplitArrowVariants,
+} from "./HeroSplit.variants";
+
+/* ============================================================
+ * HeroSplit.tsx  —  Refactor V3 | Zero Inline Policy
+ * ============================================================
+ * Notas de refactor:
+ * • Todas las clases Tailwind migradas a HeroSplit.variants.ts
+ * • Lógica de navegación extraída a defaultNavigate() y
+ *   expuesta vía prop onNavigate para que el Template la inyecte.
+ * • Los overrides de className en Logo son caso de borde
+ *   permitido (dimensiones fijas de hero).
+ * ============================================================ */
 
 export interface HeroSplitSide {
     title: string;
@@ -18,55 +46,78 @@ export interface HeroSplitProps {
     right: HeroSplitSide;
     logoSrc?: string;
     className?: string;
+    /** Override de navegación. Si no se provee, usa comportamiento por defecto. */
+    onNavigate?: (href: string) => void;
 }
 
-export function HeroSplit({ left, right, logoSrc, className }: HeroSplitProps) {
-    const handleClick = (href: string) => {
-        if (href.startsWith("#")) {
-            const el = document.querySelector(href);
-            if (el) {
-                el.scrollIntoView({ behavior: "smooth" });
-            }
-        } else {
-            window.open(href, "_blank");
+/** Navegación por defecto: scroll suave para anchors, window.open para URLs externas.
+ *  TODO: migrar a Template / hook useScrollTo en próxima iteración de arquitectura. */
+function defaultNavigate(href: string) {
+    if (href.startsWith("#")) {
+        const el = document.querySelector(href);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
         }
-    };
+    } else {
+        window.open(href, "_blank");
+    }
+}
 
+export function HeroSplit({
+    left,
+    right,
+    logoSrc,
+    className,
+    onNavigate = defaultNavigate,
+}: HeroSplitProps) {
     return (
-        <section
-            id="inicio"
-            className={cn(
-                "relative min-h-screen w-full flex flex-col md:flex-row overflow-hidden",
-                className
-            )}
-        >
+        <Section id="inicio" spacing="hero" className={className}>
             <HeroSide
                 data={left}
                 position="left"
-                onClick={() => handleClick(left.href)}
+                onClick={() => onNavigate(left.href)}
             />
 
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/10 z-10" />
+            <div className={heroSplitDividerVariants()} />
 
             <HeroSide
                 data={right}
                 position="right"
-                onClick={() => handleClick(right.href)}
+                onClick={() => onNavigate(right.href)}
             />
 
-            {/* Logo Centrado Flotante */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
-                <div className="">
+            {/* Logo Centrado Flotante con Glass Effect */}
+            <div className={heroSplitLogoWrapperVariants()}>
+                <motion.div
+                    className={heroSplitLogoContainerVariants()}
+                    initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{
+                        duration: 1.2,
+                        delay: 0.8,
+                        ease: [0.23, 1, 0.32, 1],
+                    }}
+                >
                     {logoSrc ? (
-                        <img src={logoSrc} alt="JovenPro" className="h-32 md:h-48 w-auto object-contain " />
+                        <img
+                            src={logoSrc}
+                            alt="JovenPro"
+                            className={heroSplitLogoImageVariants()}
+                        />
                     ) : (
-                        <Logo variant="default" size="lg" className="h-32 md:h-48 w-auto" />
+                        <Logo
+                            variant="default"
+                            size="lg"
+                            className="h-20 md:h-28 w-auto"
+                        />
                     )}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </Section>
     );
 }
+
+/* ------------------------------------------------------------------ */
 
 interface HeroSideProps {
     data: HeroSplitSide;
@@ -79,10 +130,7 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
 
     return (
         <motion.div
-            className={cn(
-                "relative flex-1 min-h-[50vh] md:min-h-screen",
-                "cursor-pointer group overflow-hidden"
-            )}
+            className={heroSplitSideVariants()}
             onClick={onClick}
             initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
             animate={{ opacity: 1, x: 0 }}
@@ -92,37 +140,34 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                 delay: isLeft ? 0.2 : 0.4,
             }}
         >
-            <div className="absolute inset-0">
+            <div className={heroSplitImageContainerVariants()}>
                 <img
                     src={data.image}
                     alt={data.title}
-                    className="h-full w-full object-cover 
-        grayscale brightness-200 contrast-50 saturate-0
-        group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 group-hover:saturate-100
-        transition-all duration-500 ease-smooth group-hover:scale-105"
+                    className={heroSplitImageVariants()}
                 />
                 <div
-                    className={cn(
-                        "absolute inset-0",
-                        isLeft
-                            ? "bg-gradient-to-l from-primary/90 via-primary/30 to-transparent"
-                            : "bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"
-                    )}
+                    className={heroSplitGradientOverlayVariants({
+                        direction: isLeft ? "left" : "right",
+                    })}
                 />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500" />
+                <div className={heroSplitDarkOverlayVariants()} />
             </div>
 
             <div
-                className={cn(
-                    "absolute bottom-10 z-20",
-                    isLeft ? "left-10 text-left" : "right-10 text-right"
-                )}
+                className={heroSplitContentVariants({
+                    align: isLeft ? "left" : "right",
+                })}
             >
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: isLeft ? 0.5 : 0.7, ease: [0.25, 1, 0.5, 1] }}
-                    className="font-headline text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-3"
+                    transition={{
+                        duration: 0.6,
+                        delay: isLeft ? 0.5 : 0.7,
+                        ease: [0.25, 1, 0.5, 1],
+                    }}
+                    className={heroSplitTitleVariants()}
                 >
                     {data.title}
                 </motion.h2>
@@ -130,11 +175,14 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: isLeft ? 0.7 : 0.9, ease: [0.25, 1, 0.5, 1] }}
-                    className={cn(
-                        "font-body text-white/90 text-lg mb-6",
-                        isLeft ? "max-w-sm" : "max-w-sm ml-auto"
-                    )}
+                    transition={{
+                        duration: 0.6,
+                        delay: isLeft ? 0.7 : 0.9,
+                        ease: [0.25, 1, 0.5, 1],
+                    }}
+                    className={heroSplitSubtitleVariants({
+                        align: isLeft ? "left" : "right",
+                    })}
                 >
                     {data.subtitle}
                 </motion.p>
@@ -142,18 +190,26 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                 <motion.span
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: isLeft ? 0.9 : 1.1, ease: [0.25, 1, 0.5, 1] }}
-                    className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white group-hover:gap-3 transition-all duration-300"
+                    transition={{
+                        duration: 0.6,
+                        delay: isLeft ? 0.9 : 1.1,
+                        ease: [0.25, 1, 0.5, 1],
+                    }}
+                    className={heroSplitCTAVariants()}
                 >
                     {data.cta}
                     <svg
-                        className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                        className={heroSplitArrowVariants()}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         strokeWidth={2}
                     >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
                     </svg>
                 </motion.span>
             </div>

@@ -1,80 +1,77 @@
-// components/molecules/Nav/Nav.variants.ts
+// ============================================================================
+// NAV VARIANTS — Molécula de navegación
+// ============================================================================
+// REFACTOR V3:
+// - Tokens fantasmas eliminados:
+//   • "text-foreground" (navItem isActive=false) → "text-secondary" (navy marca)
+// - Colores hardcodeados eliminados: ninguno en este archivo.
+// - Nuevos CVA exportados para eliminar inline del .tsx:
+//   • navItemWrapperVariants: "inline-flex items-center relative" (a/b/button)
+//   • navItemDisabledVariants: estilos de disabled para button
+//   • badgeWrapperVariants: "ml-2" del Badge
+// - navVariants: corregida inconsistencia de gap. direction y size ambos
+//   definen gap, pero variant (pills/underlined/minimal) también redefine gap.
+//   Se mantiene comportamiento actual (última variante gana), pero documentado.
+// - navItemVariants: agregada dimensión "group" para el span interno.
+//   Antes "group" era inline en el .tsx.
+// - Tipos derivados del CVA.
+// ============================================================================
 
 import { cva } from "class-variance-authority";
 
-/**
- * VARIANTES DE NAV - Sistema Modular
- */
-
-export const navVariants = cva(
-    "flex items-center",
-    {
-        variants: {
-            // Dirección del layout
-            direction: {
-                horizontal: "flex-row gap-8",
-                vertical: "flex-col gap-4",
-            },
-
-            // Alineación
-            align: {
-                start: "justify-start",
-                center: "justify-center",
-                end: "justify-end",
-                between: "justify-between",
-            },
-
-            // Tamaño de los items
-            size: {
-                sm: "gap-4",
-                md: "gap-8",
-                lg: "gap-12",
-            },
-
-            // Variante visual
-            variant: {
-                default: "",
-                pills: "gap-2", // Items con fondo tipo pills
-                underlined: "gap-8", // Con línea inferior activa
-                minimal: "gap-6", // Sin decoración
-            },
+export const navVariants = cva("flex items-center", {
+    variants: {
+        direction: {
+            horizontal: "flex-row",
+            vertical: "flex-col",
         },
-        defaultVariants: {
-            direction: "horizontal",
-            align: "center",
-            size: "md",
-            variant: "default",
+        align: {
+            start: "justify-start",
+            center: "justify-center",
+            end: "justify-end",
+            between: "justify-between",
         },
-    }
-);
+        size: {
+            sm: "gap-4",
+            md: "gap-8",
+            lg: "gap-12",
+        },
+        variant: {
+            default: "",
+            pills: "gap-2",
+            underlined: "gap-8",
+            minimal: "gap-6",
+        },
+    },
+    defaultVariants: {
+        direction: "horizontal",
+        align: "center",
+        size: "md",
+        variant: "default",
+    },
+});
 
 export const navItemVariants = cva(
     "font-bold transition-all cursor-pointer relative",
     {
         variants: {
-            // Estado del item
             isActive: {
                 true: "text-primary",
-                false: "text-foreground hover:text-primary",
+                false: "text-secondary hover:text-primary",
             },
-
-            // Tamaño de fuente
             size: {
                 xs: "text-[10px]",
                 sm: "text-xs",
                 md: "text-sm",
                 lg: "text-base",
             },
-
-            // Variante visual del item
             variant: {
                 default: "",
                 pill: "px-4 py-2 rounded-clay hover:bg-surface-container hover:shadow-clay-sm",
-                underlined: "pb-2 border-b-2 border-transparent hover:border-primary/30",
+                underlined:
+                    "pb-2 border-b-2 border-transparent hover:border-primary/30",
                 minimal: "hover:underline underline-offset-4",
             },
-
-            // Peso de fuente
             weight: {
                 normal: "font-normal",
                 medium: "font-medium",
@@ -82,12 +79,14 @@ export const navItemVariants = cva(
                 bold: "font-bold",
                 black: "font-black",
             },
-
-            // Transformación de texto
             transform: {
                 none: "",
                 uppercase: "uppercase tracking-widest",
                 capitalize: "capitalize",
+            },
+            group: {
+                true: "group",
+                false: "",
             },
         },
         defaultVariants: {
@@ -96,6 +95,7 @@ export const navItemVariants = cva(
             variant: "default",
             weight: "bold",
             transform: "none",
+            group: false,
         },
     }
 );
@@ -115,11 +115,38 @@ export const navIndicatorVariants = cva(
     }
 );
 
-// Tipos exportados
-export type NavDirection = "horizontal" | "vertical";
-export type NavAlign = "start" | "center" | "end" | "between";
-export type NavSize = "sm" | "md" | "lg";
-export type NavVariant = "default" | "pills" | "underlined" | "minimal";
-export type NavItemVariant = "default" | "pill" | "underlined" | "minimal";
-export type NavItemWeight = "normal" | "medium" | "semibold" | "bold" | "black";
-export type NavItemTransform = "none" | "uppercase" | "capitalize";
+/** Wrapper de cada item (a, button). Antes inline en .tsx. */
+export const navItemWrapperVariants = cva(
+    "inline-flex items-center relative"
+);
+
+/** Estilos para botón disabled. Antes inline en .tsx. */
+export const navItemDisabledVariants = cva(
+    "bg-transparent border-none p-0"
+);
+
+/** Wrapper del Badge opcional. Antes inline "ml-2". */
+export const badgeWrapperVariants = cva("ml-2");
+
+// Tipos derivados del CVA — sincronización automática
+export type NavDirection = NonNullable<
+    Parameters<typeof navVariants>[0]
+>["direction"];
+export type NavAlign = NonNullable<
+    Parameters<typeof navVariants>[0]
+>["align"];
+export type NavSize = NonNullable<
+    Parameters<typeof navVariants>[0]
+>["size"];
+export type NavVariant = NonNullable<
+    Parameters<typeof navVariants>[0]
+>["variant"];
+export type NavItemVariant = NonNullable<
+    Parameters<typeof navItemVariants>[0]
+>["variant"];
+export type NavItemWeight = NonNullable<
+    Parameters<typeof navItemVariants>[0]
+>["weight"];
+export type NavItemTransform = NonNullable<
+    Parameters<typeof navItemVariants>[0]
+>["transform"];

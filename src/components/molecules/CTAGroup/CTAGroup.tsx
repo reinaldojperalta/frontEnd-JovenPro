@@ -1,4 +1,16 @@
-// components/molecules/CTAGroup/CTAGroup.tsx
+// ============================================================================
+// CTA GROUP — Molécula de agrupación de botones de acción
+// ============================================================================
+// REFACTOR V3:
+// - Zero inline classes:
+//   • "flex-col-reverse sm:flex-row" → dimensión reverseOnMobile en CVA
+//   • "w-full sm:w-auto" por botón → eliminado. El CVA del contenedor ya
+//     aplica [&>button]:w-full sm:[&>button]:w-auto via fullWidthMobile.
+// - Consumo de Button: correcto. Solo props de variante, sin clases arbitrarias.
+// - action.className se propaga al Button como override puntual (excepción
+//   documentada en ATOMOS_CONSUMO.md).
+// - Tipos importados desde .variants.ts (derivados del CVA).
+// ============================================================================
 
 import React, { forwardRef } from "react";
 import { Button, type ButtonProps } from "@/components/atoms/Button";
@@ -7,94 +19,38 @@ import {
     type CTAGroupDirection,
     type CTAGroupAlign,
     type CTAGroupGap,
-    type CTAGroupVerticalAlign
+    type CTAGroupVerticalAlign,
 } from "./CTAGroup.variants";
 import { cn } from "@/lib/utils";
 
-// ============================================
-// TIPOS DE DATOS
-// ============================================
-
-// ✅ CORREGIDO: No extender ButtonProps, definir explícitamente
-// para evitar conflictos de tipos con 'icon'
 export interface CTAAction {
-    /** Texto del botón */
     label: string;
-
-    /** Icono como ReactNode (JSX ejecutado) */
     icon?: React.ReactNode;
-
-    /** Handler click */
     onClick?: () => void;
-
-    /** Link href */
     href?: string;
-
-    /** Prioridad del botón */
     priority?: "primary" | "secondary" | "tertiary";
-
-    /** Variante del botón (opcional, para override) */
     variant?: ButtonProps["variant"];
-
-    /** Tamaño del botón */
     size?: ButtonProps["size"];
-
-    /** Posición del icono */
     iconPosition?: "left" | "right";
-
-    /** Estado de loading */
     isLoading?: boolean;
-
-    /** Deshabilitado */
     disabled?: boolean;
-
-    /** Clases adicionales */
     className?: string;
-
-    /** Posición en el grupo (para orden) */
     order?: "first" | "last";
 }
 
-// ============================================
-// INTERFAZ DEL CTAGROUP
-// ============================================
-
 export interface CTAGroupProps
     extends React.HTMLAttributes<HTMLDivElement> {
-    /** Acción principal (botón izquierda/arriba) */
     primaryAction: CTAAction;
-
-    /** Acción secundaria (botón derecha/abajo) */
     secondaryAction?: CTAAction;
-
-    /** Acción terciaria (opcional) */
     tertiaryAction?: CTAAction;
-
-    /** Dirección del layout */
     direction?: CTAGroupDirection;
-
-    /** Alineación horizontal */
     align?: CTAGroupAlign;
-
-    /** Espaciado entre botones */
     gap?: CTAGroupGap;
-
-    /** Alineación vertical de los botones */
     verticalAlign?: CTAGroupVerticalAlign;
-
-    /** Responsive: apilar en móvil */
     responsive?: boolean;
-
-    /** Botones full width en móvil */
     fullWidthMobile?: boolean;
-
-    /** Invertir orden en móvil (cuando responsive=true) */
     reverseOnMobile?: boolean;
 }
-
-// ============================================
-// COMPONENTE CTAGROUP
-// ============================================
 
 const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
     (
@@ -105,7 +61,6 @@ const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
             direction = "horizontal",
             align = "start",
             gap = "sm",
-
             verticalAlign = "center",
             responsive = true,
             fullWidthMobile = true,
@@ -115,14 +70,26 @@ const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
         },
         ref
     ) => {
-        // Preparar acciones en array
         const actions = [
-            { ...primaryAction, key: "primary", defaultPriority: "primary" as const },
-            secondaryAction && { ...secondaryAction, key: "secondary", defaultPriority: "secondary" as const },
-            tertiaryAction && { ...tertiaryAction, key: "tertiary", defaultPriority: "tertiary" as const },
-        ].filter((action): action is NonNullable<typeof action> => Boolean(action));
+            {
+                ...primaryAction,
+                key: "primary",
+                defaultPriority: "primary" as const,
+            },
+            secondaryAction && {
+                ...secondaryAction,
+                key: "secondary",
+                defaultPriority: "secondary" as const,
+            },
+            tertiaryAction && {
+                ...tertiaryAction,
+                key: "tertiary",
+                defaultPriority: "tertiary" as const,
+            },
+        ].filter(
+            (action): action is NonNullable<typeof action> => Boolean(action)
+        );
 
-        // Ordenar según prop order
         const sortedActions = actions.sort((a, b) => {
             if (a.order === "first") return -1;
             if (b.order === "first") return 1;
@@ -131,10 +98,10 @@ const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
             return 0;
         });
 
-        // Determinar variant de cada botón según prioridad
-        const getButtonVariant = (action: typeof sortedActions[0]): ButtonProps["variant"] => {
+        const getButtonVariant = (
+            action: (typeof sortedActions)[0]
+        ): ButtonProps["variant"] => {
             const priority = action.priority || action.defaultPriority;
-
             switch (priority) {
                 case "primary":
                     return action.variant || "primary";
@@ -158,8 +125,8 @@ const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
                         verticalAlign,
                         responsive,
                         fullWidthMobile,
+                        reverseOnMobile,
                     }),
-                    reverseOnMobile && "flex-col-reverse sm:flex-row",
                     className
                 )}
                 {...props}
@@ -174,11 +141,7 @@ const CTAGroup = forwardRef<HTMLDivElement, CTAGroupProps>(
                         isLoading={action.isLoading}
                         disabled={action.disabled}
                         onClick={action.onClick}
-                        className={cn(
-                            // Si es responsive y fullWidthMobile, ajustar
-                            responsive && fullWidthMobile && "w-full sm:w-auto",
-                            action.className
-                        )}
+                        className={action.className}
                     >
                         {action.label}
                     </Button>

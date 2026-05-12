@@ -1,4 +1,6 @@
-// components/molecules/HeroSideSkeleton/index.ts
+// ============================================================================
+// HERO SIDE SKELETON — Barrel export
+// ============================================================================
 
 export { HeroSideSkeleton } from "./HeroSideSkeleton";
 export type { HeroSideSkeletonProps } from "./HeroSideSkeleton";

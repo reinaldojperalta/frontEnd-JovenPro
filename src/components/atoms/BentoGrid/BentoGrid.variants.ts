@@ -1,48 +1,100 @@
 // ============================================================================
-// BENTO GRID VARIANTS — Layout tokens para grid masonry/bento
+// BENTO GRID & ITEM VARIANTS — Sistema de layout unificado
 // ============================================================================
-// REFACTOR V3:
-// - Corregidos tokens de aspect-ratio fantasmas:
-//   • "aspect-bento-square"  → "aspect-bento-small"  (1/1)
-//   • "aspect-bento-portrait" → "aspect-bento-vertical" (3/4)
-//   Estos tokens no existían en tailwind.config.ts y rompían el build silenciosamente.
-// - bg-surface, shadow-clay, rounded-clay: validados contra paleta V3.
+// REFACTOR V4: Grid 16×9 para BentoCarousel
+// - Layout carousel: usa clases CSS puras desde globals.css (bento-grid-v4)
+// - Posiciones nombradas mapeadas a bento-slot-{position}
+// - Nueva dimensión "type" para diferenciar producto / texto / control
 // ============================================================================
 
 import { cva } from "class-variance-authority";
 
-/** Número de columnas del grid (responsive por defecto) */
-export type BentoGridCols = 1 | 2 | 3 | 4;
+/* ============================================================
+ * BENTO GRID (Container)
+ * ============================================================ */
 
-/** Variantes del contenedor grid */
-export const bentoGridVariants = cva(
-    "grid w-full gap-4 md:gap-6",
-    {
-        variants: {
-            cols: {
-                1: "grid-cols-1",
-                2: "grid-cols-1 md:grid-cols-2",
-                3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-                4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
-            },
-        },
-        defaultVariants: {
-            cols: 3,
-        },
-    }
-);
+export type BentoGridLayout = "standard" | "carousel" | "news";
 
-/** Cuántas columnas ocupa un item (responsive) */
+export const bentoGridVariants = cva("grid w-full", {
+    variants: {
+        layout: {
+            standard: "gap-4 md:gap-6",
+            carousel: "bento-grid-v4",
+            news: "grid-cols-1 md:grid-cols-3 gap-6",
+        },
+        cols: {
+            1: "grid-cols-1",
+            2: "grid-cols-1 md:grid-cols-2",
+            3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+            4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+            none: "",
+        },
+    },
+    defaultVariants: {
+        layout: "standard",
+        cols: "none",
+    },
+});
+
+/* ============================================================
+ * BENTO ITEM (Slot)
+ * ============================================================ */
+
+export type BentoItemPosition =
+    // Carousel V4 — 16×9 grid
+    | "subtitle2"
+    | "subtitle"
+    | "history-1"
+    | "history-2"
+    | "history-3"
+    | "history-4"
+    | "hero"
+    | "title"
+    | "next"
+    | "dots"
+    | "catalogo"
+    | "preview-2"
+    | "preview-1"
+    | "preview-max"
+    // Legacy standard/news
+    | "featured"
+    | "compact";
+
+export type BentoItemType = "product" | "text" | "control";
+
 export type BentoItemSpan = 1 | 2 | 3 | "full";
-
-/** Ratio de aspecto del item. Mapea a tokens definidos en tailwind.config.ts */
+export type BentoItemRowSpan = 1 | 2 | 3;
 export type BentoItemRatio = "large" | "small" | "vertical" | "auto";
 
-/** Variantes de cada celda del bento */
 export const bentoItemVariants = cva(
-    "relative overflow-hidden rounded-clay bg-surface shadow-clay transition-all duration-500 ease-smooth hover:shadow-clay-active",
+    "relative overflow-hidden rounded-clay transition-all duration-500 ease-smooth min-h-0 min-w-0",
     {
         variants: {
+            position: {
+                // ── Carousel V4: 16×9 grid ──
+                "subtitle2": "bento-slot-subtitle2",
+                "subtitle": "bento-slot-subtitle",
+                "history-1": "bento-slot-history-1",
+                "history-2": "bento-slot-history-2",
+                "history-3": "bento-slot-history-3",
+                "history-4": "bento-slot-history-4",
+                "hero": "bento-slot-hero",
+                "title": "bento-slot-title",
+                "next": "bento-slot-next",
+                "dots": "bento-slot-dots",
+                "catalogo": "bento-slot-catalogo",
+                "preview-2": "bento-slot-preview-2",
+                "preview-1": "bento-slot-preview-1",
+                "preview-max": "bento-slot-preview-max",
+                // ── Legacy standard/news ──
+                "featured": "col-span-1 md:col-span-2 row-span-2",
+                "compact": "col-span-1",
+            },
+            type: {
+                product: "bg-transparent shadow-clay",
+                text: "bg-surface shadow-clay flex items-center justify-center text-center",
+                control: "bg-primary/5 shadow-clay z-30 !overflow-visible w-full h-full flex items-center justify-center",
+            },
             colSpan: {
                 1: "col-span-1",
                 2: "col-span-1 md:col-span-2",
@@ -55,16 +107,27 @@ export const bentoItemVariants = cva(
                 3: "row-span-3",
             },
             ratio: {
-                large: "aspect-bento-large",      // 4/3 — Hero cards
-                small: "aspect-bento-small",        // 1/1 — Cuadrados (reemplaza "square")
-                vertical: "aspect-bento-vertical",  // 3/4 — Portrait cards (reemplaza "portrait")
-                auto: "aspect-auto h-full",         // Sin forzar ratio, fill disponible
+                large: "aspect-bento-large",
+                small: "aspect-bento-small",
+                vertical: "aspect-bento-vertical",
+                auto: "aspect-auto h-full",
+            },
+            isHistory: {
+                true: "grayscale opacity-50 transition-all duration-300 cursor-pointer hover:grayscale-0 hover:opacity-100",
+                false: "",
             },
         },
         defaultVariants: {
-            colSpan: 1,
-            rowSpan: 1,
+            position: undefined,
+            type: "product",
             ratio: "auto",
+            isHistory: false,
         },
     }
 );
+
+/* ============================================================
+ * Tipos exportados
+ * ============================================================ */
+
+export type BentoGridCols = 1 | 2 | 3 | 4;

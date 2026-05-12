@@ -3,18 +3,14 @@
 // ============================================================================
 // REFACTOR V3:
 // - Agregado "group" al base para soportar group-hover en icono derecho.
-//   Antes el span del icono usaba group-hover pero el botón nunca declaraba
-//   la clase "group", por lo que la animación era un no-op silencioso.
 // - Eliminada variante "icon" y tamaños "icon"/"iconLg": IconButton es átomo
-//   separado. Mantenerlas aquí duplica responsabilidad y viola Atomic Design.
-// - "liquidGlass" renombrado a "skeleton" (estado carga, texto transparente)
-//   y "glass" (visual interactivo, texto visible).
-// - "success" migrado de green-100/green-700 a tokens semánticos V3.
-// - "secondary" usa bg-surface en vez de bg-surface-container para evitar
-//   fondo invisible cuando el botón se renderiza sobre capa 0 (#F8FAFC).
-// - translate arbitrario [2px] reemplazado por utilidad estándar -translate-y-0.5.
-// - Nuevos CVA exportados: buttonLoaderVariants, buttonIconVariants.
-//   Elimina toda clase inline del .tsx.
+//   separado.
+// - "liquidGlass" renombrado a "skeleton" y "glass".
+// - "success" migrado a tokens semánticos V3.
+// - "secondary" usa bg-surface.
+// - translate arbitrario [2px] reemplazado por -translate-y-0.5.
+// - Nuevos CVA: buttonLoaderVariants, buttonIconVariants.
+// - AGREGADO variant "outline" para CTAs secundarios con borde.
 // ============================================================================
 
 import { cva } from "class-variance-authority";
@@ -37,6 +33,12 @@ export const buttonVariants = cva(
                 ghost: [
                     "bg-transparent text-foreground",
                     "hover:bg-surface/50",
+                    "shadow-none",
+                ],
+                outline: [
+                    "bg-transparent text-foreground",
+                    "border-2 border-foreground/20",
+                    "hover:bg-foreground hover:text-background",
                     "shadow-none",
                 ],
                 success: [
@@ -77,10 +79,10 @@ export const buttonVariants = cva(
     }
 );
 
-/** Spinner de carga (Loader2). Antes inline en Button.tsx línea 79. */
+/** Spinner de carga (Loader2). */
 export const buttonLoaderVariants = cva("w-5 h-5 animate-spin shrink-0");
 
-/** Wrapper del icono. Antes inline en Button.tsx líneas 84 y 92. */
+/** Wrapper del icono. */
 export const buttonIconVariants = cva("shrink-0", {
     variants: {
         position: {

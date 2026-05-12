@@ -82,24 +82,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 disabled={isDisabled}
                 {...props}
             >
-                {/* Spinner de loading (izquierda) */}
-                {isLoading && <Loader2 className={cn(buttonLoaderVariants())} />}
+                {/* Cuando asChild, Slot necesita exactamente 1 hijo */}
+                {asChild ? (
+                    children
+                ) : (
+                    <>
+                        {/* Spinner de loading (izquierda) */}
+                        {isLoading && <Loader2 className={cn(buttonLoaderVariants())} />}
 
-                {/* Icono izquierda (solo si no está loading) */}
-                {!isLoading && icon && iconPosition === "left" && (
-                    <span className={cn(buttonIconVariants({ position: "left" }))}>
-                        {icon}
-                    </span>
-                )}
+                        {/* Icono izquierda (solo si no está loading) */}
+                        {!isLoading && icon && iconPosition === "left" && (
+                            <span className={cn(buttonIconVariants({ position: "left" }))}>
+                                {icon}
+                            </span>
+                        )}
 
-                {/* Contenido principal */}
-                {children}
+                        {/* Contenido principal */}
+                        {children}
 
-                {/* Icono derecha */}
-                {!isLoading && icon && iconPosition === "right" && (
-                    <span className={cn(buttonIconVariants({ position: "right" }))}>
-                        {icon}
-                    </span>
+                        {/* Icono derecha */}
+                        {!isLoading && icon && iconPosition === "right" && (
+                            <span className={cn(buttonIconVariants({ position: "right" }))}>
+                                {icon}
+                            </span>
+                        )}
+                    </>
                 )}
             </Comp>
         );

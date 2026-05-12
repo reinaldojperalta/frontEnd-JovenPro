@@ -1,4 +1,25 @@
-// components/molecules/TestimonialCard/TestimonialCard.tsx
+// ============================================================================
+// TESTIMONIAL CARD — Molécula de tarjeta de testimonio
+// ============================================================================
+// REFACTOR V3:
+// - Archivo .variants.ts creado (no existía).
+// - Zero inline classes:
+//   • Wrapper article → testimonialCardVariants
+//   • Header flex → testimonialCardHeaderVariants
+//   • Info container → testimonialCardInfoVariants
+//   • "block truncate" (nombre/rol) → testimonialCardNameVariants / RoleVariants
+//   • Comilla decorativa → testimonialCardQuoteVariants
+//   • "flex-1 leading-relaxed mb-6" → testimonialCardContentVariants
+//   • Footer flex → testimonialCardFooterVariants
+//   • Product image container → testimonialCardProductImageVariants
+//   • Product img → testimonialCardProductImgVariants
+// - BUG CORREGIDO: testimonial.content → testimonial.text. El tipo Testimonial
+//   en data.ts define el campo como "text", no "content".
+// - Consumo de átomos validado:
+//   • Avatar: src, alt, fallback, size, variant via props. Correcto.
+//   • Text: as, weight, size, variant, lineClamp via props. Correcto.
+//   • StarRating: value, size via props. Correcto.
+// ============================================================================
 
 "use client";
 
@@ -6,24 +27,42 @@ import React from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Text } from "@/components/atoms/Typography";
 import { StarRating } from "@/components/atoms/StarRating";
+import {
+    testimonialCardVariants,
+    testimonialCardHeaderVariants,
+    testimonialCardInfoVariants,
+    testimonialCardNameVariants,
+    testimonialCardRoleVariants,
+    testimonialCardQuoteVariants,
+    testimonialCardContentVariants,
+    testimonialCardFooterVariants,
+    testimonialCardProductImageVariants,
+    testimonialCardProductImgVariants,
+    type TestimonialCardSize,
+} from "./TestimonialCard.variants";
 import { cn } from "@/lib/utils";
 import type { Testimonial } from "@/lib/data";
 
 export interface TestimonialCardProps {
     testimonial: Testimonial;
+    size?: TestimonialCardSize;
     className?: string;
 }
 
-export function TestimonialCard({ testimonial, className }: TestimonialCardProps) {
+export function TestimonialCard({
+    testimonial,
+    size = "default",
+    className,
+}: TestimonialCardProps) {
     return (
         <article
             className={cn(
-                "flex flex-col h-full bg-surface-container rounded-clay shadow-clay p-6 md:p-8",
+                testimonialCardVariants({ size }),
                 className
             )}
         >
             {/* Header: Avatar + Info */}
-            <div className="flex items-center gap-4 mb-6">
+            <div className={cn(testimonialCardHeaderVariants())}>
                 <Avatar
                     src={testimonial.avatar}
                     alt={testimonial.name}
@@ -31,11 +70,20 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
                     size="md"
                     variant="solid"
                 />
-                <div className="min-w-0">
-                    <Text as="span" weight="semibold" size="base" className="block truncate">
+                <div className={cn(testimonialCardInfoVariants())}>
+                    <Text
+                        as="span"
+                        weight="semibold"
+                        size="base"
+                        className={cn(testimonialCardNameVariants())}
+                    >
                         {testimonial.name}
                     </Text>
-                    <Text variant="muted" size="sm" className="block truncate">
+                    <Text
+                        variant="muted"
+                        size="sm"
+                        className={cn(testimonialCardRoleVariants())}
+                    >
                         {testimonial.role}
                     </Text>
                 </div>
@@ -43,26 +91,30 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
 
             {/* Decorative quote */}
             <span
-                className="text-primary/10 text-5xl font-serif leading-none mb-2 select-none"
+                className={cn(testimonialCardQuoteVariants())}
                 aria-hidden="true"
             >
                 &ldquo;
             </span>
 
             {/* Content */}
-            <Text variant="body" size="base" className="flex-1 leading-relaxed mb-6">
-                {testimonial.content}
+            <Text
+                variant="body"
+                size="base"
+                className={cn(testimonialCardContentVariants())}
+            >
+                {testimonial.text}
             </Text>
 
             {/* Footer: Rating + Optional Product Image */}
-            <div className="flex items-center justify-between gap-4 pt-4 border-t border-surface-variant/50">
+            <div className={cn(testimonialCardFooterVariants())}>
                 <StarRating value={testimonial.rating} size="sm" />
                 {testimonial.productImage && (
-                    <div className="relative w-12 h-12 rounded-clay-sm overflow-hidden shrink-0 bg-surface-variant">
+                    <div className={cn(testimonialCardProductImageVariants())}>
                         <img
                             src={testimonial.productImage}
                             alt="Producto comprado"
-                            className="w-full h-full object-cover"
+                            className={cn(testimonialCardProductImgVariants())}
                             loading="lazy"
                         />
                     </div>

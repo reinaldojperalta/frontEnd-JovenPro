@@ -1,18 +1,24 @@
-// components/atoms/Price/index.ts
+// ============================================================================
+// PRICE SYSTEM — Barrel export
+// ============================================================================
+
 export { Price } from "./Price";
 export type { PriceProps } from "./Price";
+
 export {
     priceVariants,
     oldPriceVariants,
-    discountBadgeVariants
+    discountBadgeVariants,
 } from "./Price.variants";
+
 export type {
     PriceVariant,
     PriceSize,
     PriceWeight,
     OldPriceVariant,
     OldPricePosition,
-    DiscountVariant
+    DiscountVariant,
 } from "./Price.variants";
+
 export { PriceSkeleton } from "./PriceSkeleton";
 export type { PriceSkeletonProps } from "./PriceSkeleton";

@@ -1,4 +1,23 @@
-// components/molecules/FormField/FormField.tsx
+// ============================================================================
+// FORMFIELD — Molécula de campo de formulario
+// ============================================================================
+// REFACTOR V3:
+// - Zero inline classes:
+//   • "relative" (wrapper icono) → validationBadgeWrapperVariants
+//   • "absolute -top-1 -right-1" (badge validación) → validationBadgeVariants
+//   • "opacity-50 hover:opacity-100" (IconButton) → formFieldActionVariants
+//   • "pt-6" (label) → labelVariants spacing
+//   • Floating label completo → floatingLabelVariants
+//   • "ml-1 text-red-500" (required asterisk) → after: pseudo-elemento en CVA
+//   • "relative" (fieldContainer floating) → fieldContainerVariants layout
+//   • Iconos de validación con colores inline → validationIconVariants
+// - Colores hardcodeados migrados a tokens semánticos (danger, success, muted).
+// - Dead code eliminado: hasIcon/hasAction de fieldContainerVariants.
+// - Tipos importados desde .variants.ts (derivados del CVA).
+// - NOTA: <X className="w-4 h-4" /> se mantiene como excepción documentada.
+//   Los iconos de lucide-react requieren dimensiones via className cuando se
+//   usan como children de IconButton.
+// ============================================================================
 
 import React, { forwardRef } from "react";
 import { Input, type InputProps } from "@/components/atoms/Input";
@@ -7,80 +26,45 @@ import { IconButton } from "@/components/atoms/IconButton";
 import {
     formFieldVariants,
     labelVariants,
+    floatingLabelVariants,
     helperTextVariants,
     fieldContainerVariants,
+    validationIconVariants,
+    validationBadgeWrapperVariants,
+    validationBadgeVariants,
+    formFieldActionVariants,
     type FormFieldState,
     type FormFieldLayout,
     type FormFieldSize,
-    type HelperTextVariant
+    type HelperTextVariant,
 } from "./FormField.variants";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, AlertCircle, Loader2, X } from "lucide-react";
 import { usePasswordToggle } from "@/hooks";
-
-// ============================================
-// TIPOS DE DATOS
-// ============================================
 
 export interface FormFieldValidation {
     isValid: boolean;
     message?: string;
 }
 
-// ============================================
-// INTERFAZ DEL FORMFIELD
-// ============================================
-
-export interface FormFieldProps extends Omit<InputProps, "errorMessage" | "isValid"> {
-    /** ID del campo (para label) */
+export interface FormFieldProps
+    extends Omit<InputProps, "errorMessage" | "isValid" | "state"> {
     id?: string;
-
-    /** Label del campo */
     label?: string;
-
-    /** Texto de ayuda */
     helperText?: string;
-
-    /** Texto de error (sobrescribe helperText) */
     errorMessage?: string;
-
-    /** Texto de éxito */
     successMessage?: string;
-
-    /** Estado del campo */
     state?: FormFieldState;
-
-    /** Layout del campo */
     layout?: FormFieldLayout;
-
-    /** Tamaño del espaciado */
     size?: FormFieldSize;
-
-    /** Campo requerido */
     required?: boolean;
-
-    /** Mostrar icono de estado (validación) */
     showValidationIcon?: boolean;
-
-    /** Icono personalizado de la izquierda */
     leftIcon?: React.ReactNode;
-
-    /** Acción personalizada (botón derecha) */
     rightAction?: React.ReactNode;
-
-    /** Callback al limpiar */
     onClear?: () => void;
-
-    /** Mostrar toggle de contraseña */
     passwordToggle?: boolean;
-
-    /** Clases adicionales */
     className?: string;
 }
-
-// ============================================
-// COMPONENTE FORMFIELD
-// ============================================
 
 const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
     (
@@ -108,9 +92,8 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
         },
         ref
     ) => {
-        // Hook para password toggle
         const passwordState = usePasswordToggle();
-        // Determinar estado efectivo
+
         const effectiveState: FormFieldState = disabled
             ? "disabled"
             : errorMessage
@@ -121,7 +104,6 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                         ? "loading"
                         : state;
 
-        // Determinar mensaje a mostrar
         const effectiveMessage = errorMessage || successMessage || helperText;
         const messageVariant: HelperTextVariant = errorMessage
             ? "error"
@@ -131,42 +113,49 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                     ? "hint"
                     : "default";
 
-        // Icono de validación automático
         const getValidationIcon = () => {
             if (!showValidationIcon) return null;
-
             switch (effectiveState) {
                 case "error":
-                    return <AlertCircle className="w-5 h-5 text-red-500" />;
+                    return (
+                        <AlertCircle
+                            className={cn(validationIconVariants({ state: "error" }))}
+                        />
+                    );
                 case "success":
-                    return <CheckCircle2 className="w-5 h-5 text-green-500" />;
+                    return (
+                        <CheckCircle2
+                            className={cn(validationIconVariants({ state: "success" }))}
+                        />
+                    );
                 case "loading":
-                    return <Loader2 className="w-5 h-5 text-primary animate-spin" />;
+                    return (
+                        <Loader2
+                            className={cn(validationIconVariants({ state: "loading" }))}
+                        />
+                    );
                 default:
                     return null;
             }
         };
 
-        // Renderizar icono izquierdo (combinado)
         const renderLeftIcon = () => {
             const validationIcon = getValidationIcon();
-
             if (leftIcon && validationIcon) {
                 return (
-                    <div className="relative">
+                    <div className={cn(validationBadgeWrapperVariants())}>
                         {leftIcon}
-                        <span className="absolute -top-1 -right-1">{validationIcon}</span>
+                        <span className={cn(validationBadgeVariants())}>
+                            {validationIcon}
+                        </span>
                     </div>
                 );
             }
-
             return validationIcon || leftIcon;
         };
 
-        // Renderizar acción derecha
         const renderRightAction = () => {
             if (rightAction) return rightAction;
-
             if (passwordToggle && !disabled && !isLoading) {
                 return (
                     <IconButton
@@ -175,11 +164,10 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                         size="sm"
                         aria-label="Toggle password visibility"
                         onClick={passwordState.toggle}
-                        className="opacity-50 hover:opacity-100"
+                        className={cn(formFieldActionVariants({ visible: false }))}
                     />
                 );
             }
-
             if (onClear && value) {
                 return (
                     <IconButton
@@ -188,20 +176,19 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                         size="sm"
                         aria-label="Limpiar campo"
                         onClick={onClear}
-                        className="opacity-50 hover:opacity-100"
+                        className={cn(formFieldActionVariants({ visible: false }))}
                     />
                 );
             }
-
             return undefined;
         };
 
-        // Determinar variant del input
-        const inputVariant = effectiveState === "error"
-            ? "error"
-            : effectiveState === "success"
-                ? "success"
-                : "default";
+        const inputVariant =
+            effectiveState === "error"
+                ? "error"
+                : effectiveState === "success"
+                    ? "success"
+                    : "default";
 
         return (
             <div
@@ -211,53 +198,56 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                     className
                 )}
             >
-                {/* Label */}
                 {label && layout !== "floating" && (
                     <label
                         htmlFor={id}
                         className={cn(
                             labelVariants({
                                 size,
-                                state: effectiveState === "loading" ? "default" : effectiveState,
-                                required
-                            }),
-                            "pt-6"
+                                state:
+                                    effectiveState === "loading" ? "default" : effectiveState,
+                                required,
+                                spacing: "top",
+                            })
                         )}
                     >
                         {label}
                     </label>
                 )}
 
-                {/* Floating label */}
                 {label && layout === "floating" && (
                     <label
                         htmlFor={id}
                         className={cn(
-                            "absolute left-4 top-1/2 -translate-y-1/2 transition-all pointer-events-none",
-                            value
-                                ? "text-[10px] -translate-y-8 text-foreground/60"
-                                : "text-base text-foreground/40",
-                            effectiveState === "error" && "text-red-500",
-                            effectiveState === "success" && "text-green-600",
+                            floatingLabelVariants({
+                                hasValue: !!value,
+                                state:
+                                    effectiveState === "loading" ? "default" : effectiveState,
+                                required,
+                            })
                         )}
                     >
                         {label}
-                        {required && <span className="ml-1 text-red-500">*</span>}
                     </label>
                 )}
 
-                {/* Input container */}
-                <div className={cn(
-                    fieldContainerVariants({
-                        hasIcon: !!renderLeftIcon(),
-                        hasAction: !!renderRightAction()
-                    }),
-                    layout === "floating" && "relative"
-                )}>
+                <div
+                    className={cn(
+                        fieldContainerVariants({
+                            layout: layout === "floating" ? "floating" : "default",
+                        })
+                    )}
+                >
                     <Input
                         id={id}
                         variant={inputVariant}
-                        state={effectiveState === "loading" ? "default" : effectiveState}
+                        state={
+                            effectiveState === "loading" ||
+                            effectiveState === "error" ||
+                            effectiveState === "success"
+                                ? "default"
+                                : effectiveState
+                        }
                         disabled={disabled || effectiveState === "disabled"}
                         isLoading={isLoading || effectiveState === "loading"}
                         value={value}
@@ -268,7 +258,6 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                     />
                 </div>
 
-                {/* Helper / Error / Success text */}
                 {effectiveMessage && (
                     <Text
                         as="p"

@@ -28,7 +28,7 @@
 import { cva } from "class-variance-authority";
 
 export const inputVariants = cva(
-    "w-full bg-transparent outline-none transition-all placeholder:text-muted",
+    "w-full bg-transparent outline-none transition-all placeholder:text-muted-light",
     {
         variants: {
             variant: {
@@ -141,12 +141,12 @@ export const inputWrapperVariants = cva(
 
 /** Icono izquierdo del input. Antes inline en Input.tsx línea 75. */
 export const inputIconLeftVariants = cva(
-    "absolute left-4 top-1/2 -translate-y-1/2 text-muted transition-colors group-focus-within:text-primary"
+    "absolute left-4 top-1/2 -translate-y-1/2 text-secondary transition-colors group-focus-within:text-primary"
 );
 
 /** Icono derecho del input. Antes inline en Input.tsx línea 96. */
 export const inputIconRightVariants = cva(
-    "absolute right-4 top-1/2 -translate-y-1/2 text-muted flex items-center justify-center"
+    "absolute right-4 top-1/2 -translate-y-1/2 text-secondary flex items-center justify-center"
 );
 
 /** Spinner de carga (Loader2). Antes inline en Input.tsx línea 76. */

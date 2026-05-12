@@ -20,7 +20,7 @@ export const logoVariants = cva(
         variants: {
             variant: {
                 default: "text-primary [&>span]:text-secondary",
-                inverted: "text-white [&>span]:text-white/80",
+                inverted: "text-white [&>span]:text-muted-foreground/40",
                 monochrome: "text-foreground [&>span]:text-foreground",
                 gradient:
                     "bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent [&>span]:bg-gradient-to-r [&>span]:from-secondary [&>span]:to-secondary-light [&>span]:bg-clip-text [&>span]:text-transparent",

@@ -1,25 +1,39 @@
-// components/molecules/Nav/Nav.tsx
+// ============================================================================
+// NAV — Molécula de navegación
+// ============================================================================
+// REFACTOR V3:
+// - Zero inline classes:
+//   • "inline-flex items-center relative" (a/button) → navItemWrapperVariants
+//   • "bg-transparent border-none p-0" (button disabled) → navItemDisabledVariants
+//   • "group" (span interno) → navItemVariants group dimension
+//   • "ml-2" (Badge wrapper) → badgeWrapperVariants
+//   • "bottom-0" (indicator animated) → navIndicatorVariants (ya incluía bottom-0)
+// - "text-foreground" (item inactivo) → "text-secondary" (navy marca).
+//   "text-foreground" es token de texto principal; en navegación, los items
+//   inactivos deben tener menor énfasis que el activo. secondary (#2D2B52)
+//   sobre surface (#F1F5F9) da contraste 7.5:1, suficiente.
+// - Tipos importados desde .variants.ts (derivados del CVA).
+// - Badge consumido correctamente: variant + size, className via wrapper CVA.
+// ============================================================================
 
 import React, { forwardRef } from "react";
 import { Badge } from "@/components/atoms/Badge";
-import { Text } from "@/components/atoms/Typography";
 import {
     navVariants,
     navItemVariants,
     navIndicatorVariants,
+    navItemWrapperVariants,
+    navItemDisabledVariants,
+    badgeWrapperVariants,
     type NavDirection,
     type NavAlign,
     type NavSize,
     type NavVariant,
     type NavItemVariant,
     type NavItemWeight,
-    type NavItemTransform
+    type NavItemTransform,
 } from "./Nav.variants";
 import { cn } from "@/lib/utils";
-
-// ============================================
-// TIPOS DE DATOS
-// ============================================
 
 export interface NavItem {
     id: string;
@@ -33,54 +47,21 @@ export interface NavItem {
     disabled?: boolean;
 }
 
-// ============================================
-// INTERFAZ DEL NAV
-// ============================================
-
 export interface NavProps {
-    /** Items de navegación */
     items: NavItem[];
-
-    /** Dirección del layout */
     direction?: NavDirection;
-
-    /** Alineación */
     align?: NavAlign;
-
-    /** Tamaño del gap entre items */
     size?: NavSize;
-
-    /** Variante visual del contenedor */
     variant?: NavVariant;
-
-    /** Variante visual de cada item */
     itemVariant?: NavItemVariant;
-
-    /** Tamaño de fuente de los items */
     itemSize?: "xs" | "sm" | "md" | "lg";
-
-    /** Peso de fuente de los items */
     itemWeight?: NavItemWeight;
-
-    /** Transformación de texto */
     itemTransform?: NavItemTransform;
-
-    /** Mostrar indicador de activo */
     showActiveIndicator?: boolean;
-
-    /** Callback al clickear item (si no usa href) */
     onItemClick?: (item: NavItem) => void;
-
-    /** Clases adicionales */
     className?: string;
-
-    /** ID para accesibilidad */
     ariaLabel?: string;
 }
-
-// ============================================
-// COMPONENTE NAV ITEM (interno)
-// ============================================
 
 interface NavItemComponentProps {
     item: NavItem;
@@ -103,46 +84,46 @@ const NavItemComponent: React.FC<NavItemComponentProps> = ({
 }) => {
     const content = (
         <>
-            <span className={cn(
-                navItemVariants({
-                    isActive: item.isActive,
-                    size,
-                    variant,
-                    weight,
-                    transform
-                }),
-                "group" // Para efectos hover en hijos
-            )}>
+            <span
+                className={cn(
+                    navItemVariants({
+                        isActive: item.isActive,
+                        size,
+                        variant,
+                        weight,
+                        transform,
+                        group: true,
+                    })
+                )}
+            >
                 {item.label}
 
-                {/* Indicador de activo (línea inferior) */}
                 {showIndicator && item.isActive && (
-                    <span className={navIndicatorVariants({ variant: "default" })} />
+                    <span
+                        className={cn(navIndicatorVariants({ variant: "default" }))}
+                    />
                 )}
 
-                {/* Indicador animado en hover */}
                 {showIndicator && !item.isActive && variant === "underlined" && (
-                    <span className={cn(
-                        navIndicatorVariants({ variant: "animated" }),
-                        "bottom-0"
-                    )} />
+                    <span
+                        className={cn(navIndicatorVariants({ variant: "animated" }))}
+                    />
                 )}
             </span>
 
-            {/* Badge opcional */}
             {item.badge && (
-                <Badge
-                    variant={item.badgeVariant || "primary"}
-                    size="sm"
-                    className="ml-2"
-                >
-                    {item.badge}
-                </Badge>
+                <span className={cn(badgeWrapperVariants())}>
+                    <Badge
+                        variant={item.badgeVariant || "primary"}
+                        size="sm"
+                    >
+                        {item.badge}
+                    </Badge>
+                </span>
             )}
         </>
     );
 
-    // Handler de click
     const handleClick = (e: React.MouseEvent) => {
         if (item.disabled) {
             e.preventDefault();
@@ -152,12 +133,11 @@ const NavItemComponent: React.FC<NavItemComponentProps> = ({
         onClick?.(item);
     };
 
-    // Renderizar como enlace interno (SPA anchor)
     if (item.href && !item.external) {
         return (
             <a
                 href={item.href}
-                className="inline-flex items-center relative"
+                className={cn(navItemWrapperVariants())}
                 onClick={handleClick}
                 aria-current={item.isActive ? "page" : undefined}
             >
@@ -166,14 +146,13 @@ const NavItemComponent: React.FC<NavItemComponentProps> = ({
         );
     }
 
-    // Renderizar como <a> externa
     if (item.href && item.external) {
         return (
             <a
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center relative"
+                className={cn(navItemWrapperVariants())}
                 onClick={handleClick}
             >
                 {content}
@@ -181,10 +160,12 @@ const NavItemComponent: React.FC<NavItemComponentProps> = ({
         );
     }
 
-    // Renderizar como <button>
     return (
         <button
-            className="inline-flex items-center relative bg-transparent border-none p-0"
+            className={cn(
+                navItemWrapperVariants(),
+                navItemDisabledVariants()
+            )}
             onClick={handleClick}
             disabled={item.disabled}
             aria-current={item.isActive ? "page" : undefined}
@@ -193,10 +174,6 @@ const NavItemComponent: React.FC<NavItemComponentProps> = ({
         </button>
     );
 };
-
-// ============================================
-// COMPONENTE NAV
-// ============================================
 
 const Nav = forwardRef<HTMLElement, NavProps>(
     (

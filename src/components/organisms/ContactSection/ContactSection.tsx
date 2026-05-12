@@ -1,59 +1,54 @@
-// components/organisms/ContactSection/ContactSection.tsx
-
 "use client";
 
 import React, { useState, forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
-import { Badge } from "@/components/atoms/Badge";
 import { FormField } from "@/components/molecules/FormField";
 import { CTAGroup } from "@/components/molecules/CTAGroup";
-import { Mail, Send, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, Send, CheckCircle2 } from "lucide-react";
+import { Section } from "@/components/atoms/Section";
 import { cn } from "@/lib/utils";
+import {
+    contactSectionCardVariants,
+    contactSectionContentVariants,
+    contactSectionTitleVariants,
+    contactSectionDescriptionVariants,
+    contactSectionFeaturesVariants,
+    contactSectionFeatureItemVariants,
+    contactSectionFeatureIndicatorVariants,
+    contactSectionFormVariants,
+    contactSectionFormCardVariants,
+    contactSectionFormWrapperVariants,
+    contactSectionCTAVariants,
+    contactSectionAccentTopVariants,
+    contactSectionAccentBottomVariants,
+    type ContactSectionLayout,
+} from "./ContactSection.variants";
 
-// ============================================
-// TIPOS DE DATOS
-// ============================================
+/* ============================================================
+ * ContactSection — Refactor V3 | Zero Inline Policy
+ * ============================================================
+ * • Badge abuse corregido: indicador visual simple en vez de
+ *   Badge con override masivo.
+ * • Background accents: migrados a .variants.ts
+ * • Heading override: migrado a contactSectionTitleVariants
+ * • Framer Motion: SIN CAMBIOS
+ * ============================================================ */
 
 export interface ContactSectionProps {
-    /** Título principal (parte 1) */
     titleLine1?: string;
-
-    /** Título principal (parte 2, con énfasis) */
     titleLine2?: string;
-
-    /** Descripción */
     description?: string;
-
-    /** Características/beneficios */
     features?: string[];
-
-    /** Label del campo email */
     emailLabel?: string;
-
-    /** Placeholder del email */
     emailPlaceholder?: string;
-
-    /** Texto del botón submit */
     submitLabel?: string;
-
-    /** Texto de éxito */
     successLabel?: string;
-
-    /** Callback al enviar */
     onSubmit?: (email: string) => Promise<void> | void;
-
-    /** Variante de layout */
-    variant?: "split" | "centered";
-
-    /** Clases adicionales */
+    variant?: ContactSectionLayout;
     className?: string;
 }
-
-// ============================================
-// ANIMACIONES
-// ============================================
 
 const fadeInLeft = {
     initial: { opacity: 0, x: -30 },
@@ -66,16 +61,6 @@ const fadeInRight = {
     animate: { opacity: 1, x: 0 },
     transition: { duration: 0.6, ease: "easeOut", delay: 0.2 },
 };
-
-const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 },
-};
-
-// ============================================
-// COMPONENTE CONTACTSECTION
-// ============================================
 
 const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
     (
@@ -98,21 +83,17 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
         const [isValid, setIsValid] = useState(true);
         const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
 
-        // Validación de email
         const validateEmail = (val: string) => {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             setIsValid(regex.test(val) || val === "");
             setEmail(val);
         };
 
-        // Handler de submit
         const handleSubmit = async (e?: React.FormEvent) => {
             e?.preventDefault();
-
             if (!email || !isValid) return;
 
             setStatus("loading");
-
             try {
                 await onSubmit?.(email);
                 setStatus("success");
@@ -123,81 +104,71 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             }
         };
 
-        // Preparar acciones para CTAGroup
         const primaryAction = {
             label: status === "success" ? successLabel : submitLabel,
-            icon: status === "success" ? <CheckCircle2 className="w-6 h-6" /> : <Send className="w-6 h-6" />,
+            icon:
+                status === "success" ? (
+                    <CheckCircle2 className="w-6 h-6" />
+                ) : (
+                    <Send className="w-6 h-6" />
+                ),
             onClick: handleSubmit,
             disabled: status !== "idle" || !email || !isValid,
             isLoading: status === "loading",
         };
 
-        const isSplit = variant === "split";
-
         return (
-            <section ref={ref} className={cn("py-16 px-6", className)}>
+            <Section ref={ref} spacing="md" className={className}>
                 <Container size="lg" padding="md">
                     <Container
                         variant="clay"
                         radius="clay"
                         padding="2xl"
                         className={cn(
-                            "relative overflow-hidden p-8 lg:p-20 lg:pb-28", // Añadimos pb-28 para dar mucho aire abajo
-                            isSplit && "flex flex-col lg:flex-row items-center gap-6",
-                            !isSplit && "flex flex-col items-center text-center max-w-4xl mx-auto"
+                            contactSectionCardVariants({ layout: variant })
                         )}
                     >
-                        {/* Lado izquierdo: Contenido */}
+                        {/* Contenido */}
                         <motion.div
                             {...fadeInLeft}
-                            className={cn(
-                                "flex-1 space-y-2 relative z-10",
-                                isSplit ? "text-left" : "text-center"
-                            )}
+                            className={contactSectionContentVariants({
+                                layout: variant,
+                            })}
                         >
-                            {/* Título */}
                             <Heading
                                 level="h2"
                                 variant="primary"
-                                className="leading-tight lg:leading-[1.1] text-5xl lg:text-7xl tracking-tighter"
+                                className={contactSectionTitleVariants()}
                             >
                                 {titleLine1}
                                 <br />
                                 {titleLine2}
                             </Heading>
 
-                            {/* Descripción */}
                             <Text
                                 variant="lead"
-                                className={cn(
-                                    "max-w-md",
-                                    isSplit && "mx-auto lg:mx-0",
-                                    !isSplit && "mx-auto"
-                                )}
+                                className={contactSectionDescriptionVariants({
+                                    layout: variant,
+                                })}
                             >
                                 {description}
                             </Text>
 
-                            {/* Features */}
                             {features.length > 0 && (
                                 <div
-                                    className={cn(
-                                        "flex flex-wrap gap-8 text-xs font-black uppercase tracking-[0.2em] opacity-80",
-                                        isSplit && "justify-center lg:justify-start",
-                                        !isSplit && "justify-center"
-                                    )}
+                                    className={contactSectionFeaturesVariants({
+                                        layout: variant,
+                                    })}
                                 >
                                     {features.map((feature, i) => (
-                                        <span key={i} className="flex items-center gap-3">
-                                            <Badge
-                                                variant="secondary"
-                                                size="sm"
-                                                indicator
-                                                indicatorColor="secondary"
-                                                className="px-0 py-0 bg-transparent shadow-none"
-                                            >
-                                                <span className="sr-only">{feature}</span>
-                                            </Badge>
+                                        <span
+                                            key={i}
+                                            className={contactSectionFeatureItemVariants()}
+                                        >
+                                            <span
+                                                className={contactSectionFeatureIndicatorVariants()}
+                                                aria-hidden="true"
+                                            />
                                             {feature}
                                         </span>
                                     ))}
@@ -205,21 +176,23 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                             )}
                         </motion.div>
 
-                        {/* Lado derecho: Formulario */}
+                        {/* Formulario */}
                         <motion.div
                             {...fadeInRight}
-                            className={cn(
-                                "flex-1 w-full max-w-lg lg:ml-auto relative z-10",
-                                !isSplit && "max-w-xl"
-                            )}
+                            className={contactSectionFormVariants({
+                                layout: variant,
+                            })}
                         >
                             <Container
                                 variant="surface-container"
                                 radius="clay"
                                 padding="xl"
-                                className="shadow-clay-active"
+                                className={contactSectionFormCardVariants()}
                             >
-                                <form onSubmit={handleSubmit} className="space-y-8">
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className={contactSectionFormWrapperVariants()}
+                                >
                                     <FormField
                                         id="contact-email"
                                         type="email"
@@ -229,32 +202,46 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                                         placeholder={emailPlaceholder}
                                         leftIcon={<Mail className="w-5 h-5" />}
                                         state={
-                                            !isValid ? "error" : status === "success" ? "success" : "default"
+                                            !isValid
+                                                ? "error"
+                                                : status === "success"
+                                                    ? "success"
+                                                    : "default"
                                         }
-                                        errorMessage={!isValid ? "El formato del correo no es válido." : undefined}
-                                        successMessage={status === "success" ? "¡Te contactaremos pronto!" : undefined}
+                                        errorMessage={
+                                            !isValid
+                                                ? "El formato del correo no es válido."
+                                                : undefined
+                                        }
+                                        successMessage={
+                                            status === "success"
+                                                ? "¡Te contactaremos pronto!"
+                                                : undefined
+                                        }
                                         isLoading={status === "loading"}
                                         required
                                         showValidationIcon
                                     />
 
-                                    <CTAGroup
-                                        primaryAction={primaryAction}
-                                        responsive={false}
-                                        fullWidthMobile={true}
-                                        align="center"
-                                        gap="sm"
-                                    />
+                                    <div className={contactSectionCTAVariants()}>
+                                        <CTAGroup
+                                            primaryAction={primaryAction}
+                                            responsive={false}
+                                            fullWidthMobile={true}
+                                            align="center"
+                                            gap="sm"
+                                        />
+                                    </div>
                                 </form>
                             </Container>
                         </motion.div>
 
                         {/* Background accents */}
-                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[150px] -z-10 rounded-full translate-x-1/2 -translate-y-1/2" />
-                        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary/20 blur-[100px] -z-10 rounded-full -translate-x-1/2 translate-y-1/2" />
+                        <div className={contactSectionAccentTopVariants()} />
+                        <div className={contactSectionAccentBottomVariants()} />
                     </Container>
                 </Container>
-            </section>
+            </Section>
         );
     }
 );

@@ -1,4 +1,20 @@
-// components/molecules/Card/Card.tsx
+// ============================================================================
+// CARD — Molécula de contenedor de contenido
+// ============================================================================
+// REFACTOR V3:
+// - Zero inline classes:
+//   • "group flex flex-col" → cardVariants base
+//   • "relative w-full" → cardMediaVariants base
+//   • overflow-hidden + radius top condicional → cardMediaTopWrapperVariants
+//   • "absolute inset-0 -z-10" → cardMediaBackgroundWrapperVariants
+//   • "object-cover transition-transform..." → cardMediaImageVariants
+//   • "absolute inset-0 flex items-end p-6" → cardMediaOverlayVariants
+//   • gradiente de fondo → cardMediaGradientVariants
+//   • "flex-1" redundante eliminado de content (ya está en cardContentVariants base)
+// - Eliminado condicional mediaPosition === "background" && "relative"
+//   (cardVariants ya incluye "relative" en el base).
+// - Tipos importados desde .variants.ts (derivados del CVA).
+// ============================================================================
 
 import React, { forwardRef } from "react";
 import Image from "next/image";
@@ -9,12 +25,17 @@ import {
     cardContentVariants,
     cardFooterVariants,
     cardMediaVariants,
+    cardMediaTopWrapperVariants,
+    cardMediaBackgroundWrapperVariants,
+    cardMediaImageVariants,
+    cardMediaOverlayVariants,
+    cardMediaGradientVariants,
     type CardVariant,
     type CardRadius,
     type CardPadding,
     type CardWidth,
     type CardMediaAspectRatio,
-    type CardFooterAlign
+    type CardFooterAlign,
 } from "./Card.variants";
 import { cn } from "@/lib/utils";
 
@@ -73,21 +94,20 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         const effectiveHeaderPadding = headerPadding ?? padding;
         const effectiveContentPadding = contentPadding ?? (media ? "none" : padding);
         const effectiveFooterPadding = footerPadding ?? padding;
-
-        // Detectar si es ruta local (empieza con /) o externa
         const isLocalImage = media?.src.startsWith("/");
 
         const renderMedia = () => {
             if (!media) return null;
 
             const mediaContent = (
-                <div className={cn(
-                    cardMediaVariants({
-                        aspectRatio: media.aspectRatio || "square",
-                        radius: mediaPosition === "background" ? radius : "none"
-                    }),
-                    "relative w-full"
-                )}>
+                <div
+                    className={cn(
+                        cardMediaVariants({
+                            aspectRatio: media.aspectRatio || "square",
+                            radius: mediaPosition === "background" ? radius : "none",
+                        })
+                    )}
+                >
                     {isLoading ? (
                         <SkeletonBlock className="absolute inset-0" radius="none" />
                     ) : (
@@ -96,15 +116,14 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                             alt={media.alt}
                             fill={media.fill !== false}
                             priority={media.priority}
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            className={cn(cardMediaImageVariants())}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            // Rutas locales no necesitan unconfigured host
                             unoptimized={isLocalImage}
                         />
                     )}
 
                     {media.overlay && (
-                        <div className="absolute inset-0 flex items-end p-6">
+                        <div className={cn(cardMediaOverlayVariants())}>
                             {media.overlay}
                         </div>
                     )}
@@ -113,21 +132,16 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
             if (mediaPosition === "top") {
                 return (
-                    <div className={cn(
-                        "overflow-hidden",
-                        radius === "clay" && "rounded-t-clay",
-                        radius === "lg" && "rounded-t-2xl",
-                        radius === "md" && "rounded-t-xl",
-                    )}>
+                    <div className={cn(cardMediaTopWrapperVariants({ radius }))}>
                         {mediaContent}
                     </div>
                 );
             }
 
             return (
-                <div className="absolute inset-0 -z-10">
+                <div className={cn(cardMediaBackgroundWrapperVariants())}>
                     {mediaContent}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                    <div className={cn(cardMediaGradientVariants())} />
                 </div>
             );
         };
@@ -142,10 +156,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                         padding,
                         width,
                         interactive,
-                        isLoading
+                        isLoading,
                     }),
-                    mediaPosition === "background" && "relative",
-                    "group flex flex-col",
                     className
                 )}
                 {...props}
@@ -154,31 +166,36 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 {media && mediaPosition === "background" && renderMedia()}
 
                 {header && (
-                    <header className={cn(
-                        cardHeaderVariants({
-                            padding: effectiveHeaderPadding,
-                            border: headerBorder
-                        })
-                    )}>
+                    <header
+                        className={cn(
+                            cardHeaderVariants({
+                                padding: effectiveHeaderPadding,
+                                border: headerBorder,
+                            })
+                        )}
+                    >
                         {header}
                     </header>
                 )}
 
-                <div className={cn(
-                    cardContentVariants({ padding: effectiveContentPadding }),
-                    "flex-1"
-                )}>
+                <div
+                    className={cn(
+                        cardContentVariants({ padding: effectiveContentPadding })
+                    )}
+                >
                     {children}
                 </div>
 
                 {footer && (
-                    <footer className={cn(
-                        cardFooterVariants({
-                            padding: effectiveFooterPadding,
-                            border: footerBorder,
-                            align: footerAlign
-                        })
-                    )}>
+                    <footer
+                        className={cn(
+                            cardFooterVariants({
+                                padding: effectiveFooterPadding,
+                                border: footerBorder,
+                                align: footerAlign,
+                            })
+                        )}
+                    >
                         {footer}
                     </footer>
                 )}

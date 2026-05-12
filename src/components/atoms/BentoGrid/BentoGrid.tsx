@@ -1,10 +1,10 @@
 // ============================================================================
-// BENTO GRID — Container + Item (molécula de layout)
+// BENTO GRID — Container + Item (ÁTOMO de layout)
 // ============================================================================
-// REFACTOR V3:
-// - Zero inline classes: TODO el CSS vive en BentoGrid.variants.ts.
-// - No se tocan colores aquí; el tema se controla via tokens de Tailwind.
-// - BentoItem delega ratio/colSpan/rowSpan al CVA del archivo .variants.ts.
+// Sistema unificado de distribución bento.
+// BentoGrid define el layout del grid (standard | carousel | news).
+// BentoItem define la posición del slot dentro del grid.
+// Ambos son átomos puros: sin lógica de negocio, sin estado, sin color semántico.
 // ============================================================================
 
 import React from "react";
@@ -12,26 +12,32 @@ import { cn } from "@/lib/utils";
 import {
     bentoGridVariants,
     bentoItemVariants,
+    type BentoGridLayout,
     type BentoGridCols,
+    type BentoItemPosition,
     type BentoItemSpan,
+    type BentoItemRowSpan,
     type BentoItemRatio,
+    type BentoItemType,
 } from "./BentoGrid.variants";
 
-// ==========================================
-// BENTO GRID (Container)
-// ==========================================
+/* ============================================================
+ * BENTO GRID (Container)
+ * ============================================================ */
 
 export interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
-    /** Número de columnas del grid (responsive por defecto) */
+    /** Layout del grid: standard (genérico), carousel (16×9), news (3 cols) */
+    layout?: BentoGridLayout;
+    /** Columnas para layout=standard (responsive). Ignorado en carousel/news. */
     cols?: BentoGridCols;
 }
 
 export const BentoGrid = React.forwardRef<HTMLDivElement, BentoGridProps>(
-    ({ className, cols, children, ...props }, ref) => {
+    ({ className, layout, cols, children, ...props }, ref) => {
         return (
             <div
                 ref={ref}
-                className={cn(bentoGridVariants({ cols }), className)}
+                className={cn(bentoGridVariants({ layout, cols }), className)}
                 {...props}
             >
                 {children}
@@ -42,25 +48,54 @@ export const BentoGrid = React.forwardRef<HTMLDivElement, BentoGridProps>(
 
 BentoGrid.displayName = "BentoGrid";
 
-// ==========================================
-// BENTO ITEM (Child)
-// ==========================================
+/* ============================================================
+ * BENTO ITEM (Slot)
+ * ============================================================ */
 
 export interface BentoItemProps extends React.HTMLAttributes<HTMLDivElement> {
-    /** Columnas que ocupa el item (responsive) */
+    /** Posición nombrada dentro de un layout (carousel | news) */
+    position?: BentoItemPosition;
+    /** Tipo de slot: producto (fondo+shadow), texto (transparente), control (transparente) */
+    type?: BentoItemType;
+    /** Columnas que ocupa (modo genérico, cuando no hay position) */
     colSpan?: BentoItemSpan;
-    /** Filas que ocupa el item */
-    rowSpan?: 1 | 2 | 3;
-    /** Ratio de aspecto forzado */
+    /** Filas que ocupa (modo genérico) */
+    rowSpan?: BentoItemRowSpan;
+    /** Ratio de aspecto forzado (modo genérico) */
     ratio?: BentoItemRatio;
+    /** Estado de historial inactivo (carousel) */
+    isHistory?: boolean;
 }
 
 export const BentoItem = React.forwardRef<HTMLDivElement, BentoItemProps>(
-    ({ className, colSpan, rowSpan, ratio, children, ...props }, ref) => {
+    (
+        {
+            className,
+            position,
+            type,
+            colSpan,
+            rowSpan,
+            ratio,
+            isHistory,
+            children,
+            ...props
+        },
+        ref
+    ) => {
         return (
             <div
                 ref={ref}
-                className={cn(bentoItemVariants({ colSpan, rowSpan, ratio }), className)}
+                className={cn(
+                    bentoItemVariants({
+                        position,
+                        type,
+                        colSpan,
+                        rowSpan,
+                        ratio,
+                        isHistory,
+                    }),
+                    className
+                )}
                 {...props}
             >
                 {children}

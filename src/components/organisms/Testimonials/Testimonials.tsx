@@ -5,14 +5,48 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { IconButton } from "@/components/atoms/IconButton";
+import { Avatar } from "@/components/atoms/Avatar";
+import { StarRating } from "@/components/atoms/StarRating";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Testimonial } from "@/lib/data";
+import { Section } from "@/components/atoms/Section";
+import {
+    testimonialsGridVariants,
+    testimonialsHeaderVariants,
+    testimonialsOverlineVariants,
+    testimonialsCardWrapperVariants,
+    testimonialsCardVariants,
+    testimonialsQuoteVariants,
+    testimonialsFooterVariants,
+    testimonialsAuthorVariants,
+    testimonialsAuthorInfoVariants,
+    testimonialsNameVariants,
+    testimonialsRoleVariants,
+    testimonialsProductVariants,
+    testimonialsProductImageVariants,
+    testimonialsControlsVariants,
+    testimonialsDotsWrapperVariants,
+    testimonialsDotVariants,
+    testimonialsArrowsWrapperVariants,
+} from "./Testimonials.variants";
+
+/* ============================================================
+ * Testimonials — Refactor V3 | Zero Inline Policy
+ * ============================================================
+ * • Avatar átomo reemplaza <img> inline del autor
+ * • StarRating átomo reemplaza estrellas inline
+ * • shadow-soft → shadow-clay
+ * • "Community" hardcodeado → prop overline (default "Comunidad")
+ * • Dots inline → testimonialsDotVariants
+ * • TODO: goNext/goPrev pueden extraerse a hook useSlider en próxima iteración
+ * ============================================================ */
 
 export interface TestimonialsProps {
     testimonials: Testimonial[];
     title?: string;
     subtitle?: string;
+    overline?: string;
     className?: string;
 }
 
@@ -20,6 +54,7 @@ export function Testimonials({
     testimonials,
     title = "Voces de la Comunidad",
     subtitle = "Descubre cómo JovenPro está transformando la vida de creadores alrededor del mundo.",
+    overline = "Comunidad",
     className,
 }: TestimonialsProps) {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -29,19 +64,26 @@ export function Testimonials({
     };
 
     const goPrev = () => {
-        setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        setActiveIndex(
+            (prev) => (prev - 1 + testimonials.length) % testimonials.length
+        );
     };
 
     const active = testimonials[activeIndex];
 
     return (
-        <section id="testimonios" className={cn("py-20 md:py-28 bg-surface-container-low/30", className)}>
+        <Section id="testimonios" spacing="lg" background="surface-container-low" className={className}>
             <Container size="lg" padding="md">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-                    <div className="md:col-span-4">
-                        <span className="font-body text-xs font-semibold tracking-widest text-secondary uppercase mb-2 block">
-                            Community
-                        </span>
+                <div className={testimonialsGridVariants()}>
+                    {/* Header */}
+                    <div className={testimonialsHeaderVariants()}>
+                        <Text
+                            variant="overline"
+                            size="xs"
+                            className={testimonialsOverlineVariants()}
+                        >
+                            {overline}
+                        </Text>
                         <Heading level="h2" className="mb-4">
                             {title}
                         </Heading>
@@ -50,7 +92,8 @@ export function Testimonials({
                         </Text>
                     </div>
 
-                    <div className="md:col-span-8">
+                    {/* Card */}
+                    <div className={testimonialsCardWrapperVariants()}>
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={active.id}
@@ -58,71 +101,65 @@ export function Testimonials({
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                                 transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                                className="bg-white rounded-2xl p-8 md:p-10 shadow-soft border border-border/20 relative min-h-[280px] flex flex-col justify-between"
+                                className={testimonialsCardVariants()}
                             >
-                                <p className="font-body text-lg italic text-foreground leading-relaxed mb-8">
-                                    "{active.text}"
+                                <p className={testimonialsQuoteVariants()}>
+                                    &ldquo;{active.text}&rdquo;
                                 </p>
 
-                                <div className="flex items-center justify-between mt-8">
-                                    <div className="flex items-center gap-4">
-                                        <img
+                                <div className={testimonialsFooterVariants()}>
+                                    <div className={testimonialsAuthorVariants()}>
+                                        <Avatar
                                             src={active.avatar}
                                             alt={active.name}
-                                            className="w-12 h-12 rounded-full object-cover"
+                                            size="lg"
                                         />
-                                        <div>
-                                            <p className="font-headline text-sm font-bold text-primary">
+                                        <div className={testimonialsAuthorInfoVariants()}>
+                                            <p className={testimonialsNameVariants()}>
                                                 {active.name}
                                             </p>
-                                            <p className="font-body text-xs text-foreground/60 uppercase tracking-wider">
+                                            <p className={testimonialsRoleVariants()}>
                                                 {active.role}
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-3">
+                                    <div className={testimonialsProductVariants()}>
                                         {active.productImage && (
                                             <img
                                                 src={active.productImage}
                                                 alt="Producto"
-                                                className="w-12 h-12 rounded-lg object-cover hidden sm:block"
+                                                className={testimonialsProductImageVariants()}
                                             />
                                         )}
-                                        <div className="flex gap-0.5">
-                                            {Array.from({ length: 5 }).map((_, i) => (
-                                                <Star
-                                                    key={i}
-                                                    className={cn(
-                                                        "w-4 h-4",
-                                                        i < active.rating
-                                                            ? "fill-primary text-primary"
-                                                            : "fill-border text-border"
-                                                    )}
-                                                />
-                                            ))}
-                                        </div>
+                                        <StarRating
+                                            value={active.rating}
+                                            size="sm"
+                                        />
                                     </div>
                                 </div>
                             </motion.div>
                         </AnimatePresence>
 
-                        <div className="flex items-center justify-between mt-6">
-                            <div className="flex gap-2">
+                        {/* Controles */}
+                        <div className={testimonialsControlsVariants()}>
+                            <div className={testimonialsDotsWrapperVariants()}>
                                 {testimonials.map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => setActiveIndex(i)}
                                         className={cn(
-                                            "h-2 rounded-full transition-all duration-300",
-                                            i === activeIndex ? "bg-primary w-6" : "bg-surface-variant w-2 hover:bg-border"
+                                            testimonialsDotVariants({
+                                                state:
+                                                    i === activeIndex ? "active" : "inactive",
+                                            })
                                         )}
                                         aria-label={`Testimonio ${i + 1}`}
                                     />
                                 ))}
                             </div>
 
-                            <div className="flex gap-2">
+                            <div className={testimonialsArrowsWrapperVariants()}>
                                 <IconButton
                                     icon={<ArrowLeft className="w-5 h-5" />}
                                     variant="outline"
@@ -142,6 +179,6 @@ export function Testimonials({
                     </div>
                 </div>
             </Container>
-        </section>
+        </Section>
     );
 }

@@ -2,20 +2,29 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
+import { Button } from "@/components/atoms/Button";
 import { ProductCard } from "@/components/molecules/ProductCard";
 import { PaginationDots } from "@/components/molecules/PaginationDots";
+import { BentoGrid, BentoItem } from "@/components/atoms/BentoGrid";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data";
+import { Section } from "@/components/atoms/Section";
 import {
     BENTO_SLOTS,
     BENTO_SPRING,
     BENTO_DIRECTIONS,
     bentoPlaceholderVariants,
+    bentoCarouselInfoVariants,
+    bentoCarouselLabelVariants,
+    bentoCarouselOverlineVariants,
     type BentoSlotConfig,
 } from "./BentoCarousel.variants";
+
+/* ============================================================
+ * BentoCarousel — Refactor V4 | Grid 16×9
+ * ============================================================ */
 
 function wrapIndex(index: number, length: number): number {
     return ((index % length) + length) % length;
@@ -28,29 +37,34 @@ export interface BentoCarouselProps {
     className?: string;
     interval?: number;
     paginationSize?: "compact" | "standard";
+    catalogHref?: string;
+    onCatalogClick?: (href: string) => void;
+    onProductClick?: (href: string) => void;
 }
 
 export function BentoCarousel({
     products,
-    title = "Talento que Impulsa el Futuro",
-    subtitle = "Piezas únicas hechas a mano con dedicación y alma",
+    title = "Catálogo de productos",
+    subtitle = "Propulsando nuevos talentos",
     className,
     interval = 4000,
     paginationSize = "standard",
+    catalogHref = "https://jovenpro.com/tienda/",
+    onCatalogClick,
+    onProductClick,
 }: BentoCarouselProps) {
     const [idx, setIdx] = useState(0);
-    const [direction, setDirection] = useState<'next' | 'prev'>('next');
+    const [direction, setDirection] = useState<"next" | "prev">("next");
     const [isHovered, setIsHovered] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Asegurar mínimo 9 productos
-    const safeProducts = products.length >= 9
-        ? products
-        : Array.from(
-            { length: Math.ceil(9 / products.length) },
-            () => products
-        ).flat().slice(0, Math.max(9, products.length));
+    const safeProducts =
+        products.length >= 9
+            ? products
+            : Array.from({ length: Math.ceil(9 / products.length) }, () => products)
+                .flat()
+                .slice(0, Math.max(9, products.length));
 
     const total = safeProducts.length;
 
@@ -62,44 +76,38 @@ export function BentoCarousel({
         [idx, total, safeProducts]
     );
 
-    // ============================================
-    // NAVEGACIÓN ATÓMICA (El fix del delay)
-    // ============================================
-    // Paso 1: Actualizar direction (los slots viejos se re-renderizan 
-    //         con la nueva dirección, actualizando sus exit animations)
-    // Paso 2: Cambiar idx (los items nuevos entran con todo sincronizado)
+    const navigate = useCallback(
+        (dir: "next" | "prev", targetIdx?: number) => {
+            if (isLocked || total === 0) return;
 
-    const navigate = useCallback((dir: 'next' | 'prev', targetIdx?: number) => {
-        if (isLocked || total === 0) return;
+            setIsLocked(true);
+            const newIdx =
+                targetIdx !== undefined
+                    ? targetIdx
+                    : dir === "next"
+                        ? (idx + 1) % total
+                        : (idx - 1 + total) % total;
 
-        setIsLocked(true);
-        const newIdx = targetIdx !== undefined
-            ? targetIdx
-            : dir === 'next'
-                ? (idx + 1) % total
-                : (idx - 1 + total) % total;
+            setDirection(dir);
 
-        // PASO 1: Dirección primero. Esto fuerza re-render de todos los slots
-        // con los items ACTUALES pero direction NUEVA. Los motion.div existentes
-        // actualizan sus props de exit.
-        setDirection(dir);
+            queueMicrotask(() => {
+                setIdx(newIdx);
+                setTimeout(() => setIsLocked(false), 600);
+            });
+        },
+        [idx, total, isLocked]
+    );
 
-        // PASO 2: En el siguiente microtask (después del render de direction),
-        // cambiamos idx. Los items viejos ahora salen con el exit actualizado.
-        queueMicrotask(() => {
-            setIdx(newIdx);
-            // Desbloquear después de que la animación termine (~600ms)
-            setTimeout(() => setIsLocked(false), 600);
-        });
-    }, [idx, total, isLocked]);
-
-    const rotate = useCallback((dir: 'next' | 'prev' = 'next') => {
-        navigate(dir);
-    }, [navigate]);
+    const rotate = useCallback(
+        (dir: "next" | "prev" = "next") => {
+            navigate(dir);
+        },
+        [navigate]
+    );
 
     useEffect(() => {
         if (!isHovered && total > 0 && !isLocked) {
-            intervalRef.current = setInterval(() => rotate('next'), interval);
+            intervalRef.current = setInterval(() => rotate("next"), interval);
         }
         return () => {
             if (intervalRef.current) clearInterval(intervalRef.current);
@@ -113,7 +121,7 @@ export function BentoCarousel({
         }
         setTimeout(() => {
             if (!isHovered && total > 0 && !isLocked) {
-                intervalRef.current = setInterval(() => rotate('next'), interval);
+                intervalRef.current = setInterval(() => rotate("next"), interval);
             }
         }, 100);
     }, [isHovered, total, rotate, interval, isLocked]);
@@ -122,10 +130,10 @@ export function BentoCarousel({
         const targetItem = getItem(slotConfig.offset);
         if (!targetItem) return;
 
-        const targetIndex = safeProducts.findIndex(p => p.id === targetItem.id);
+        const targetIndex = safeProducts.findIndex((p) => p.id === targetItem.id);
         if (targetIndex === -1 || targetIndex === idx) return;
 
-        const dir = targetIndex > idx ? 'next' : 'prev';
+        const dir = targetIndex > idx ? "next" : "prev";
         navigate(dir, targetIndex);
         resetTimer();
     };
@@ -136,26 +144,19 @@ export function BentoCarousel({
             return;
         }
         const newIdx = wrapIndex(idx + offset, total);
-        const dir = offset > 0 ? 'next' : 'prev';
+        const dir = offset > 0 ? "next" : "prev";
         navigate(dir, newIdx);
         resetTimer();
     };
 
-    const handleArrow = (dir: 'next' | 'prev') => {
-        navigate(dir);
-        resetTimer();
-    };
-
-    // ============================================
-    // PREVIEW LABELS PARA DOTS (tooltip)
-    // ============================================
-    const offsets = paginationSize === "compact"
-        ? [-1, 0, 1]
-        : [-3, -2, -1, 0, 1, 2, 3];
+    const offsets =
+        paginationSize === "compact"
+            ? [-1, 0, 1]
+            : [-3, -2, -1, 0, 1, 2, 3];
 
     const previewLabels = React.useMemo(() => {
         const labels: Record<number, string> = {};
-        offsets.forEach(offset => {
+        offsets.forEach((offset) => {
             const targetIdx = wrapIndex(idx + offset, total);
             const product = safeProducts[targetIdx];
             labels[offset] = product ? `#${targetIdx + 1} · ${product.name}` : "";
@@ -163,9 +164,6 @@ export function BentoCarousel({
         return labels;
     }, [idx, total, safeProducts, offsets]);
 
-    // ============================================
-    // RENDER SLOT
-    // ============================================
     const renderSlot = (slot: BentoSlotConfig) => {
         const item = getItem(slot.offset);
         const isHistory = slot.variant === "history-slot";
@@ -173,14 +171,13 @@ export function BentoCarousel({
         const animations = isHistory ? dir.history : dir.main;
 
         return (
-            <div
+            <BentoItem
                 key={slot.id}
-                className={cn(
-                    slot.gridClass,
-                    "bento-slot",
-                    isHistory && "bento-history-inactive"
-                )}
+                position={slot.position}
+                type="product"
+                isHistory={isHistory}
                 onClick={() => handleSlotClick(slot)}
+                className="cursor-pointer"
             >
                 <AnimatePresence mode="wait" initial={false}>
                     {item ? (
@@ -199,6 +196,7 @@ export function BentoCarousel({
                                 product={item}
                                 variant={slot.variant}
                                 animate={false}
+                                onProductClick={onProductClick}
                             />
                         </motion.div>
                     ) : (
@@ -209,115 +207,110 @@ export function BentoCarousel({
                             exit={{ opacity: 0 }}
                             className={cn(
                                 "w-full h-full",
-                                bentoPlaceholderVariants.base,
-                                isHistory && bentoPlaceholderVariants.history
+                                bentoPlaceholderVariants({ isHistory })
                             )}
                         />
                     )}
                 </AnimatePresence>
-            </div>
+            </BentoItem>
         );
     };
 
+    const handleCatalogClick = () => {
+        if (onCatalogClick) {
+            onCatalogClick(catalogHref);
+        } else {
+            window.open(catalogHref, "_blank");
+        }
+    };
+
     return (
-        <section id="productos" className={cn("py-24 md:py-32", className)}>
+        <Section id="productos" spacing="xl" background="background" className={className}>
             <Container size="xl" padding="md">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
-                    <div>
+                <BentoGrid
+                    layout="carousel"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    {/* ── TEXTOS ── */}
+                    <BentoItem position="subtitle2" type="text">
                         <Text
                             size="sm"
                             variant="default"
                             weight="semibold"
-                            className="uppercase tracking-[0.2em] text-primary mb-3"
+                            className={cn(bentoCarouselOverlineVariants())}
                         >
-                            Curation
+                            Compralo ya
                         </Text>
-                        <Heading level="h2" className="text-foreground">
+                    </BentoItem>
+
+                    <BentoItem position="subtitle" type="text">
+                        <Text
+                            variant="muted"
+                            size="md"
+                        >
+                            {subtitle}
+                        </Text>
+                    </BentoItem>
+
+                    <BentoItem position="title" type="text">
+                        <Heading
+                            level="h3"
+                            className="text-foreground"
+                        >
                             {title}
                         </Heading>
-                    </div>
-                    <Text variant="muted" size="lg" className="max-w-md">
-                        {subtitle}
+                    </BentoItem>
+
+                    {/* ── PRODUCTOS ── */}
+                    {BENTO_SLOTS.map(renderSlot)}
+
+                    {/* ── CONTROLES ── */}
+                    <BentoItem position="dots" type="control">
+                        <div className="w-full h-full flex items-center justify-center">
+                            <PaginationDots
+                                size={paginationSize}
+                                currentOffset={0}
+                                onOffsetChange={handleDotOffsetChange}
+                                total={total}
+                                currentIndex={idx}
+                                previewLabels={previewLabels}
+                            />
+                        </div>
+                    </BentoItem>
+
+                    <BentoItem position="catalogo" type="control">
+                        <div className="w-full h-full flex items-center justify-center">
+                            <Button
+                                asChild
+                                variant="primary"
+                                size="md"
+                                className="w-full sm:w-auto"
+                                onClick={handleCatalogClick}
+                            >
+                                <a
+                                    href={catalogHref}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Ver catálogo
+                                </a>
+                            </Button>
+                        </div>
+                    </BentoItem>
+                </BentoGrid>
+
+                {/* Info label debajo del grid */}
+                <div className={bentoCarouselInfoVariants()}>
+                    <Text
+                        size="xs"
+                        variant="muted"
+                        className={bentoCarouselLabelVariants()}
+                    >
+                        Producto {idx + 1} de {total}
                     </Text>
                 </div>
-
-                {/* Grid */}
-                <div
-                    className="bento-grid-container"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    {BENTO_SLOTS.map(renderSlot)}
-                </div>
-
-                {/* Controles: Flechas + Info + Dots */}
-                <div className="flex items-center justify-center gap-4 md:gap-6 mt-10">
-                    {/* Flecha izquierda */}
-                    <button
-                        onClick={() => handleArrow('next')}
-                        disabled={isLocked}
-                        className={cn(
-                            "touch-target rounded-full bg-surface shadow-clay",
-                            "text-foreground hover:bg-primary hover:text-white",
-                            "transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-                        )}
-                        aria-label="Anterior"
-                    >
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-
-                    <div className="flex flex-col items-center gap-2 min-w-[200px]">
-                        {/* Label absoluto: Producto X de Y */}
-                        <Text
-                            size="xs"
-                            variant="caption"
-                            className="uppercase tracking-[0.15em] font-semibold"
-                        >
-                            Producto {idx + 1} de {total}
-                        </Text>
-
-                        {/* Dots: offset relativo (comportamiento original) */}
-                        <PaginationDots
-                            size={paginationSize}
-                            currentOffset={0}
-                            onOffsetChange={handleDotOffsetChange}
-                            total={total}
-                            currentIndex={idx}
-                            previewLabels={previewLabels}
-                        />
-                    </div>
-
-                    {/* Flecha derecha */}
-                    <button
-                        onClick={() => handleArrow('prev')}
-                        disabled={isLocked}
-                        className={cn(
-                            "touch-target rounded-full bg-surface shadow-clay",
-                            "text-foreground hover:bg-primary hover:text-white",
-                            "transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-                        )}
-                        aria-label="Siguiente"
-                    >
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
-                </div>
-
-                {/* Footer CTA */}
-                <div className="flex justify-center mt-8">
-                    <button
-                        onClick={() => window.open("https://jovenpro.com/catalogo", "_blank")}
-                        className={cn(
-                            "px-8 py-3 rounded-full border-2 border-foreground/20",
-                            "font-body text-sm font-semibold uppercase tracking-wider",
-                            "text-foreground hover:bg-foreground hover:text-background",
-                            "transition-all duration-300"
-                        )}
-                    >
-                        Ver catálogo completo
-                    </button>
-                </div>
             </Container>
-        </section>
+        </Section>
     );
 }

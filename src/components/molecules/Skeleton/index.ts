@@ -1,3 +1,8 @@
-// components/molecules/Skeleton/index.ts
+// ============================================================================
+// MOLECULE SKELETONS — Barrel export
+// ============================================================================
+
 export { SkeletonText } from "./SkeletonText";
+
+
 export { SkeletonCard } from "./SkeletonCard";

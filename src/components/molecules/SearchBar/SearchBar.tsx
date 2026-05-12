@@ -1,4 +1,29 @@
-// components/molecules/SearchBar/SearchBar.tsx
+// ============================================================================
+// SEARCH BAR — Molécula de búsqueda con autocomplete
+// ============================================================================
+// REFACTOR V3:
+// - Zero inline classes:
+//   • "relative" (wrapper Input) → searchBarInputWrapperVariants
+//   • "w-5 h-5" (Search) → searchBarInputIconVariants
+//   • "w-4 h-4" (X) → searchBarClearIconVariants
+//   • "opacity-50 hover:opacity-100" (IconButton) → searchBarClearButtonVariants
+//   • "w-full" (Input) → ELIMINADO. Input ya es w-full por defecto (CVA base).
+//   • "flex items-center gap-4" (suggestion content) → searchBarSuggestionContentVariants
+//   • "w-5 h-5 text-primary" (ShoppingBag) → searchBarSuggestionIconVariants
+//   • "line-clamp-1" (Text) → Reemplazado por prop lineClamp={1} del átomo Text
+//   • "w-4 h-4 text-primary opacity-60" (ArrowRight) → searchBarArrowIconVariants
+//   • "p-4" (empty state) → searchBarEmptyStateVariants
+//   • "italic" (empty Text) → searchBarEmptyTextVariants
+//   • "fixed inset-0 z-50 pointer-events-none" (overlay) → searchBarOverlayVariants
+// - Consumo de átomos validado:
+//   • Input: variant="search", leftIcon/rightIcon via props. Correcto.
+//   • IconButton: variant="ghost", size="sm". Correcto.
+//   • Text: size, weight, variant, transform, lineClamp via props. Correcto.
+//   • Badge: No se usa en este componente.
+// - Tipos importados desde .variants.ts (derivados del CVA).
+// ============================================================================
+
+"use client";
 
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 import { Search, X, ShoppingBag, ArrowRight } from "lucide-react";
@@ -9,14 +34,20 @@ import {
     searchBarVariants,
     suggestionsVariants,
     suggestionItemVariants,
+    searchBarInputWrapperVariants,
+    searchBarInputIconVariants,
+    searchBarClearIconVariants,
+    searchBarClearButtonVariants,
+    searchBarSuggestionContentVariants,
+    searchBarSuggestionIconVariants,
+    searchBarArrowIconVariants,
+    searchBarEmptyStateVariants,
+    searchBarEmptyTextVariants,
+    searchBarOverlayVariants,
     type SearchBarSize,
-    type SuggestionsVariant
+    type SuggestionsVariant,
 } from "./SearchBar.variants";
 import { cn } from "@/lib/utils";
-
-// ============================================
-// TIPOS DE DATOS
-// ============================================
 
 export interface SearchSuggestion {
     id: string | number;
@@ -27,66 +58,25 @@ export interface SearchSuggestion {
     onClick?: () => void;
 }
 
-// ============================================
-// INTERFAZ DEL SEARCHBAR
-// ============================================
-
 export interface SearchBarProps {
-    /** Valor del input */
     value: string;
-
-    /** Callback al cambiar el input */
     onChange: (value: string) => void;
-
-    /** Callback al seleccionar una sugerencia */
     onSelect?: (suggestion: SearchSuggestion) => void;
-
-    /** Callback al enviar (Enter) */
     onSubmit?: (value: string) => void;
-
-    /** Callback al limpiar */
     onClear?: () => void;
-
-    /** Lista de sugerencias */
     suggestions?: SearchSuggestion[];
-
-    /** Placeholder del input */
     placeholder?: string;
-
-    /** Tamaño del componente */
     size?: SearchBarSize;
-
-    /** Variante visual del dropdown */
     suggestionsVariant?: SuggestionsVariant;
-
-    /** Mostrar icono de categoría en sugerencias */
     showCategoryIcon?: boolean;
-
-    /** Mensaje cuando no hay resultados */
     emptyMessage?: string;
-
-    /** Loading state */
     isLoading?: boolean;
-
-    /** Deshabilitar */
     disabled?: boolean;
-
-    /** Clases adicionales */
     className?: string;
-
-    /** Auto-focus al montar */
     autoFocus?: boolean;
-
-    /** Cerrar al hacer click fuera */
     closeOnClickOutside?: boolean;
-
-    /** Mínimo de caracteres para mostrar sugerencias */
     minChars?: number;
 }
-
-// ============================================
-// COMPONENTE SEARCHBAR
-// ============================================
 
 const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
     (
@@ -116,15 +106,11 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
         const containerRef = useRef<HTMLDivElement>(null);
         const inputRef = useRef<HTMLInputElement>(null);
 
-        // Determinar si mostrar sugerencias
         const showSuggestions = isOpen && value.length >= minChars && !disabled;
-
-        // Filtrar sugerencias visibles
-        const filteredSuggestions = suggestions.filter(s =>
+        const filteredSuggestions = suggestions.filter((s) =>
             s.label.toLowerCase().includes(value.toLowerCase())
         );
 
-        // Handlers
         const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             onChange(e.target.value);
             setIsOpen(true);
@@ -153,17 +139,20 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
             switch (e.key) {
                 case "ArrowDown":
                     e.preventDefault();
-                    setHighlightedIndex(prev =>
+                    setHighlightedIndex((prev) =>
                         prev < filteredSuggestions.length - 1 ? prev + 1 : prev
                     );
                     break;
                 case "ArrowUp":
                     e.preventDefault();
-                    setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1);
+                    setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : -1));
                     break;
                 case "Enter":
                     e.preventDefault();
-                    if (highlightedIndex >= 0 && filteredSuggestions[highlightedIndex]) {
+                    if (
+                        highlightedIndex >= 0 &&
+                        filteredSuggestions[highlightedIndex]
+                    ) {
                         handleSelect(filteredSuggestions[highlightedIndex]);
                     } else {
                         onSubmit?.(value);
@@ -177,12 +166,14 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
             }
         };
 
-        // Click fuera para cerrar
         useEffect(() => {
             if (!closeOnClickOutside) return;
 
             const handleClickOutside = (e: MouseEvent) => {
-                if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                if (
+                    containerRef.current &&
+                    !containerRef.current.contains(e.target as Node)
+                ) {
                     setIsOpen(false);
                 }
             };
@@ -191,7 +182,6 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
             return () => document.removeEventListener("mousedown", handleClickOutside);
         }, [closeOnClickOutside]);
 
-        // Auto-focus
         useEffect(() => {
             if (autoFocus) {
                 inputRef.current?.focus();
@@ -201,24 +191,28 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
         return (
             <div
                 ref={containerRef}
-                className={cn(searchBarVariants({ size, isOpen: showSuggestions }), className)}
+                className={cn(
+                    searchBarVariants({ size, isOpen: showSuggestions }),
+                    className
+                )}
             >
-                {/* Input con iconos */}
-                <div className="relative">
+                <div className={cn(searchBarInputWrapperVariants())}>
                     <Input
                         ref={inputRef}
                         variant="search"
                         size="md"
-                        leftIcon={<Search className="w-5 h-5" />}
+                        leftIcon={
+                            <Search className={cn(searchBarInputIconVariants())} />
+                        }
                         rightIcon={
                             value ? (
                                 <IconButton
-                                    icon={<X className="w-4 h-4" />}
+                                    icon={<X className={cn(searchBarClearIconVariants())} />}
                                     variant="ghost"
                                     size="sm"
                                     aria-label="Limpiar búsqueda"
                                     onClick={handleClear}
-                                    className="opacity-50 hover:opacity-100"
+                                    className={cn(searchBarClearButtonVariants())}
                                 />
                             ) : undefined
                         }
@@ -229,13 +223,15 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
                         onFocus={() => value.length >= minChars && setIsOpen(true)}
                         disabled={disabled}
                         isLoading={isLoading}
-                        className="w-full"
                     />
                 </div>
 
-                {/* Dropdown de sugerencias */}
                 {showSuggestions && (
-                    <div className={cn(suggestionsVariants({ variant: suggestionsVariant }))}>
+                    <div
+                        className={cn(
+                            suggestionsVariants({ variant: suggestionsVariant })
+                        )}
+                    >
                         {filteredSuggestions.length > 0 ? (
                             filteredSuggestions.map((suggestion, index) => (
                                 <div
@@ -243,18 +239,31 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
                                     className={cn(
                                         suggestionItemVariants({
                                             variant: suggestionsVariant,
-                                            isHighlighted: index === highlightedIndex
+                                            isHighlighted: index === highlightedIndex,
                                         })
                                     )}
                                     onClick={() => handleSelect(suggestion)}
                                     onMouseEnter={() => setHighlightedIndex(index)}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        {showCategoryIcon && (
-                                            suggestion.icon || <ShoppingBag className="w-5 h-5 text-primary" />
+                                    <div
+                                        className={cn(
+                                            searchBarSuggestionContentVariants()
                                         )}
+                                    >
+                                        {showCategoryIcon &&
+                                            (suggestion.icon || (
+                                                <ShoppingBag
+                                                    className={cn(
+                                                        searchBarSuggestionIconVariants()
+                                                    )}
+                                                />
+                                            ))}
                                         <div>
-                                            <Text size="sm" weight="bold" className="line-clamp-1">
+                                            <Text
+                                                size="sm"
+                                                weight="bold"
+                                                lineClamp={1}
+                                            >
                                                 {suggestion.label}
                                             </Text>
                                             {suggestion.category && (
@@ -270,13 +279,20 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
                                     </div>
 
                                     {index === highlightedIndex && (
-                                        <ArrowRight className="w-4 h-4 text-primary opacity-60" />
+                                        <ArrowRight
+                                            className={cn(
+                                                searchBarArrowIconVariants()
+                                            )}
+                                        />
                                     )}
                                 </div>
                             ))
                         ) : (
-                            <div className="p-4">
-                                <Text variant="caption" className="italic">
+                            <div className={cn(searchBarEmptyStateVariants())}>
+                                <Text
+                                    variant="caption"
+                                    className={cn(searchBarEmptyTextVariants())}
+                                >
                                     {emptyMessage}
                                 </Text>
                             </div>
@@ -284,10 +300,9 @@ const SearchBar = forwardRef<HTMLDivElement, SearchBarProps>(
                     </div>
                 )}
 
-                {/* Overlay para cerrar al hacer click fuera */}
                 {showSuggestions && (
                     <div
-                        className="fixed inset-0 z-50 pointer-events-none"
+                        className={cn(searchBarOverlayVariants())}
                         aria-hidden="true"
                     />
                 )}
