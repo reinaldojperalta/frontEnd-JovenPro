@@ -12,6 +12,7 @@ import { Footer } from "@/components/organisms/Footer";
 import { cn } from "@/lib/utils";
 import type {
     Product,
+    Store,
     NewsItem,
     VideoItem,
     Testimonial,
@@ -25,6 +26,7 @@ export interface HomeTemplateV2Props {
     navItems: NavItem[];
     heroData: HeroSplitData;
     products: Product[];
+    stores: Store[];
     newsItems: NewsItem[];
     videos: VideoItem[];
     testimonials: Testimonial[];
@@ -46,6 +48,7 @@ export function HomeTemplateV2({
     navItems,
     heroData,
     products,
+    stores,
     newsItems,
     videos,
     testimonials,
@@ -68,7 +71,7 @@ export function HomeTemplateV2({
                 searchSuggestions={searchSuggestions}
             />
 
-            <BentoCarousel products={products} />
+            <BentoCarousel stores={stores} />
             <NewsSection items={newsItems} />
             <VideosSection videos={videos} />
             <Testimonials testimonials={testimonials} />

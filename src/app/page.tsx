@@ -4,7 +4,7 @@ import { HomeTemplateV2 } from "@/components/templates/HomeTemplateV2";
 import {
   navItems,
   // categories, // Eliminado
-  products,
+  stores,
   newsItems,
   testimonials,
   videos,
@@ -18,7 +18,8 @@ export default function HomePage() {
     <HomeTemplateV2
       navItems={navItems}
       heroData={heroSplitData}
-      products={products}
+      stores={stores}
+      products={[]}
       // categories={categories} // Eliminado
       newsItems={newsItems}
       videos={videos}

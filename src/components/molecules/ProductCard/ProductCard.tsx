@@ -20,8 +20,8 @@ import {
     productCardThumbnailTitleVariants,
     productCardThumbnailPriceVariants,
     productCardImageVariants,
-    productCardArtisanBadgeVariants,
-    productCardArtisanNameVariants,
+    productCardEmprendedorBadgeVariants,
+    productCardEmprendedorNameVariants,
     productCardDiscountBadgeVariants,
     productCardFullTitleVariants,
     productCardFullDescriptionVariants,
@@ -32,7 +32,7 @@ import {
     productCardFullOldPriceVariants,
     productCardMinHeaderInfoVariants,
     productCardMinTitleVariants,
-    productCardMinArtisanNameVariants,
+    productCardMinEmprendedorNameVariants,
     productCardMinDescriptionVariants,
     productCardMinPriceVariants,
     type ProductCardVariant,
@@ -69,16 +69,16 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                     {...cardProps}
                 >
                     {/* Flotantes absolutos sobre imagen */}
-                    <div className={productCardArtisanBadgeVariants()}>
+                    <div className={productCardEmprendedorBadgeVariants()}>
                         <Avatar
                             size="sm"
-                            src={product.artisan.avatar}
-                            fallback={product.artisan.initials}
+                            src={product.emprendedor.avatar}
+                            fallback={product.emprendedor.initials}
                         />
-                        <span className={productCardArtisanNameVariants()}>
-                            {product.artisan.name}
+                        <span className={productCardEmprendedorNameVariants()}>
+                            {product.emprendedor.name}
                         </span>
-                        {product.artisan.verified && (
+                        {product.emprendedor.verified && (
                             <span className="text-primary text-xs">✓</span>
                         )}
                     </div>
@@ -157,15 +157,15 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                     <div className={productCardHeaderVariants()}>
                         <Avatar
                             size="sm"
-                            src={product.artisan.avatar}
-                            fallback={product.artisan.initials}
+                            src={product.emprendedor.avatar}
+                            fallback={product.emprendedor.initials}
                         />
                         <div className={productCardMinHeaderInfoVariants()}>
                             <Heading level="h4" className={productCardMinTitleVariants()}>
                                 {product.name}
                             </Heading>
-                            <Text size="xs" variant="muted" className={productCardMinArtisanNameVariants()}>
-                                {product.artisan.name}
+                            <Text size="xs" variant="muted" className={productCardMinEmprendedorNameVariants()}>
+                                {product.emprendedor.name}
                             </Text>
                         </div>
                     </div>

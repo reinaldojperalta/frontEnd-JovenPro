@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Button } from "@/components/atoms/Button";
-import { ProductCard } from "@/components/molecules/ProductCard";
+import { StoreCard } from "@/components/molecules/StoreCard";
 import { PaginationDots } from "@/components/molecules/PaginationDots";
 import { BentoGrid, BentoItem } from "@/components/atoms/BentoGrid";
 import { cn } from "@/lib/utils";
-import type { Product } from "@/lib/data";
+import type { Store } from "@/lib/data";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import { Section } from "@/components/atoms/Section";
 import {
@@ -32,7 +32,7 @@ function wrapIndex(index: number, length: number): number {
 }
 
 export interface BentoCarouselProps {
-    products: Product[];
+    stores: Store[];
     title?: string;
     subtitle?: string;
     className?: string;
@@ -42,8 +42,8 @@ export interface BentoCarouselProps {
 }
 
 export function BentoCarousel({
-    products,
-    title = "Catálogo",
+    stores,
+    title = "Emprendedores",
     subtitle = "Propulsando nuevos talentos",
     className,
     interval = 4000,
@@ -59,21 +59,21 @@ export function BentoCarousel({
     const touchEndX = useRef(0);
     const { openExternal } = useAppNavigation();
 
-    const safeProducts =
-        products.length >= 9
-            ? products
-            : Array.from({ length: Math.ceil(9 / products.length) }, () => products)
+    const safeStores =
+        stores.length >= 9
+            ? stores
+            : Array.from({ length: Math.ceil(9 / stores.length) }, () => stores)
                 .flat()
-                .slice(0, Math.max(9, products.length));
+                .slice(0, Math.max(9, stores.length));
 
-    const total = safeProducts.length;
+    const total = safeStores.length;
 
     const getItem = useCallback(
-        (offset: number): Product | null => {
+        (offset: number): Store | null => {
             if (total === 0) return null;
-            return safeProducts[wrapIndex(idx + offset, total)];
+            return safeStores[wrapIndex(idx + offset, total)];
         },
-        [idx, total, safeProducts]
+        [idx, total, safeStores]
     );
 
     const navigate = useCallback(
@@ -130,7 +130,7 @@ export function BentoCarousel({
         const targetItem = getItem(slotConfig.offset);
         if (!targetItem) return;
 
-        const targetIndex = safeProducts.findIndex((p) => p.id === targetItem.id);
+        const targetIndex = safeStores.findIndex((p) => p.id === targetItem.id);
         if (targetIndex === -1 || targetIndex === idx) return;
 
         const dir = targetIndex > idx ? "next" : "prev";
@@ -178,11 +178,11 @@ export function BentoCarousel({
         const labels: Record<number, string> = {};
         offsets.forEach((offset) => {
             const targetIdx = wrapIndex(idx + offset, total);
-            const product = safeProducts[targetIdx];
-            labels[offset] = product ? `#${targetIdx + 1} · ${product.name}` : "";
+            const store = safeStores[targetIdx];
+            labels[offset] = store ? `#${targetIdx + 1} · ${store.name}` : "";
         });
         return labels;
-    }, [idx, total, safeProducts, offsets]);
+    }, [idx, total, safeStores, offsets]);
 
     const renderSlot = (slot: BentoSlotConfig) => {
         const item = getItem(slot.offset);
@@ -201,8 +201,8 @@ export function BentoCarousel({
                 isHistory={isHistory}
                 onClick={() => handleSlotClick(slot)}
                 className={cn(
-                    "cursor-pointer", 
-                    isHiddenOnMobile && "hidden md:block", 
+                    "cursor-pointer",
+                    isHiddenOnMobile && "hidden md:block",
                     isForcedVisibleOnMobile && "!block md:!block aspect-square md:aspect-auto md:h-full",
                     slot.position === "hero" && "h-[460px] md:h-full"
                 )}
@@ -220,11 +220,11 @@ export function BentoCarousel({
                             }}
                             className="w-full h-full"
                         >
-                            <ProductCard
-                                product={item}
+                            <StoreCard
+                                store={item}
                                 variant={slot.variant}
                                 animate={false}
-                                onProductClick={openExternal}
+                                onStoreClick={openExternal}
                             />
                         </motion.div>
                     ) : (
@@ -260,10 +260,10 @@ export function BentoCarousel({
                 >
                     {/* ── TEXTOS ── */}
                     <BentoItem position="subtitle2" type="text" background="transparent" className="hidden md:flex">
-                        <img 
-                            src="/images/logo/JovenPro-by-ZonaPro.png" 
-                            alt="JovenPro by ZonaPro" 
-                            className="w-auto h-12 object-contain opacity-80" 
+                        <img
+                            src="/images/logo/JovenPro-by-ZonaPro.png"
+                            alt="JovenPro by ZonaPro"
+                            className="w-auto h-12 object-contain opacity-80"
                         />
                     </BentoItem>
 
@@ -331,7 +331,7 @@ export function BentoCarousel({
                         variant="muted"
                         className={bentoCarouselLabelVariants()}
                     >
-                        Producto {idx + 1} de {total}
+                        Tienda {idx + 1} de {total}
                     </Text>
                 </div>
             </Container>

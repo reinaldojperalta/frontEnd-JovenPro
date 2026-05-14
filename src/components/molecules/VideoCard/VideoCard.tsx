@@ -63,7 +63,7 @@ export function VideoCard({ video, className }: VideoCardProps) {
                     {video.title}
                 </Text>
                 <Text variant="muted" size="sm">
-                    por {video.artisan}
+                    por {video.emprendedor}
                 </Text>
             </div>
         </article>

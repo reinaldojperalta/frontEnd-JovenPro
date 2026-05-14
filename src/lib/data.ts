@@ -18,7 +18,7 @@ export interface Product {
     currency: "COP" | "USD";
     image: string;
     category: string;
-    artisan: {
+    emprendedor: {
         name: string;
         avatar: string;
         initials: string;
@@ -58,7 +58,24 @@ export interface VideoItem {
     thumbnail: string;
     youtubeId: string;
     duration: string;
-    artisan: string;
+    emprendedor: string;
+}
+
+export interface Store {
+    id: string;
+    slug: string;
+    name: string;
+    description: string;
+    image: string;
+    location: string;
+    rating: number;
+    reviewCount: number;
+    emprendedor: {
+        name: string;
+        avatar: string;
+        initials: string;
+        verified: boolean;
+    };
 }
 
 export interface NavItem {
@@ -141,6 +158,156 @@ export const categories: Category[] = [
 // PRODUCTOS (Imágenes locales)
 // --------------------------------------------
 
+export const stores: Store[] = [
+    {
+        id: "345",
+        slug: "fragola-premium",
+        name: "Fragola Premium",
+        description: "Condiciones de entrega y conservación. La entrega del producto se realiza a domicilio.",
+        image: "/images/products/Fragola-Premium.png",
+        location: "Firavitoba, BOY",
+        rating: 4.8,
+        reviewCount: 24,
+        emprendedor: {
+            name: "Leidy Johana Molano Lopez",
+            avatar: "/images/artisans/Fragola-Premium-avatar.png",
+            initials: "LM",
+            verified: false,
+        }
+    },
+    {
+        id: "344",
+        slug: "natural-helens",
+        name: "Natural Helens",
+        description: "Tienda Natural Helens en Sogamoso.",
+        image: "/images/products/Natural-Helens.png",
+        location: "Sogamoso, BOY",
+        rating: 4.5,
+        reviewCount: 15,
+        emprendedor: {
+            name: "Hellen Rodriguez",
+            avatar: "/images/artisans/Natural-Helens-avatar.png",
+            initials: "HR",
+            verified: false,
+        }
+    },
+    {
+        id: "343",
+        slug: "solfruty",
+        name: "Solfruty",
+        description: "Encuentra lo mejor en Solfruty.",
+        image: "/images/placeholders/No-Image-Placeholder.webp",
+        location: "Boyacá",
+        rating: 4.2,
+        reviewCount: 8,
+        emprendedor: {
+            name: "Lucia Lopez",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "LL",
+            verified: false,
+        }
+    },
+    {
+        id: "341",
+        slug: "manidalu-macrame-creativo",
+        name: "Manidalú Macramé Creativo",
+        description: "Creaciones en macramé hechas a mano.",
+        image: "/images/placeholders/No-Image-Placeholder.webp",
+        location: "Boyacá",
+        rating: 5.0,
+        reviewCount: 32,
+        emprendedor: {
+            name: "Alix Marcela Murcia Orjuela",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "AM",
+            verified: false,
+        }
+    },
+    {
+        id: "340",
+        slug: "luna-glam",
+        name: "Luna Glam",
+        description: "Accesorios y moda.",
+        image: "/images/placeholders/No-Image-Placeholder.webp",
+        location: "TOL",
+        rating: 4.7,
+        reviewCount: 19,
+        emprendedor: {
+            name: "Mayfred Toledo Perez",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "MT",
+            verified: false,
+        }
+    },
+    {
+        id: "339",
+        slug: "httpswww-instagram-comrouri_col",
+        name: "Róuri",
+        description: "Tienda Róuri ubicada en Sogamoso.",
+        image: "/images/products/Rouri.png",
+        location: "Sogamoso, BOY",
+        rating: 4.9,
+        reviewCount: 56,
+        emprendedor: {
+            name: "Grether Ruiz",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "GR",
+            verified: false,
+        }
+    },
+    {
+        id: "338",
+        slug: "sofi-s-crochetland",
+        name: "Sofi`s crochetland",
+        description: "Tejidos a crochet, amigurumis y más.",
+        image: "/images/products/Sofis crochetland.png",
+        location: "Simijaca, CUN",
+        rating: 4.6,
+        reviewCount: 21,
+        emprendedor: {
+            name: "valeria monroy",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "VM",
+            verified: false,
+        }
+    },
+    {
+        id: "337",
+        slug: "inspira-turquesa",
+        name: "Inspira Turquesa",
+        description: "Todos nuestros artículos son confeccionados o fabricados a mano con materiales de calidad, pensados para el cuidado del cabello.",
+        image: "/images/products/Inspira-Turquesa.jpg",
+        location: "Sogamoso, BOY",
+        rating: 4.3,
+        reviewCount: 11,
+        emprendedor: {
+            name: "Katherin Andrea Lopez Vija",
+            avatar: "/images/artisans/Inspira-Turquesa-avatar.jpg",
+            initials: "KL",
+            verified: false,
+        }
+    },
+    {
+        id: "336",
+        slug: "waypaoficial-com",
+        name: "Waypa",
+        description: "Productos exclusivos Waypa.",
+        image: "/images/placeholders/No-Image-Placeholder.webp",
+        location: "Bucaramanga, SAN",
+        rating: 4.4,
+        reviewCount: 9,
+        emprendedor: {
+            name: "Walter Jesus Rivera Morad",
+            avatar: "/images/artisans/placeholder_author.png",
+            initials: "WR",
+            verified: false,
+        }
+    }
+];
+
+// --------------------------------------------
+
+/*
 export const products: Product[] = [
     {
         id: "prod-23597",
@@ -151,8 +318,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/ondas-sin-calor.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -173,8 +340,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/gorro-satin-doble-tela.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -194,8 +361,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/scrunchies-mediano.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -216,8 +383,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/kit-antrifrizz-cuidado-completo.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -238,8 +405,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/calzado-hombre-ref-raices.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -260,8 +427,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/zapato-ref-tayrona.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -282,8 +449,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/soporte-y-control-nintendo-switch.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -304,8 +471,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/combo-grabador-y-cortador-laser-phecda.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -326,8 +493,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/elegoo-mars-5-ultra.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -348,8 +515,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/elegoo-neptune-4.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -370,8 +537,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/bambu-lab-a1-combo.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -392,8 +559,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/pollito-gigante-amigurumi.webp",
         category: "textil",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -414,8 +581,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/ancheta-jb-licores.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -436,8 +603,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/crema-de-whisky-de-chocolate-750-ml.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -458,8 +625,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/laser-kitdiy.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -480,8 +647,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/manjar-de-rosas.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -502,8 +669,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/vela-mini-5x5-en-presentacion-de-75-gramos.webp",
         category: "todos",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -524,8 +691,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/precolombino.webp",
         category: "ceramica",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -546,8 +713,8 @@ export const products: Product[] = [
         currency: "COP",
         image: "/images/products/cafe-500-gr-origen-berbeo-boyaca-incluye-aretes.webp",
         category: "joyeria",
-        artisan: {
-            name: "Artesano JovenPro",
+        emprendedor: {
+            name: "Emprendedor JovenPro",
             avatar: "/images/artisans/placeholder_author.png",
             initials: "JP",
             verified: false,
@@ -560,6 +727,7 @@ export const products: Product[] = [
 
 
 ];
+*/
 
 // --------------------------------------------
 // JOURNAL / NOTICIAS (Imágenes locales)
@@ -674,7 +842,7 @@ export const videos: VideoItem[] = [
         thumbnail: "/images/videos/thumbnail-raku.jpg",
         youtubeId: "VEMl5roUvtM",
         duration: "12:34",
-        artisan: "María Camila R.",
+        emprendedor: "María Camila R.",
     },
     {
         id: "vid-002",
@@ -682,7 +850,7 @@ export const videos: VideoItem[] = [
         thumbnail: "/images/videos/thumbnail-wayuu.jpg",
         youtubeId: "ahDnIPYPPgQ",
         duration: "08:21",
-        artisan: "Luisa Fernanda T.",
+        emprendedor: "Luisa Fernanda T.",
     },
 ];
 
@@ -742,9 +910,9 @@ export const footerData: FooterData = {
     ],
     socials: [
         { label: "Instagram", href: "https://www.instagram.com/jovenprocolombia" },
-        { label: "Facebook",  href: "https://www.facebook.com/jovenprocolombia" },
-        { label: "WhatsApp",  href: "https://wa.me/573024840101" },
-        { label: "Telegram",  href: "https://t.me/jovenpro" },
+        { label: "Facebook", href: "https://www.facebook.com/jovenprocolombia" },
+        { label: "WhatsApp", href: "https://wa.me/573024840101" },
+        { label: "Telegram", href: "https://t.me/jovenpro" },
     ],
     copyright: `© ${new Date().getFullYear()} JovenPro. Todos los derechos reservados.`,
 };

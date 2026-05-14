@@ -46,8 +46,8 @@ export const productCardFullMediaVariants = cva("flex-1 min-h-0 overflow-hidden"
 export const productCardMinMediaVariants = cva("flex-1 min-h-0 overflow-hidden");
 
 // --- Common Sub-components ---
-export const productCardArtisanBadgeVariants = cva("absolute z-30 top-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full");
-export const productCardArtisanNameVariants = cva("text-xs font-semibold text-foreground");
+export const productCardEmprendedorBadgeVariants = cva("absolute z-30 top-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full");
+export const productCardEmprendedorNameVariants = cva("text-xs font-semibold text-foreground");
 export const productCardDiscountBadgeVariants = cva("absolute z-30 top-4 left-4");
 
 // --- Familia A — Material Design (card-full, card-min) ---
@@ -62,7 +62,7 @@ export const productCardFullOldPriceVariants = cva("font-body text-sm md:text-ba
 
 export const productCardMinHeaderInfoVariants = cva("flex-1 min-w-0");
 export const productCardMinTitleVariants = cva("font-headline font-bold text-foreground text-sm leading-tight truncate");
-export const productCardMinArtisanNameVariants = cva("truncate");
+export const productCardMinEmprendedorNameVariants = cva("truncate");
 export const productCardMinContentVariants = cva("px-4 pt-2 pb-1 flex-shrink-0");
 export const productCardMinDescriptionVariants = cva("line-clamp-1");
 export const productCardMinFooterVariants = cva("px-4 pb-4 flex-shrink-0");

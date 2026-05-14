@@ -31,6 +31,6 @@ export const videoCardDurationVariants = cva(
     "absolute bottom-3 right-3 z-10 bg-foreground/80 text-background text-xs font-semibold px-2 py-1 rounded-md backdrop-blur-sm"
 );
 
-/** Contenedor de metadatos (título + artesano). */
+/** Contenedor de metadatos (título + emprendedor). */
 export const videoCardMetaVariants = cva("mt-4 space-y-1");
 
