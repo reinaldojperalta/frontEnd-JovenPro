@@ -191,6 +191,7 @@ export const stores: Store[] = [
             verified: false,
         }
     },
+    /*
     {
         id: "343",
         slug: "solfruty",
@@ -239,6 +240,7 @@ export const stores: Store[] = [
             verified: false,
         }
     },
+    */
     {
         id: "339",
         slug: "httpswww-instagram-comrouri_col",
@@ -292,7 +294,7 @@ export const stores: Store[] = [
         slug: "waypaoficial-com",
         name: "Waypa",
         description: "Productos exclusivos Waypa.",
-        image: "/images/placeholders/No-Image-Placeholder.webp",
+        image: "/images/products/calzado-hombre-ref-raices.webp",
         location: "Bucaramanga, SAN",
         rating: 4.4,
         reviewCount: 9,
