@@ -8,6 +8,7 @@
 
 # next.js
 /.next/
+.next
 /out/
 
 # production
@@ -36,5 +37,6 @@ next-env.d.ts
 /CONTEXT/
 /graphify-out/
 /.agent/
+.agent
 ARCHITECTURE.md
 temp_products.json
