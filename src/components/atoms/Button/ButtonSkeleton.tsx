@@ -22,7 +22,7 @@ export interface ButtonSkeletonProps {
  * pero reemplaza el contenido por un bloque gris animado.
  */
 export function ButtonSkeleton({
-  variant = "liquidGlass",
+  variant = "skeleton",
   size = "md",
   isFullWidth = false,
   className,

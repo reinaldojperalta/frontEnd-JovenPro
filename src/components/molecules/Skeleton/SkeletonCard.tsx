@@ -38,9 +38,8 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
         >
             {hasImage && (
                 <SkeletonBlock
-                    aspectRatio={imageAspectRatio}
                     radius="clay"
-                    style={{ flexShrink: 0, width: isHorizontal ? 120 : "100%" }}
+                    style={{ aspectRatio: imageAspectRatio, flexShrink: 0, width: isHorizontal ? 120 : "100%" }}
                 />
             )}
 
@@ -49,7 +48,7 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
 
                 {hasAction && (
                     <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <SkeletonBlock width={80} height={32} radius="clay" />
+                        <SkeletonBlock radius="clay" style={{ width: 80, height: 32 }} />
                         <SkeletonCircle size="md" />
                     </div>
                 )}

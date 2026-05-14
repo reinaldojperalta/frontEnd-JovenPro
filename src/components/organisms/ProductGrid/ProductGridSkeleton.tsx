@@ -30,16 +30,16 @@ export function ProductGridSkeleton({
                 <div className="hidden md:block">
                     <div className="grid grid-cols-12 gap-6">
                         <div className="col-span-7 row-span-2">
-                            <ProductCardSkeleton variant="featured" />
+                            <ProductCardSkeleton variant="card-full" />
                         </div>
                         <div className="col-span-5">
-                            <ProductCardSkeleton variant="medium" />
+                            <ProductCardSkeleton variant="card-min" />
                         </div>
                         <div className="col-span-6">
-                            <ProductCardSkeleton variant="preview" />
+                            <ProductCardSkeleton variant="card-preview" />
                         </div>
                         <div className="col-span-6">
-                            <ProductCardSkeleton variant="preview" />
+                            <ProductCardSkeleton variant="card-preview" />
                         </div>
                     </div>
                     <div className="flex justify-center gap-2 mt-10">
@@ -55,7 +55,7 @@ export function ProductGridSkeleton({
                     >
                         {Array.from({ length: 3 }).map((_, i) => (
                             <div key={i} className="snap-center shrink-0 w-[85vw] max-w-sm">
-                                <ProductCardSkeleton variant="medium" />
+                                <ProductCardSkeleton variant="card-min" />
                             </div>
                         ))}
                     </div>

@@ -10,18 +10,23 @@ export interface HeadingSkeletonProps {
     tracking?: "tighter" | "tight" | "normal" | "wide" | "wider" | "widest";
     transform?: "uppercase" | "lowercase" | "capitalize" | "normal";
     className?: string;
+    width?: string | number;
+    height?: string | number;
 }
 
 export function HeadingSkeleton({
     level = "h2",
-    variant = "liquidGlass",
+    variant = "skeleton",
     italic = false,
     tracking = "tighter",
     transform = "normal",
     className,
+    width,
+    height,
 }: HeadingSkeletonProps) {
     return (
         <div
+            style={{ width, height }}
             className={cn(
                 headingVariants({
                     level,

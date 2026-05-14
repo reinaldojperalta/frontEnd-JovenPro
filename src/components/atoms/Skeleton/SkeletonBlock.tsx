@@ -15,10 +15,14 @@ import { cn } from "@/lib/utils";
 
 export interface SkeletonBlockProps
     extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof skeletonBlockVariants> { }
+    VariantProps<typeof skeletonBlockVariants> {
+        width?: string | number;
+        height?: string | number;
+        aspectRatio?: string | number;
+}
 
 const SkeletonBlock = forwardRef<HTMLDivElement, SkeletonBlockProps>(
-    ({ className, variant, radius, animation, ...props }, ref) => {
+    ({ className, variant, radius, animation, width, height, aspectRatio, style, ...props }, ref) => {
         return (
             <div
                 ref={ref}
@@ -26,6 +30,7 @@ const SkeletonBlock = forwardRef<HTMLDivElement, SkeletonBlockProps>(
                     skeletonBlockVariants({ variant, radius, animation }),
                     className
                 )}
+                style={{ width, height, aspectRatio, ...style }}
                 {...props}
             />
         );

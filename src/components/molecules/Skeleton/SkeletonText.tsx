@@ -34,9 +34,8 @@ const SkeletonText: React.FC<SkeletonTextProps> = ({
                 return (
                     <SkeletonBlock
                         key={i}
-                        height={lineHeight}
-                        width={width}
                         radius="sm"
+                        style={{ height: lineHeight, width }}
                     />
                 );
             })}

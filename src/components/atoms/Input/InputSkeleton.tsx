@@ -28,7 +28,7 @@ export interface InputSkeletonProps {
  * - Bloque gris animado en lugar del input nativo
  */
 export function InputSkeleton({
-  variant = "liquidGlass",
+  variant = "skeleton",
   size = "md",
   showLabel = false,
   hasLeftIcon = false,
@@ -49,7 +49,7 @@ export function InputSkeleton({
       {/* Wrapper con mismo layout que el input real */}
       <div
         className={cn(
-          inputWrapperVariants({ variant, size, fullWidth: true }),
+          inputWrapperVariants({ size, fullWidth: true }),
           "relative flex items-center skeleton-pulse/40 border-transparent"
         )}
       >
@@ -68,12 +68,10 @@ export function InputSkeleton({
               variant,
               size,
               state: "default",
-              hasIcon: hasLeftIcon || hasRightIcon,
-              iconPosition: hasLeftIcon ? "left" : "right",
             }),
             "bg-transparent border-transparent shadow-none pointer-events-none select-none",
-            hasLeftIcon && getIconPadding(size as string, "left"),
-            hasRightIcon && getIconPadding(size as string, "right")
+            hasLeftIcon && getIconPadding(size as InputSize, "left"),
+            hasRightIcon && getIconPadding(size as InputSize, "right")
           )}
         >
           <div className={cn("w-full rounded-sm bg-muted", heightMap[size as keyof typeof heightMap] || "h-6")} />

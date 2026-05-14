@@ -26,5 +26,5 @@ export type {
     SuggestionsVariant,
 } from "./SearchBar.variants";
 
-/* export { SearchBarSkeleton } from "./SearchBarSkeleton";
-export type { SearchBarSkeletonProps } from "./SearchBarSkeleton"; */
+export { SearchBarSkeleton } from "./SearchBarSkeleton";
+export type { SearchBarSkeletonProps } from "./SearchBarSkeleton";

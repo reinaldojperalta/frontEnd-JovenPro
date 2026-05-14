@@ -192,7 +192,8 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                                 <>
                                     <br />
                                     <GradientText
-                                        colors={["from-primary-dim", "to-primary"]}
+                                        from="primary-dim"
+                                        to="primary"
                                         className="italic text-[0.8em] leading-tight block"
                                     >
                                         {gradientTitle}

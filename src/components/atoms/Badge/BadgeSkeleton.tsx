@@ -11,7 +11,7 @@ export interface BadgeSkeletonProps {
 }
 
 export function BadgeSkeleton({
-  variant = "liquidGlass",
+  variant = "skeleton",
   size = "md",
   indicator = false,
   className,

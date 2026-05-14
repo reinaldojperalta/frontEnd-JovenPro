@@ -58,10 +58,10 @@ export function ProductGrid({
         return () => el.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const getCardVariant = (index: number): "featured" | "medium" | "preview" => {
-        if (index === 0) return "featured";
-        if (index === 1) return "medium";
-        return "preview";
+    const getCardVariant = (index: number): "card-full" | "card-min" | "card-preview" => {
+        if (index === 0) return "card-full";
+        if (index === 1) return "card-min";
+        return "card-preview";
     };
 
     const getGridArea = (index: number): string => {
@@ -199,7 +199,7 @@ export function ProductGrid({
                                     >
                                         <ProductCard
                                             product={product}
-                                            variant="medium"
+                                            variant="card-min"
                                         />
                                     </div>
                                 ))}

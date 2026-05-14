@@ -19,7 +19,7 @@ export interface IconButtonSkeletonProps {
  * para que el layout no salte ni un píxel.
  */
 export function IconButtonSkeleton({
-  variant = "liquidGlass",
+  variant = "skeleton",
   size = "md",
   className,
 }: IconButtonSkeletonProps) {

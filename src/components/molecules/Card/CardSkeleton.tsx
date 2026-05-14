@@ -29,6 +29,7 @@ export interface CardSkeletonProps {
     footerAlign?: CardFooterAlign;
     className?: string;
     children?: React.ReactNode;
+    minHeight?: string | number;
 }
 
 export function CardSkeleton({
@@ -44,10 +45,12 @@ export function CardSkeleton({
     hasFooter = true,
     footerAlign = "between",
     className,
+    minHeight,
 }: CardSkeletonProps) {
 
     return (
         <article
+            style={{ minHeight }}
             className={cn(
                 cardVariants({
                     variant,
