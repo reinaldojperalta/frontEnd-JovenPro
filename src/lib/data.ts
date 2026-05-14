@@ -90,14 +90,17 @@ export interface HeroSplitData {
 export interface WorkWithUsData {
     headline: string;
     subheadline: string;
-    instagramUrl: string;  // NUEVO
-    facebookUrl: string;   // NUEVO
+    sectionLabel: string;          // Etiqueta overline de la sección (ej. "Maker Hub")
+    socialsLabel: string;          // Label sobre los iconos sociales (ej. "Conecta con nosotros")
+    whatsappDisplayLabel: string;  // Texto visible del enlace de WhatsApp
+    instagramUrl: string;
+    facebookUrl: string;
     whatsappNumber: string;
     whatsappMessage: string;
-    mapUrl: string;        // NUEVO
+    mapUrl: string;
     locationLabel: string;
     mapImageUrl: string;
-    locationSubLabel: string;   // NUEVO
+    locationSubLabel: string;
 }
 
 export interface FooterData {
@@ -605,13 +608,13 @@ export const newsItems: NewsItem[] = [
     },
     {
         id: "news-005",
-        title: "Plata y esmeraldas: la dupla perfecta",
-        excerpt: "Tendencias en joyería artesanal colombiana para esta temporada.",
-        category: "Joyería",
-        image: "/images/news/plata-esmeraldas.jpg",
-        date: "18 Abr 2026",
-        readTime: "3 min",
-        href: "https://jovenpro.com/blog/plata-esmeraldas",
+        title: "Cerámica raku: fuego y alma colombiana",
+        excerpt: "La técnica milenaria del raku llega a los talleres de JovenPro. Descubre cómo nuestros artesanos fusionan la tradición japonesa con la identidad boyacense.",
+        category: "Cerámica",
+        image: "/images/news/madera-andes.jpg",
+        date: "10 Abr 2026",
+        readTime: "5 min",
+        href: "https://jovenpro.com/blog/ceramica-raku",
     },
 ];
 
@@ -690,14 +693,14 @@ export const videos: VideoItem[] = [
 export const heroSplitData: HeroSplitData = {
     left: {
         title: "Crea con nosotros",
-        subtitle: "texto",
+        subtitle: "Únete a nuestra plataforma y lleva tus productos a miles de compradores.",
         cta: "Quiero vender",
         href: "#contacto",
         image: "/images/hero/imagen_heroSide_emprendedor.webp",
     },
     right: {
         title: "Apoya lo local",
-        subtitle: "texto",
+        subtitle: "Descubre artesanías únicas, hechas a mano por emprendedores colombianos.",
         cta: "Explorar tienda.",
         href: "#productos",
         image: "/images/hero/emprendedor-mirror.jpg",
@@ -712,12 +715,15 @@ export const heroSplitData: HeroSplitData = {
 export const workWithUsData: WorkWithUsData = {
     headline: "Únete a los demás emprendedores.",
     subheadline: "Transforma tu pasión en un negocio próspero. Accede a herramientas exclusivas, visibilidad internacional y una comunidad que respalda tu crecimiento emprendedor.",
+    sectionLabel: "Maker Hub",
+    socialsLabel: "Conecta con nosotros",
+    whatsappDisplayLabel: "WhatsApp: +57 302 484 0101",
     instagramUrl: "https://www.instagram.com/jovenprocolombia",
     facebookUrl: "https://www.facebook.com/jovenprocolombia",
     whatsappNumber: "573024840101",
     whatsappMessage: "Hola, estoy interesado en ser emprendedor JovenPro.",
     mapUrl: "https://maps.app.goo.gl/Lq3bkJrCh4hacK8g7",
-    locationLabel: "JovenPro  /Sogamoso, Boyacá",
+    locationLabel: "JovenPro / Sogamoso, Boyacá",
     mapImageUrl: "/images/logo/mapa.webp",
     locationSubLabel: "Descubre tu potencial",
 };
@@ -735,9 +741,10 @@ export const footerData: FooterData = {
         { label: "Preguntas frecuentes", href: "#" },
     ],
     socials: [
-        { label: "Instagram", href: "https://instagram.com/jovenpro" },
-        { label: "Facebook", href: "https://facebook.com/jovenpro" },
-        { label: "TikTok", href: "https://tiktok.com/@jovenpro" },
+        { label: "Instagram", href: "https://www.instagram.com/jovenprocolombia" },
+        { label: "Facebook",  href: "https://www.facebook.com/jovenprocolombia" },
+        { label: "WhatsApp",  href: "https://wa.me/573024840101" },
+        { label: "Telegram",  href: "https://t.me/jovenpro" },
     ],
     copyright: `© ${new Date().getFullYear()} JovenPro. Todos los derechos reservados.`,
 };

@@ -8,7 +8,7 @@ export const sectionVariants = cva("w-full", {
             md: "py-16 md:py-20",
             lg: "py-20 md:py-28",
             xl: "py-24 md:py-32",
-            hero: "min-h-screen flex items-center",
+            hero: "min-h-screen flex flex-col md:flex-row items-stretch",
         },
         background: {
             transparent: "bg-transparent",

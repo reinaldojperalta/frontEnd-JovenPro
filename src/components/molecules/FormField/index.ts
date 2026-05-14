@@ -8,8 +8,13 @@ export type { FormFieldProps, FormFieldValidation } from "./FormField";
 export {
     formFieldVariants,
     labelVariants,
+    floatingLabelVariants,
     helperTextVariants,
     fieldContainerVariants,
+    validationIconVariants,
+    validationBadgeWrapperVariants,
+    validationBadgeVariants,
+    formFieldActionVariants,
 } from "./FormField.variants";
 
 export type {

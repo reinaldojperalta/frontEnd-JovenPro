@@ -112,7 +112,7 @@ Esta versión ha sido re-auditada directamente desde el código fuente.
 | `aspect-bento-small` | `1/1` | CardPreview |
 | `aspect-bento-history` | `1/1` | HistorySlot |
 
-> ⚠️ **TOKENS FANTASMA PENDIENTES**: `aspect-bento-square` y `aspect-bento-portrait` se usan en `BentoGrid.variants.ts` pero **NO están definidos** en `tailwind.config.ts`. Tailwind los ignora silenciosamente.
+> ✅ **RESUELTO**: `aspect-bento-square` y `aspect-bento-portrait` ya están integrados en `BentoGrid.variants.ts` y sincronizados en `tailwind.config.ts`.
 
 ---
 
@@ -188,8 +188,8 @@ Esta versión ha sido re-auditada directamente desde el código fuente.
 
 | Clase/Token usado | Archivo que lo usa | Estado |
 | --- | --- | --- |
-| `aspect-bento-square` | `BentoGrid.variants.ts` | ❌ NO DEFINIDO |
-| `aspect-bento-portrait` | `BentoGrid.variants.ts` | ❌ NO DEFINIDO |
+| `aspect-bento-square` | `BentoGrid.variants.ts` | ✅ DEFINIDO |
+| `aspect-bento-portrait` | `BentoGrid.variants.ts` | ✅ DEFINIDO |
 | `text-on-surface` | `Input.variants.ts` | ❌ NO DEFINIDO |
 | `text-on-surface-variant` | `Typography.variants.ts` | ❌ NO DEFINIDO |
 | `border-surface-variant` | `IconButton.variants.ts` | ❌ NO DEFINIDO |

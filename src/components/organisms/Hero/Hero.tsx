@@ -151,7 +151,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                     paddingY="2xl"
                     className={cn(
                         "relative z-10 w-full",
-                        isSplit && "flex flex-col lg:flex-row items-center gap-16",
+                        isSplit && "flex flex-col lg:flex-row items-center gap-8 lg:gap-16",
                         isCentered && "flex flex-col items-center text-center",
                         isFull && "flex flex-col justify-end h-full pb-20"
                     )}
@@ -235,7 +235,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                                 radius="clay"
                                 padding="none"
                                 interactive={false}
-                                className="min-h-[500px] border-8 border-surface-container overflow-hidden"
+                                className="min-h-[300px] sm:min-h-[500px] border-4 md:border-8 border-surface-container overflow-hidden"
                                 media={{
                                     src: featuredItem.image,
                                     alt: featuredItem.title,

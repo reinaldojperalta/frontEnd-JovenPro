@@ -34,7 +34,7 @@ export const workWithUsCardVariants = cva(
 );
 
 export const workWithUsContentVariants = cva(
-    "w-full lg:w-1/2 p-10 md:p-16 flex flex-col justify-center relative overflow-hidden"
+    "w-full lg:w-1/2 p-6 sm:p-10 md:p-16 flex flex-col justify-center relative overflow-hidden"
 );
 
 export const workWithUsDecoVariants = cva(
@@ -46,7 +46,7 @@ export const workWithUsInnerVariants = cva("relative z-10");
 export const workWithUsTitleVariants = cva("mb-6 leading-tight");
 
 export const workWithUsDescriptionVariants = cva(
-    "font-body text-foreground/70 text-base md:text-lg mb-10 max-w-md leading-relaxed"
+    "font-body text-foreground/70 text-base md:text-lg mb-6 md:mb-10 max-w-md leading-relaxed"
 );
 
 export const workWithUsDividerVariants = cva(
@@ -56,7 +56,7 @@ export const workWithUsDividerVariants = cva(
 export const workWithUsSocialsVariants = cva("flex gap-3");
 
 export const workWithUsMapVariants = cva(
-    "w-full lg:w-1/2 relative min-h-[400px] bg-surface"
+    "w-full lg:w-1/2 relative min-h-[300px] md:min-h-[400px] bg-surface"
 );
 
 export const workWithUsMapImageVariants = cva(
@@ -88,3 +88,7 @@ export const workWithUsLocationLabelVariants = cva(
 export const workWithUsLocationSubVariants = cva(
     "font-normal text-xs opacity-80"
 );
+
+export const workWithUsWhatsappLinkVariants = cva(
+    "font-headline text-base md:text-xl text-primary-dim underline font-bold block mt-4 hover:opacity-80 transition-opacity cursor-pointer bg-transparent border-none p-0"
+);

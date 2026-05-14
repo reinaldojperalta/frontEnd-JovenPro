@@ -18,17 +18,17 @@ export const heroSplitLogoWrapperVariants = cva(
 
 /** Contenedor con efecto glass para el logo */
 export const heroSplitLogoContainerVariants = cva(
-    "p-6 md:p-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
+    "p-4 sm:p-6 md:p-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
 );
 
 /** Imagen del logo (cuando se pasa logoSrc) */
 export const heroSplitLogoImageVariants = cva(
-    "h-24 md:h-32 w-auto object-contain drop-shadow-2xl"
+    "h-16 sm:h-24 md:h-32 w-auto object-contain drop-shadow-2xl"
 );
 
 /** Contenedor motion.div de cada lado */
 export const heroSplitSideVariants = cva(
-    "relative flex-1 min-h-[50vh] md:min-h-screen cursor-pointer group overflow-hidden"
+    "relative flex-1 w-full min-h-[50vh] md:min-h-screen cursor-pointer group overflow-hidden"
 );
 
 /** Wrapper absoluto que contiene img + overlays */
@@ -54,7 +54,7 @@ export const heroSplitImageVariants = cva(
 
 /** Overlay de gradiente primario (dirección left/right) */
 export const heroSplitGradientOverlayVariants = cva(
-    "absolute inset-0",
+    "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0",
     {
         variants: {
             direction: {
@@ -75,12 +75,12 @@ export const heroSplitDarkOverlayVariants = cva(
 
 /** Contenedor del texto (título, subtítulo, CTA) */
 export const heroSplitContentVariants = cva(
-    "absolute bottom-10 z-20",
+    "absolute bottom-4 md:bottom-10 z-20",
     {
         variants: {
             align: {
-                left: "left-10 text-left",
-                right: "right-10 text-right",
+                left: "left-4 md:left-10 text-left",
+                right: "right-4 md:right-10 text-right",
             },
         },
         defaultVariants: {
@@ -91,12 +91,12 @@ export const heroSplitContentVariants = cva(
 
 /** Título principal de cada lado */
 export const heroSplitTitleVariants = cva(
-    "font-headline text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-3"
+    "font-headline text-2xl sm:text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-2 md:mb-3"
 );
 
 /** Subtítulo / descripción */
 export const heroSplitSubtitleVariants = cva(
-    "font-body text-white/90 text-lg mb-6 max-w-sm",
+    "font-body text-white/90 text-sm sm:text-base md:text-lg mb-4 md:mb-6 max-w-[90%] sm:max-w-xs md:max-w-sm",
     {
         variants: {
             align: {

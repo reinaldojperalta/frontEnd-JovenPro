@@ -1,7 +1,5 @@
 // src/components/templates/HomeTemplateV2/HomeTemplateV2.tsx
 
-"use client";
-
 import React from "react";
 import { NavbarSticky, NavbarSearchSuggestion } from "@/components/organisms/NavbarSticky";
 import { HeroSplit } from "@/components/organisms/HeroSplit";
@@ -35,10 +33,6 @@ export interface HomeTemplateV2Props {
     className?: string;
 }
 
-const handleProductClick = (href: string) => {
-    window.open(href, "_blank");
-};
-
 function buildSearchSuggestions(products: Product[]): NavbarSearchSuggestion[] {
     return products.map((p) => ({
         id: p.id,
@@ -46,17 +40,6 @@ function buildSearchSuggestions(products: Product[]): NavbarSearchSuggestion[] {
         category: p.category,
         href: `https://jovenpro.com/producto/${p.slug}/`,
     }));
-}
-
-function handleSearchSubmit(value: string) {
-    const url = `https://jovenpro.com/?s=${encodeURIComponent(value)}&post_type=product&product_cat=`;
-    window.open(url, "_blank", "noopener,noreferrer");
-}
-
-function handleSearchSelect(suggestion: NavbarSearchSuggestion) {
-    if (suggestion.href) {
-        window.open(suggestion.href, "_blank", "noopener,noreferrer");
-    }
 }
 
 export function HomeTemplateV2({
@@ -83,15 +66,9 @@ export function HomeTemplateV2({
             <NavbarSticky
                 items={navItems}
                 searchSuggestions={searchSuggestions}
-                onSearchSubmit={handleSearchSubmit}
-                onSearchSelect={handleSearchSelect}
-                onCartClick={() =>
-                    window.open("https://jovenpro.com/carrito/", "_blank", "noopener,noreferrer")
-                }
             />
 
-            <BentoCarousel products={products}
-                onProductClick={handleProductClick} />
+            <BentoCarousel products={products} />
             <NewsSection items={newsItems} />
             <VideosSection videos={videos} />
             <Testimonials testimonials={testimonials} />

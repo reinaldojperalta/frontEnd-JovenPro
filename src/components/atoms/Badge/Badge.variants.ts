@@ -84,7 +84,20 @@ export const indicatorVariants = cva("relative flex h-2 w-2", {
 });
 
 export const pingVariants = cva(
-    "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+    "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+    {
+        variants: {
+            color: {
+                primary: "bg-primary",
+                secondary: "bg-secondary",
+                danger: "bg-danger",
+                success: "bg-success",
+            },
+        },
+        defaultVariants: {
+            color: "primary",
+        },
+    }
 );
 
 export const dotVariants = cva("relative inline-flex rounded-full h-2 w-2", {

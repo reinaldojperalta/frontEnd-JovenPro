@@ -9,6 +9,16 @@ export {
     searchBarVariants,
     suggestionsVariants,
     suggestionItemVariants,
+    searchBarInputWrapperVariants,
+    searchBarInputIconVariants,
+    searchBarClearIconVariants,
+    searchBarClearButtonVariants,
+    searchBarSuggestionContentVariants,
+    searchBarSuggestionIconVariants,
+    searchBarArrowIconVariants,
+    searchBarEmptyStateVariants,
+    searchBarEmptyTextVariants,
+    searchBarOverlayVariants,
 } from "./SearchBar.variants";
 
 export type {

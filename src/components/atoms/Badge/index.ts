@@ -8,6 +8,8 @@ export type { BadgeProps } from "./Badge";
 export {
     badgeVariants,
     indicatorVariants,
+    pingVariants,
+    dotVariants,
 } from "./Badge.variants";
 
 export type {

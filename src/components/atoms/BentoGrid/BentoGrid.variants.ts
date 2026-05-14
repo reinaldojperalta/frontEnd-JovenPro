@@ -61,10 +61,19 @@ export type BentoItemPosition =
     | "compact";
 
 export type BentoItemType = "product" | "text" | "control";
+export type BentoItemBackground =
+    | "transparent"
+    | "surface"
+    | "glass"
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "surface-container"
+    | "surface-container-low";
 
 export type BentoItemSpan = 1 | 2 | 3 | "full";
 export type BentoItemRowSpan = 1 | 2 | 3;
-export type BentoItemRatio = "large" | "small" | "vertical" | "auto";
+export type BentoItemRatio = "large" | "small" | "vertical" | "auto" | "square" | "portrait";
 
 export const bentoItemVariants = cva(
     "relative overflow-hidden rounded-clay transition-all duration-500 ease-smooth min-h-0 min-w-0",
@@ -110,16 +119,29 @@ export const bentoItemVariants = cva(
                 large: "aspect-bento-large",
                 small: "aspect-bento-small",
                 vertical: "aspect-bento-vertical",
+                square: "aspect-bento-square",
+                portrait: "aspect-bento-portrait",
                 auto: "aspect-auto h-full",
             },
             isHistory: {
                 true: "grayscale opacity-50 transition-all duration-300 cursor-pointer hover:grayscale-0 hover:opacity-100",
                 false: "",
             },
+            background: {
+                transparent: "bg-transparent",
+                surface: "bg-surface shadow-clay",
+                glass: "bg-white/40 backdrop-blur-xl border border-white/50",
+                primary: "bg-primary",
+                secondary: "bg-secondary/10",
+                accent: "bg-accent/10",
+                "surface-container": "bg-surface-container",
+                "surface-container-low": "bg-surface-container-low",
+            },
         },
         defaultVariants: {
             position: undefined,
             type: "product",
+            background: "transparent",
             ratio: "auto",
             isHistory: false,
         },

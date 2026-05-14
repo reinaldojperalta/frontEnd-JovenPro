@@ -18,4 +18,5 @@ export type {
     BentoItemRowSpan,
     BentoItemRatio,
     BentoItemType,
+    BentoItemBackground,
 } from "./BentoGrid.variants";

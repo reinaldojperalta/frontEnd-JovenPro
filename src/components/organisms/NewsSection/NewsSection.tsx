@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heading } from "@/components/atoms/Typography";
 import { Text } from "@/components/atoms/Typography";
@@ -24,6 +24,10 @@ import {
     newsSectionMobileCardVariants,
     newsSectionMobileMediaVariants,
     newsSectionMobileContentVariants,
+    NEWS_SPRING,
+    NEWS_DIRECTIONS,
+    NEWS_SLOTS,
+    type NewsSlotConfig,
 } from "./NewsSection.variants";
 
 export interface NewsSectionProps {
@@ -42,6 +46,7 @@ export function NewsSection({
     onReadArticle,
 }: NewsSectionProps) {
     const [currentPage, setCurrentPage] = useState(0);
+    const [localIndex, setLocalIndex] = useState(0);
     const itemsPerPage = 4;
 
     const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -51,15 +56,30 @@ export function NewsSection({
         return items.slice(start, start + itemsPerPage);
     }, [items, currentPage]);
 
-    const featured = paginatedItems[0];
-    const previews = paginatedItems.slice(1, 4);
+    useEffect(() => {
+        setLocalIndex(0);
+    }, [currentPage]);
+
+    const getItem = (offset: number) => {
+        if (paginatedItems.length === 0) return null;
+        return paginatedItems[(localIndex + offset) % paginatedItems.length];
+    };
 
     const handleReadArticle = (href?: string) => {
         const url = href || "#";
         if (onReadArticle) {
             onReadArticle(url);
         } else {
-            window.open(url, "_blank");
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+    };
+
+    const handleSlotClick = (slot: NewsSlotConfig) => {
+        if (slot.offset === 0) {
+            const item = getItem(0);
+            if (item) handleReadArticle(item.href);
+        } else {
+            setLocalIndex((prev) => (prev + slot.offset) % paginatedItems.length);
         }
     };
 
@@ -79,13 +99,6 @@ export function NewsSection({
         }
         return labels;
     }, [currentPage, totalPages]);
-
-    // Grid classes para cada posición (de globals.css)
-    const previewGridClasses = [
-        "news-slot-preview-1",
-        "news-slot-preview-2",
-        "news-slot-preview-3",
-    ];
 
     return (
         <Section id="journal" spacing="md" background="transparent" className={className}>
@@ -124,54 +137,46 @@ export function NewsSection({
                         transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                         className={newsSectionGridVariants()}
                     >
-                        {/* Featured */}
-                        {featured && (
-                            <div
-                                className={cn(
-                                    "news-slot-featured",
-                                    newsSectionSlotVariants({ position: "featured" })
-                                )}
-                            >
-                                <NewsCard
-                                    data={{
-                                        id: featured.id,
-                                        title: featured.title,
-                                        excerpt: featured.excerpt,
-                                        image: featured.image,
-                                        category: featured.category,
-                                        date: featured.date,
-                                        readTime: featured.readTime,
-                                        href: featured.href,
-                                    }}
-                                    variant="featured"
-                                    onClick={() => handleReadArticle(featured.href)}
-                                />
-                            </div>
-                        )}
+                        {NEWS_SLOTS.map((slot) => {
+                            const item = getItem(slot.offset);
+                            if (!item) return null;
 
-                        {/* Previews */}
-                        {previews.map((item, i) => (
-                            <div
-                                key={item.id}
-                                className={cn(
-                                    previewGridClasses[i],
-                                    newsSectionSlotVariants({ position: `preview-${i + 1}` as any })
-                                )}
-                            >
-                                <NewsCard
-                                    data={{
-                                        id: item.id,
-                                        title: item.title,
-                                        excerpt: item.excerpt,
-                                        image: item.image,
-                                        category: item.category,
-                                        href: item.href,
-                                    }}
-                                    variant="preview"
-                                    onClick={() => handleReadArticle(item.href)}
-                                />
-                            </div>
-                        ))}
+                            return (
+                                <div
+                                    key={slot.id}
+                                    className={cn(
+                                        slot.gridClass,
+                                        newsSectionSlotVariants({ position: slot.variant as any })
+                                    )}
+                                >
+                                    <AnimatePresence mode="wait" initial={false}>
+                                        <motion.div
+                                            key={item.id}
+                                            initial={NEWS_DIRECTIONS.up.enter}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            exit={NEWS_DIRECTIONS.up.exit}
+                                            transition={{ ...NEWS_SPRING, delay: slot.delay }}
+                                            className="w-full h-full"
+                                        >
+                                            <NewsCard
+                                                data={{
+                                                    id: item.id,
+                                                    title: item.title,
+                                                    excerpt: item.excerpt,
+                                                    image: item.image,
+                                                    category: item.category,
+                                                    date: item.date,
+                                                    readTime: item.readTime,
+                                                    href: item.href,
+                                                }}
+                                                variant={slot.variant === "featured" ? "featured" : "preview"}
+                                                onClick={() => handleSlotClick(slot)}
+                                            />
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+                            );
+                        })}
                     </motion.div>
                 </AnimatePresence>
 
@@ -191,60 +196,69 @@ export function NewsSection({
 
                 {/* Mobile */}
                 <div className="md:hidden space-y-4">
-                    {featured && (
-                        <div
-                            className={newsSectionMobileCardVariants()}
-                            onClick={() => handleReadArticle(featured.href)}
-                        >
-                            <div className={newsSectionMobileMediaVariants()}>
-                                <img
-                                    src={featured.image}
-                                    alt={featured.title}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute top-4 left-4">
-                                    <Badge variant="primary" size="sm">
-                                        {featured.category}
-                                    </Badge>
-                                </div>
-                            </div>
-                            <div className={newsSectionMobileContentVariants()}>
-                                <h3 className="font-headline text-lg font-bold text-secondary mb-2">
-                                    {featured.title}
-                                </h3>
-                                <p className="font-body text-sm text-muted-foreground line-clamp-2">
-                                    {featured.excerpt}
-                                </p>
-                            </div>
-                        </div>
-                    )}
+                    {(() => {
+                        const mFeatured = getItem(0);
+                        const mPreviews = [getItem(1), getItem(2), getItem(3)].filter(Boolean) as NewsItem[];
+                        
+                        return (
+                            <>
+                                {mFeatured && (
+                                    <div
+                                        className={newsSectionMobileCardVariants()}
+                                        onClick={() => handleSlotClick(NEWS_SLOTS[0])}
+                                    >
+                                        <div className={newsSectionMobileMediaVariants()}>
+                                            <img
+                                                src={mFeatured.image}
+                                                alt={mFeatured.title}
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute top-4 left-4">
+                                                <Badge variant="primary" size="sm">
+                                                    {mFeatured.category}
+                                                </Badge>
+                                            </div>
+                                        </div>
+                                        <div className={newsSectionMobileContentVariants()}>
+                                            <h3 className="font-headline text-lg font-bold text-secondary mb-2">
+                                                {mFeatured.title}
+                                            </h3>
+                                            <p className="font-body text-sm text-muted-foreground line-clamp-2">
+                                                {mFeatured.excerpt}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
 
-                    <div className={newsSectionMobileScrollVariants()}>
-                        {previews.map((item) => (
-                            <div key={item.id} className={newsSectionMobileItemVariants()}>
-                                <div
-                                    className={newsSectionMobileCardVariants()}
-                                    onClick={() => handleReadArticle(item.href)}
-                                >
-                                    <div className="aspect-square overflow-hidden">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="p-4">
-                                        <Badge variant="default" size="sm" className="mb-2">
-                                            {item.category}
-                                        </Badge>
-                                        <h4 className="font-headline text-sm font-bold text-secondary mb-1">
-                                            {item.title}
-                                        </h4>
-                                    </div>
+                                <div className={newsSectionMobileScrollVariants()}>
+                                    {mPreviews.map((item, idx) => (
+                                        <div key={item.id} className={newsSectionMobileItemVariants()}>
+                                            <div
+                                                className={newsSectionMobileCardVariants()}
+                                                onClick={() => handleSlotClick(NEWS_SLOTS[idx + 1])}
+                                            >
+                                                <div className="aspect-square overflow-hidden">
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                                <div className="p-4">
+                                                    <Badge variant="default" size="sm" className="mb-2">
+                                                        {item.category}
+                                                    </Badge>
+                                                    <h4 className="font-headline text-sm font-bold text-secondary mb-1">
+                                                        {item.title}
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            </>
+                        );
+                    })()}
                 </div>
             </Container>
         </Section>

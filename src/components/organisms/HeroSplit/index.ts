@@ -5,11 +5,12 @@
 // ============================================================================
 
 export { HeroSplit } from "./HeroSplit";
-export type { HeroSplitProps } from "./HeroSplit";
+export type { HeroSplitProps, HeroSplitSide } from "./HeroSplit";
 
 export {
     heroSplitDividerVariants,
     heroSplitLogoWrapperVariants,
+    heroSplitLogoContainerVariants,
     heroSplitLogoImageVariants,
     heroSplitSideVariants,
     heroSplitImageContainerVariants,

@@ -19,6 +19,7 @@ import {
     type BentoItemRowSpan,
     type BentoItemRatio,
     type BentoItemType,
+    type BentoItemBackground,
 } from "./BentoGrid.variants";
 
 /* ============================================================
@@ -57,6 +58,8 @@ export interface BentoItemProps extends React.HTMLAttributes<HTMLDivElement> {
     position?: BentoItemPosition;
     /** Tipo de slot: producto (fondo+shadow), texto (transparente), control (transparente) */
     type?: BentoItemType;
+    /** Fondo del slot (sobreescribe el fondo por defecto del tipo) */
+    background?: BentoItemBackground;
     /** Columnas que ocupa (modo genérico, cuando no hay position) */
     colSpan?: BentoItemSpan;
     /** Filas que ocupa (modo genérico) */
@@ -73,6 +76,7 @@ export const BentoItem = React.forwardRef<HTMLDivElement, BentoItemProps>(
             className,
             position,
             type,
+            background,
             colSpan,
             rowSpan,
             ratio,
@@ -89,6 +93,7 @@ export const BentoItem = React.forwardRef<HTMLDivElement, BentoItemProps>(
                     bentoItemVariants({
                         position,
                         type,
+                        background,
                         colSpan,
                         rowSpan,
                         ratio,

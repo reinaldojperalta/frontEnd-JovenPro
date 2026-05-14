@@ -18,7 +18,7 @@ export const bentoCarouselHeaderVariants = cva(
 );
 
 export const bentoCarouselOverlineVariants = cva(
-    "uppercase tracking-[0.2em] text-primary mb-3"
+    "uppercase tracking-[0.2em] mb-3"
 );
 
 /* ============================================================
@@ -52,7 +52,7 @@ export const bentoCarouselInfoVariants = cva(
 );
 
 export const bentoCarouselLabelVariants = cva(
-    "uppercase tracking-[0.15em] font-semibold text-muted-foreground text-xs"
+    "uppercase tracking-[0.15em] font-semibold"
 );
 
 /* ============================================================

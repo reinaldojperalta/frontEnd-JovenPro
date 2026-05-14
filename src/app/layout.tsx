@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "JovenPro by ZonaPro | Artisanal Couture",
+  title: "JovenPro by ZonaPro",
   description: "Marketplace premium para el talento emprendedor.",
 };
 

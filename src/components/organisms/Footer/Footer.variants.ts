@@ -18,8 +18,10 @@
 
 import { cva } from "class-variance-authority";
 
+export const footerVariants = cva("border-t border-border/20");
+
 export const footerInnerVariants = cva(
-    "max-w-7xl mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row justify-between items-center gap-6"
+    "py-12 flex flex-col md:flex-row justify-between items-center gap-10 md:gap-6"
 );
 
 export const footerBrandVariants = cva("text-center md:text-left");

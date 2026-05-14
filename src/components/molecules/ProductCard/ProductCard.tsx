@@ -4,32 +4,37 @@ import React, { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/atoms/Badge";
 import { Avatar } from "@/components/atoms/Avatar";
-import { Heading } from "@/components/atoms/Typography";
-import { Text } from "@/components/atoms/Typography";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Heading, Text } from "@/components/atoms/Typography";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data";
 import {
     productCardVariants,
-    productCardMediaVariants,
-    productCardOverlayVariants,
-    productCardContentVariants,
-    productCardTitleVariants,
-    productCardDescriptionVariants,
-    productCardPriceVariants,
-    productCardOldPriceVariants,
-    productCardLinkVariants,
-    productCardStatusBadgeVariants,
-    productCardAvatarVariants,
-    productCardCornerIconVariants,
+    productCardHeaderVariants,
+    productCardFullMediaVariants,
+    productCardFullContentVariants,
+    productCardMinMediaVariants,
+    productCardMinContentVariants,
+    productCardMinFooterVariants,
+    productCardThumbnailGlassVariants,
+    productCardThumbnailTitleVariants,
+    productCardThumbnailPriceVariants,
     productCardImageVariants,
-    productCardHistoryImageVariants,
-    productCardPriceRowVariants,
-    productCardPriceContainerVariants,
-    productCardAvatarInfoVariants,
-    productCardAvatarVerifiedVariants,
-    productCardLinkIconVariants,
-    productCardCornerIconInnerVariants,
+    productCardArtisanBadgeVariants,
+    productCardArtisanNameVariants,
+    productCardDiscountBadgeVariants,
+    productCardFullTitleVariants,
+    productCardFullDescriptionVariants,
+    productCardFullFooterRowVariants,
+    productCardFullLinkVariants,
+    productCardFullPriceRowVariants,
+    productCardFullPriceVariants,
+    productCardFullOldPriceVariants,
+    productCardMinHeaderInfoVariants,
+    productCardMinTitleVariants,
+    productCardMinArtisanNameVariants,
+    productCardMinDescriptionVariants,
+    productCardMinPriceVariants,
     type ProductCardVariant,
 } from "./ProductCard.variants";
 
@@ -38,163 +43,184 @@ export interface ProductCardProps {
     variant?: ProductCardVariant;
     className?: string;
     animate?: boolean;
-    /** Handler de click en el producto. Recibe la URL completa.
-     *  Si no se provee, el link se renderiza como <a> nativo. */
     onProductClick?: (href: string) => void;
 }
 
 export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
     ({ product, variant = "card-preview", className, animate = true, onProductClick }, ref) => {
         const isHistory = variant === "history-slot";
+
         const hasDiscount = product.oldPrice && product.oldPrice > product.price;
         const discountPercent = hasDiscount
-            ? Math.round(
-                ((product.oldPrice! - product.price) / product.oldPrice!) * 100
-            )
+            ? Math.round(((product.oldPrice! - product.price) / product.oldPrice!) * 100)
             : 0;
 
-        const statusBadgeConfig = {
-            new: { variant: "new" as const, label: "Nuevo" },
-            sale: { variant: "sale" as const, label: `-${discountPercent}%` },
-            featured: { variant: "featured" as const, label: "Destacado" },
-            none: null,
-        };
-
-        const statusConfig = product.status
-            ? statusBadgeConfig[product.status]
-            : null;
-
-        // Link interno del producto
         const productHref = `https://jovenpro.com/producto/${product.slug}/`;
 
         const CardWrapper = animate ? motion.div : "div";
-        const ImageWrapper = animate ? motion.img : "img";
+        const cardProps = animate ? { layoutId: `card-${product.id}` } : {};
 
-        const cardProps = animate
-            ? {
-                layoutId: `card-${product.id}`,
-                transition: { type: "spring", stiffness: 300, damping: 30 },
-            }
-            : {};
+        // FAMILIA A: card-full
+        if (variant === "card-full") {
+            return (
+                <CardWrapper
+                    ref={ref as any}
+                    className={cn(productCardVariants({ variant }), className)}
+                    {...cardProps}
+                >
+                    {/* Flotantes absolutos sobre imagen */}
+                    <div className={productCardArtisanBadgeVariants()}>
+                        <Avatar
+                            size="sm"
+                            src={product.artisan.avatar}
+                            fallback={product.artisan.initials}
+                        />
+                        <span className={productCardArtisanNameVariants()}>
+                            {product.artisan.name}
+                        </span>
+                        {product.artisan.verified && (
+                            <span className="text-primary text-xs">✓</span>
+                        )}
+                    </div>
 
-        const imageProps = animate
-            ? {
-                layoutId: `img-${product.id}`,
-                transition: { type: "spring", stiffness: 300, damping: 30 },
-            }
-            : {};
+                    {hasDiscount && (
+                        <div className={productCardDiscountBadgeVariants()}>
+                            <Badge
+                                variant="sale"
+                                size="md"
+                                uppercase={false}
+                                className="px-4 py-2 text-xs rounded-clay"
+                            >
+                                -{discountPercent}%
+                            </Badge>
+                        </div>
+                    )}
 
+                    {/* Layout Vertical */}
+                    <div className={productCardFullMediaVariants()}>
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className={productCardImageVariants()}
+                        />
+                    </div>
+
+                    <div className={productCardFullContentVariants()}>
+                        <Heading level="h4" className={productCardFullTitleVariants()}>
+                            {product.name}
+                        </Heading>
+                        <Text size="sm" variant="muted" className={cn("hidden md:block", productCardFullDescriptionVariants())}>
+                            {product.description}
+                        </Text>
+                        
+                        <div className={productCardFullFooterRowVariants()}>
+                            <a
+                                href={productHref}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => {
+                                    if (onProductClick) {
+                                        e.preventDefault();
+                                        onProductClick(productHref);
+                                    }
+                                }}
+                                className={productCardFullLinkVariants()}
+                            >
+                                Ver detalle <ArrowRight className="w-3 h-3" />
+                            </a>
+                            
+                            <div className={productCardFullPriceRowVariants()}>
+                                <span className={productCardFullPriceVariants()}>
+                                    ${product.price.toLocaleString()}
+                                </span>
+                                {hasDiscount && (
+                                    <span className={productCardFullOldPriceVariants()}>
+                                        ${product.oldPrice!.toLocaleString()}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </CardWrapper>
+            );
+        }
+
+        // FAMILIA A: card-min
+        if (variant === "card-min") {
+            return (
+                <CardWrapper
+                    ref={ref as any}
+                    className={cn(productCardVariants({ variant }), className)}
+                    {...cardProps}
+                >
+                    {/* Header horizontal MD */}
+                    <div className={productCardHeaderVariants()}>
+                        <Avatar
+                            size="sm"
+                            src={product.artisan.avatar}
+                            fallback={product.artisan.initials}
+                        />
+                        <div className={productCardMinHeaderInfoVariants()}>
+                            <Heading level="h4" className={productCardMinTitleVariants()}>
+                                {product.name}
+                            </Heading>
+                            <Text size="xs" variant="muted" className={productCardMinArtisanNameVariants()}>
+                                {product.artisan.name}
+                            </Text>
+                        </div>
+                    </div>
+
+                    <div className={productCardMinMediaVariants()}>
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className={productCardImageVariants()}
+                        />
+                    </div>
+
+                    <div className={productCardMinContentVariants()}>
+                        <Text size="xs" variant="muted" className={productCardMinDescriptionVariants()}>
+                            {product.description}
+                        </Text>
+                    </div>
+
+                    <div className={productCardMinFooterVariants()}>
+                        <div className={productCardMinPriceVariants()}>
+                            ${product.price.toLocaleString()}
+                        </div>
+                    </div>
+                </CardWrapper>
+            );
+        }
+
+        // FAMILIA B: Thumbnail Card (preview-max, preview, history)
         return (
             <CardWrapper
                 ref={ref as any}
                 className={cn(productCardVariants({ variant }), className)}
                 {...cardProps}
             >
-                {/* MEDIA */}
-                <div className={cn(productCardMediaVariants({ variant }))}>
-                    <ImageWrapper
-                        src={product.image}
-                        alt={product.name}
-                        className={cn(
-                            isHistory
-                                ? productCardHistoryImageVariants()
-                                : productCardImageVariants()
-                        )}
-                        {...imageProps}
-                    />
-                    <div className={cn(productCardOverlayVariants({ variant }))} />
-                </div>
-
-                {/* STATUS BADGE */}
-                {statusConfig && (
-                    <div className={cn(productCardStatusBadgeVariants({ variant }))}>
-                        <Badge
-                            variant={statusConfig.variant}
-                            size="lg"
-                            uppercase={false}
-                        >
-                            {statusConfig.label}
-                        </Badge>
-                    </div>
-                )}
-
-                {/* AVATAR ARTESANO */}
-                <div className={cn(productCardAvatarVariants({ variant }))}>
-                    <Avatar
-                        src={product.artisan.avatar}
-                        alt={product.artisan.name}
-                        fallback={product.artisan.initials}
-                        size="sm"
-                    />
-                    <span className={cn(productCardAvatarInfoVariants())}>
-                        {product.artisan.name}
-                    </span>
-                    {product.artisan.verified && (
-                        <span className={cn(productCardAvatarVerifiedVariants())}>✓</span>
-                    )}
-                </div>
-
-                {/* ICONO ESQUINA */}
-                <div className={cn(productCardCornerIconVariants({ variant }))}>
-                    <ArrowUpRight
-                        className={cn(productCardCornerIconInnerVariants())}
-                    />
-                </div>
-
-                {/* CONTENIDO */}
-                <div className={cn(productCardContentVariants({ variant }))}>
-                    <Heading
-                        level={variant === "card-full" ? "h3" : "h4"}
-                        className={cn(productCardTitleVariants({ variant }))}
-                    >
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className={cn(productCardImageVariants(), "absolute inset-0")}
+                />
+                <div className={productCardThumbnailGlassVariants()}>
+                    <p className={productCardThumbnailTitleVariants()}>
                         {product.name}
-                    </Heading>
-
-                    <Text
-                        size="md"
-                        className={cn(productCardDescriptionVariants({ variant }))}
-                    >
-                        {product.description}
-                    </Text>
-
-                    <div className={cn(productCardPriceRowVariants())}>
-                        <div className={cn(productCardPriceContainerVariants())}>
-                            <span className={cn(productCardPriceVariants({ variant }))}>
-                                ${product.price.toLocaleString()}
-                            </span>
-                            {hasDiscount && (
-                                <span
-                                    className={cn(
-                                        productCardOldPriceVariants({ variant })
-                                    )}
-                                >
-                                    ${product.oldPrice!.toLocaleString()}
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* LINK: si hay onProductClick, previene default y lo llama.
-                        Si no, <a> nativo con target="_blank" */}
-                    <a
-                        href={productHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => {
-                            if (onProductClick) {
-                                e.preventDefault();
-                                onProductClick(productHref);
-                            }
-                        }}
-                        className={cn(productCardLinkVariants({ variant }))}
-                    >
-                        Ver detalle{" "}
-                        <ArrowRight className={cn(productCardLinkIconVariants())} />
-                    </a>
+                    </p>
+                    {!isHistory && (
+                        <p className={productCardThumbnailPriceVariants()}>
+                            ${product.price.toLocaleString()}
+                        </p>
+                    )}
                 </div>
             </CardWrapper>
         );
     }
 );
+
+ProductCard.displayName = "ProductCard";
+
 
 ProductCard.displayName = "ProductCard";

@@ -67,7 +67,7 @@
 | **Token fantasma** | `Input.variants.ts` | Usa `text-on-surface` — NO definido en `tailwind.config.ts` | 🔴 PENDIENTE |
 | **Token fantasma** | `Typography.variants.ts` | Usa `text-on-surface-variant` — NO definido | 🔴 PENDIENTE |
 | **Token fantasma** | `IconButton.variants.ts` | Usa `border-surface-variant` — NO definido | 🔴 PENDIENTE |
-| **Token fantasma** | `BentoGrid.variants.ts` | Usa `aspect-bento-square` y `aspect-bento-portrait` — NO definidos | 🔴 PENDIENTE |
+| **Token fantasma** | `BentoGrid.variants.ts` | Usa `aspect-bento-square` y `aspect-bento-portrait` — NO definidos | ✅ RESUELTO |
 | **Color hardcoded** | `IconButton.variants.ts` | `whatsapp` variant usa `bg-[#25D366]` — no es token | 🟡 PENDIENTE |
 | **CVA vacío** | `ContactSection.variants.ts:120` | `contactSectionCTAVariants = cva("")` — sin clases. Dead code. | 🟢 BAJA |
 
@@ -179,7 +179,7 @@
 1. **Reemplazar `heroSplitData.subtitle: "texto"`** → copy real de la landing
 2. **Añadir TikTok SVG a `Footer.tsx`** o reemplazar con `SocialIcon` átomo
 3. **`useCart` / `useFavorites` → integrar en `HomeTemplateV2`**
-4. **Reemplazar tokens fantasma** en `Input.variants.ts`, `Typography.variants.ts`, `IconButton.variants.ts`, `BentoGrid.variants.ts`
+4. **Reemplazar tokens fantasma** en `Input.variants.ts`, `Typography.variants.ts`, `IconButton.variants.ts` (BentoGrid RESUELTO)
 5. **Refactorizar `<button>` inline de WorkWithUs:156** → usar átomo `Button` con variante apropiada + mover texto a `WorkWithUsData`
 6. **Verificar si `useScrollHeader` fue eliminado** — el ARCHITECTURE.md anterior lo referenciaba
 

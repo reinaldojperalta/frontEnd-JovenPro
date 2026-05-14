@@ -31,7 +31,7 @@ export const navbarStickyNavListVariants = cva("", {
     variants: {
         searchActive: {
             true: "hidden",
-            false: "hidden md:flex items-center gap-8",
+            false: "hidden lg:flex items-center gap-8",
         },
     },
     defaultVariants: { searchActive: false },
@@ -53,7 +53,7 @@ export const navbarStickyNavLinkVariants = cva(
 export const navbarStickySearchVariants = cva("", {
     variants: {
         active: {
-            true: "flex-1 max-w-md mx-4 hidden md:block",
+            true: "flex-1 max-w-md mx-4 hidden lg:flex",
             false: "hidden",
         },
     },
@@ -77,7 +77,7 @@ export const navbarStickyActionIconVariants = cva("", {
 /** NUEVO: elimina "w-5 h-5" inline de todos los iconos SVG lucide. */
 export const navbarStickySvgIconVariants = cva("w-5 h-5");
 
-export const navbarStickyLoginButtonVariants = cva("", {
+export const navbarStickyLoginButtonVariants = cva("flex", {
     variants: {
         state: {
             transparent: "bg-secondary/20 text-muted-foreground/50 hover:bg-white/20 backdrop-blur-sm border border-white/20 shadow-none",
@@ -87,10 +87,10 @@ export const navbarStickyLoginButtonVariants = cva("", {
     defaultVariants: { state: "solid" },
 });
 
-export const navbarStickyMobileToggleVariants = cva("md:hidden");
+export const navbarStickyMobileToggleVariants = cva("lg:hidden");
 
 export const navbarStickyMobileMenuVariants = cva(
-    "md:hidden bg-background/95 backdrop-blur-md border-t border-surface-variant overflow-hidden"
+    "lg:hidden bg-background/95 backdrop-blur-md border-t border-surface-variant overflow-hidden"
 );
 
 export const navbarStickyMobileListVariants = cva("flex flex-col gap-4 py-4");

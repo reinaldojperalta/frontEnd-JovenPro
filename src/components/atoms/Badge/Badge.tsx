@@ -23,7 +23,7 @@ const StatusIndicator: React.FC<{
 }> = ({ color }) => {
     return (
         <span className={cn(indicatorVariants({ color }))}>
-            <span className={cn(pingVariants())} />
+            <span className={cn(pingVariants({ color }))} />
             <span className={cn(dotVariants({ color }))} />
         </span>
     );

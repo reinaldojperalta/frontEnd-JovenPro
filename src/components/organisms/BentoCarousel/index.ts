@@ -13,6 +13,8 @@ export {
     bentoCarouselInfoVariants,
     bentoCarouselLabelVariants,
     bentoCarouselOverlineVariants,
+    bentoCarouselHeaderVariants,
+    bentoCarouselGridWrapperVariants,
 } from "./BentoCarousel.variants";
 
 export type {

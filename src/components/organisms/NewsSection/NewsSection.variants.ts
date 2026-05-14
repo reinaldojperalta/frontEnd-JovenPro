@@ -57,3 +57,37 @@ export const newsSectionMobileMediaVariants = cva(
 );
 
 export const newsSectionMobileContentVariants = cva("p-6");
+
+export const NEWS_SPRING = {
+    type: "spring" as const,
+    stiffness: 300,
+    damping: 30,
+};
+
+export const NEWS_DIRECTIONS = {
+    up: {
+        enter: { y: 60, opacity: 0 },
+        exit: { y: -60, opacity: 0 },
+    },
+    down: {
+        enter: { y: -60, opacity: 0 },
+        exit: { y: 60, opacity: 0 },
+    },
+};
+
+export type NewsSlotVariant = "featured" | "preview-1" | "preview-2" | "preview-3";
+
+export interface NewsSlotConfig {
+    id: string;
+    variant: NewsSlotVariant;
+    offset: number;
+    delay: number;
+    gridClass: string;
+}
+
+export const NEWS_SLOTS: NewsSlotConfig[] = [
+    { id: "featured", variant: "featured", offset: 0, delay: 0, gridClass: "news-slot-featured" },
+    { id: "preview-1", variant: "preview-1", offset: 1, delay: 0.1, gridClass: "news-slot-preview-1" },
+    { id: "preview-2", variant: "preview-2", offset: 2, delay: 0.15, gridClass: "news-slot-preview-2" },
+    { id: "preview-3", variant: "preview-3", offset: 3, delay: 0.2, gridClass: "news-slot-preview-3" },
+];

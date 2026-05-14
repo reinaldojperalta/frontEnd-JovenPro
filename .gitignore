@@ -31,3 +31,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentación y agentes de IA
+/CONTEXT/
+/graphify-out/
+/.agent/
+ARCHITECTURE.md
+temp_products.json

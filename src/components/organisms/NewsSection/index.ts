@@ -8,6 +8,7 @@ export { NewsSection } from "./NewsSection";
 export type { NewsSectionProps } from "./NewsSection";
 
 export {
+    newsSectionVariants,
     newsSectionHeaderVariants,
     newsSectionTitleVariants,
     newsSectionSubtitleVariants,
@@ -19,6 +20,11 @@ export {
     newsSectionMobileCardVariants,
     newsSectionMobileMediaVariants,
     newsSectionMobileContentVariants,
+    NEWS_SPRING,
+    NEWS_DIRECTIONS,
+    NEWS_SLOTS,
+    type NewsSlotConfig,
+    type NewsSlotVariant,
 } from "./NewsSection.variants";
 
 export { NewsSectionSkeleton } from "./NewsSectionSkeleton";

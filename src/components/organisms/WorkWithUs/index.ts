@@ -24,6 +24,7 @@ export {
     workWithUsPinIconVariants,
     workWithUsLocationLabelVariants,
     workWithUsLocationSubVariants,
+    workWithUsWhatsappLinkVariants,
 } from "./WorkWithUs.variants";
 
 export { WorkWithUsSkeleton } from "./WorkWithUsSkeleton";

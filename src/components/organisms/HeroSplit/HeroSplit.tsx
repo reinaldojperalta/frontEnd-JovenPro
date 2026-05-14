@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Logo } from "@/components/atoms/Logo";
 import { cn } from "@/lib/utils";
 import { Section } from "@/components/atoms/Section";
+import { useAppNavigation } from "@/hooks/useAppNavigation";
 import {
     heroSplitDividerVariants,
     heroSplitLogoWrapperVariants,
@@ -46,21 +47,6 @@ export interface HeroSplitProps {
     right: HeroSplitSide;
     logoSrc?: string;
     className?: string;
-    /** Override de navegación. Si no se provee, usa comportamiento por defecto. */
-    onNavigate?: (href: string) => void;
-}
-
-/** Navegación por defecto: scroll suave para anchors, window.open para URLs externas.
- *  TODO: migrar a Template / hook useScrollTo en próxima iteración de arquitectura. */
-function defaultNavigate(href: string) {
-    if (href.startsWith("#")) {
-        const el = document.querySelector(href);
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-        }
-    } else {
-        window.open(href, "_blank");
-    }
 }
 
 export function HeroSplit({
@@ -68,14 +54,15 @@ export function HeroSplit({
     right,
     logoSrc,
     className,
-    onNavigate = defaultNavigate,
 }: HeroSplitProps) {
+    const { scrollToSection } = useAppNavigation();
+
     return (
         <Section id="inicio" spacing="hero" className={className}>
             <HeroSide
                 data={left}
                 position="left"
-                onClick={() => onNavigate(left.href)}
+                onClick={() => scrollToSection(left.href)}
             />
 
             <div className={heroSplitDividerVariants()} />
@@ -83,7 +70,7 @@ export function HeroSplit({
             <HeroSide
                 data={right}
                 position="right"
-                onClick={() => onNavigate(right.href)}
+                onClick={() => scrollToSection(right.href)}
             />
 
             {/* Logo Centrado Flotante con Glass Effect */}

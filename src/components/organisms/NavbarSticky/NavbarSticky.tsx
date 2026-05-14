@@ -10,6 +10,7 @@ import { SearchBar } from "@/components/molecules/SearchBar";
 import { cn } from "@/lib/utils";
 import { Menu, X, ShoppingCart, Search } from "lucide-react";
 import type { NavItem } from "@/lib/data";
+import { useAppNavigation } from "@/hooks/useAppNavigation";
 import {
     navbarStickyVariants,
     navbarStickyInnerVariants,
@@ -36,10 +37,6 @@ export interface NavbarSearchSuggestion {
 
 export interface NavbarStickyProps {
     items: NavItem[];
-    onCartClick?: () => void;
-    onFavoritesClick?: () => void;
-    onSearchSubmit?: (value: string) => void;
-    onSearchSelect?: (suggestion: NavbarSearchSuggestion) => void;
     cartCount?: number;
     className?: string;
     loginHref?: string;
@@ -48,9 +45,6 @@ export interface NavbarStickyProps {
 
 export function NavbarSticky({
     items,
-    onCartClick,
-    onSearchSubmit,
-    onSearchSelect,
     cartCount = 0,
     className,
     loginHref = "https://jovenpro.com/my-account/",
@@ -60,6 +54,7 @@ export function NavbarSticky({
     const [mobileOpen, setMobileOpen] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
     const [searchValue, setSearchValue] = useState("");
+    const { searchStore, openExternal, goToCart, scrollToSection } = useAppNavigation();
 
     useEffect(() => {
         const hero = document.querySelector("#inicio");
@@ -77,8 +72,7 @@ export function NavbarSticky({
     const handleNavClick = (href: string) => {
         setMobileOpen(false);
         setSearchActive(false);
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        scrollToSection(href);
     };
 
     const toggleSearch = () => {
@@ -100,10 +94,10 @@ export function NavbarSticky({
                             className={navbarStickyLogoVariants()}
                             onClick={() => handleNavClick("#inicio")}
                         >
-                            <Logo
-                                variant={isSolid ? "default" : "inverted"}
-                                size="md"
-                                className={navbarStickyLogoVariants({ state: navState })}
+                            <img
+                                src="/images/logo/jpror.png"
+                                alt="JovenPro Logo"
+                                className="h-8 md:h-10 w-auto object-contain cursor-pointer"
                             />
                         </div>
 
@@ -128,8 +122,8 @@ export function NavbarSticky({
                             <SearchBar
                                 value={searchValue}
                                 onChange={setSearchValue}
-                                onSubmit={onSearchSubmit}
-                                onSelect={onSearchSelect}
+                                onSubmit={searchStore}
+                                onSelect={(s) => s.href && openExternal(s.href)}
                                 suggestions={searchSuggestions}
                                 size="md"
                                 autoFocus={searchActive}
@@ -158,7 +152,7 @@ export function NavbarSticky({
                                 variant="ghost"
                                 size="md"
                                 aria-label="Carrito"
-                                onClick={onCartClick}
+                                onClick={goToCart}
                                 hasNotification={cartCount > 0}
                                 notificationColor="danger"
                                 className={navbarStickyActionIconVariants({ state: navState })}
@@ -197,6 +191,32 @@ export function NavbarSticky({
                         </div>
                     </div>
                 </Container>
+                
+                {/* Mobile Search Overlay */}
+                <AnimatePresence>
+                    {searchActive && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="lg:hidden bg-background/95 backdrop-blur-md border-b border-surface-variant z-50 shadow-clay overflow-visible relative"
+                        >
+                            <Container size="lg" padding="md">
+                                <div className="py-4">
+                                    <SearchBar
+                                        value={searchValue}
+                                        onChange={setSearchValue}
+                                        onSubmit={searchStore}
+                                        onSelect={(s) => s.href && openExternal(s.href)}
+                                        suggestions={searchSuggestions}
+                                        size="md"
+                                        autoFocus
+                                    />
+                                </div>
+                            </Container>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <AnimatePresence>
                     {mobileOpen && (

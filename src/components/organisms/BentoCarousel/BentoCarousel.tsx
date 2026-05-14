@@ -10,6 +10,7 @@ import { PaginationDots } from "@/components/molecules/PaginationDots";
 import { BentoGrid, BentoItem } from "@/components/atoms/BentoGrid";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/data";
+import { useAppNavigation } from "@/hooks/useAppNavigation";
 import { Section } from "@/components/atoms/Section";
 import {
     BENTO_SLOTS,
@@ -38,26 +39,25 @@ export interface BentoCarouselProps {
     interval?: number;
     paginationSize?: "compact" | "standard";
     catalogHref?: string;
-    onCatalogClick?: (href: string) => void;
-    onProductClick?: (href: string) => void;
 }
 
 export function BentoCarousel({
     products,
-    title = "Catálogo de productos",
+    title = "Catálogo",
     subtitle = "Propulsando nuevos talentos",
     className,
     interval = 4000,
     paginationSize = "standard",
     catalogHref = "https://jovenpro.com/tienda/",
-    onCatalogClick,
-    onProductClick,
 }: BentoCarouselProps) {
     const [idx, setIdx] = useState(0);
     const [direction, setDirection] = useState<"next" | "prev">("next");
     const [isHovered, setIsHovered] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
+    const { openExternal } = useAppNavigation();
 
     const safeProducts =
         products.length >= 9
@@ -149,6 +149,26 @@ export function BentoCarousel({
         resetTimer();
     };
 
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.changedTouches[0].screenX;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        touchEndX.current = e.changedTouches[0].screenX;
+        handleSwipe();
+    };
+
+    const handleSwipe = () => {
+        if (touchEndX.current < touchStartX.current - 50) {
+            rotate("next");
+            resetTimer();
+        }
+        if (touchEndX.current > touchStartX.current + 50) {
+            rotate("prev");
+            resetTimer();
+        }
+    };
+
     const offsets =
         paginationSize === "compact"
             ? [-1, 0, 1]
@@ -170,6 +190,9 @@ export function BentoCarousel({
         const dir = BENTO_DIRECTIONS[direction];
         const animations = isHistory ? dir.history : dir.main;
 
+        const isHiddenOnMobile = ["history-2", "history-3", "history-4", "preview-1", "preview-2", "next"].includes(slot.position);
+        const isForcedVisibleOnMobile = ["history-1", "preview-max"].includes(slot.position);
+
         return (
             <BentoItem
                 key={slot.id}
@@ -177,7 +200,12 @@ export function BentoCarousel({
                 type="product"
                 isHistory={isHistory}
                 onClick={() => handleSlotClick(slot)}
-                className="cursor-pointer"
+                className={cn(
+                    "cursor-pointer", 
+                    isHiddenOnMobile && "hidden md:block", 
+                    isForcedVisibleOnMobile && "!block md:!block aspect-square md:aspect-auto md:h-full",
+                    slot.position === "hero" && "h-[460px] md:h-full"
+                )}
             >
                 <AnimatePresence mode="wait" initial={false}>
                     {item ? (
@@ -196,7 +224,7 @@ export function BentoCarousel({
                                 product={item}
                                 variant={slot.variant}
                                 animate={false}
-                                onProductClick={onProductClick}
+                                onProductClick={openExternal}
                             />
                         </motion.div>
                     ) : (
@@ -217,11 +245,7 @@ export function BentoCarousel({
     };
 
     const handleCatalogClick = () => {
-        if (onCatalogClick) {
-            onCatalogClick(catalogHref);
-        } else {
-            window.open(catalogHref, "_blank");
-        }
+        openExternal(catalogHref);
     };
 
     return (
@@ -231,32 +255,31 @@ export function BentoCarousel({
                     layout="carousel"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
                 >
                     {/* ── TEXTOS ── */}
-                    <BentoItem position="subtitle2" type="text">
-                        <Text
-                            size="sm"
-                            variant="default"
-                            weight="semibold"
-                            className={cn(bentoCarouselOverlineVariants())}
-                        >
-                            Compralo ya
-                        </Text>
+                    <BentoItem position="subtitle2" type="text" background="transparent" className="hidden md:flex">
+                        <img 
+                            src="/images/logo/JovenPro-by-ZonaPro.png" 
+                            alt="JovenPro by ZonaPro" 
+                            className="w-auto h-12 object-contain opacity-80" 
+                        />
                     </BentoItem>
 
-                    <BentoItem position="subtitle" type="text">
+                    <BentoItem position="subtitle" type="text" background="primary" className="hidden md:flex">
                         <Text
-                            variant="muted"
+                            variant="inverted"
                             size="md"
                         >
                             {subtitle}
                         </Text>
                     </BentoItem>
 
-                    <BentoItem position="title" type="text">
+                    <BentoItem position="title" type="text" background="primary">
                         <Heading
                             level="h3"
-                            className="text-foreground"
+                            className="text-white"
                         >
                             {title}
                         </Heading>
@@ -266,8 +289,9 @@ export function BentoCarousel({
                     {BENTO_SLOTS.map(renderSlot)}
 
                     {/* ── CONTROLES ── */}
-                    <BentoItem position="dots" type="control">
-                        <div className="w-full h-full flex items-center justify-center">
+                    <BentoItem position="dots" type="control" background="glass" className="hidden md:flex shadow-sm">
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+                            <span className="text-xs uppercase tracking-widest font-bold text-foreground/50">Navegar</span>
                             <PaginationDots
                                 size={paginationSize}
                                 currentOffset={0}
@@ -279,7 +303,7 @@ export function BentoCarousel({
                         </div>
                     </BentoItem>
 
-                    <BentoItem position="catalogo" type="control">
+                    <BentoItem position="catalogo" type="control" background="glass" className="shadow-xl shadow-primary/20">
                         <div className="w-full h-full flex items-center justify-center">
                             <Button
                                 asChild

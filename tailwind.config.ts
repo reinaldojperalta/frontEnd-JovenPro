@@ -52,6 +52,13 @@ const config: Config = {
           DEFAULT: "#F59E0B",
           subtle: "#FEF3C7",
         },
+        // ============================================
+        // Tokens de texto sobre superficies (Material Design "on-*")
+        // ============================================
+        "on-surface": "#1E293B",          // texto sobre bg-surface (#F1F5F9) — slate-800, contraste 12.5:1
+        "on-surface-variant": "#64748B",  // texto secundario/muted sobre surface — slate-500, contraste 4.7:1
+        // Nota: border-surface-variant NO es ghost token —
+        // se genera automáticamente desde surface.variant (#E2E8F0)
       },
       fontFamily: {
         body: ["var(--font-Inter)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
@@ -76,6 +83,8 @@ const config: Config = {
         'bento-horizontal': '16/9',  // CardPreviewMax — 3 cols × 2 rows
         'bento-small': '1/1',        // CardPreview — 2 cols × 2 rows
         'bento-history': '1/1',      // HistorySlot — 1×1
+        'bento-square': '1/1',       // BentoItem ratio:square — cuadrado genérico
+        'bento-portrait': '2/3',     // BentoItem ratio:portrait — retrato (más alto que ancho)
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.25, 1, 0.5, 1)',

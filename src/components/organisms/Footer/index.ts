@@ -6,6 +6,7 @@ export { Footer } from "./Footer";
 export type { FooterProps } from "./Footer";
 
 export {
+    footerVariants,
     footerInnerVariants,
     footerBrandVariants,
     footerLogoVariants,

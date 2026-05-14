@@ -48,7 +48,7 @@ export const testimonialsQuoteVariants = cva(
 );
 
 export const testimonialsFooterVariants = cva(
-    "flex items-center justify-between mt-8"
+    "flex flex-col sm:flex-row items-start sm:items-center justify-between mt-8 gap-4"
 );
 
 export const testimonialsAuthorVariants = cva("flex items-center gap-4");

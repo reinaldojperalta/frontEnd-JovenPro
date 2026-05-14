@@ -9,6 +9,9 @@ export {
     navVariants,
     navItemVariants,
     navIndicatorVariants,
+    navItemWrapperVariants,
+    navItemDisabledVariants,
+    badgeWrapperVariants,
 } from "./Nav.variants";
 
 export type {
