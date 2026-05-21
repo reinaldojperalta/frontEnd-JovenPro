@@ -159,152 +159,424 @@ export const categories: Category[] = [
 // --------------------------------------------
 
 export const stores: Store[] = [
+
     {
         id: "345",
         slug: "fragola-premium",
         name: "Fragola Premium",
-        description: "Condiciones de entrega y conservación. La entrega del producto se realiza a domicilio.",
-        image: "/images/products/Fragola-Premium.png",
+        description: "Condiciones de entrega y conservación La entrega del producto se realiza a domicilio, por lo cual el cliente debe proporcionar una dirección exacta y completa, o indicar un lugar específico y seguro donde el pedido pueda ser recibido o dejado. Una vez entregado, es responsabilidad del cliente garantizar su adecuada conservación.  El producto debe mantenerse en un lugar fresco y seco. No es necesario refrigerarlo; sin embargo, en caso de hacerlo, se recomienda no someterlo a temperaturas muy bajas, ya que esto puede afectar su textura y calidad original. Se aconseja evitar la exposición directa al sol, al calor excesivo o a la humedad para conservar el producto en óptimas condiciones.",
+        image: "/images/products/fragola-premium.webp",
         location: "Firavitoba, BOY",
-        rating: 4.8,
-        reviewCount: 24,
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Leidy Johana Molano Lopez",
-            avatar: "/images/artisans/Fragola-Premium-avatar.png",
+            avatar: "/images/artisans/fragola-premium-avatar.webp",
             initials: "LM",
-            verified: false,
+            verified: false
         }
     },
-    {
-        id: "344",
-        slug: "natural-helens",
-        name: "Natural Helens",
-        description: "Tienda Natural Helens en Sogamoso.",
-        image: "/images/products/Natural-Helens.png",
-        location: "Sogamoso, BOY",
-        rating: 4.5,
-        reviewCount: 15,
-        emprendedor: {
-            name: "Hellen Rodriguez",
-            avatar: "/images/artisans/Natural-Helens-avatar.png",
-            initials: "HR",
-            verified: false,
-        }
-    },
-    /*
-    {
-        id: "343",
-        slug: "solfruty",
-        name: "Solfruty",
-        description: "Encuentra lo mejor en Solfruty.",
-        image: "/images/placeholders/No-Image-Placeholder.webp",
-        location: "Boyacá",
-        rating: 4.2,
-        reviewCount: 8,
-        emprendedor: {
-            name: "Lucia Lopez",
-            avatar: "/images/artisans/placeholder_author.png",
-            initials: "LL",
-            verified: false,
-        }
-    },
-    {
+    /*{
         id: "341",
-        slug: "manidalu-macrame-creativo",
+        slug: "manidal-macram-creativo",
         name: "Manidalú Macramé Creativo",
-        description: "Creaciones en macramé hechas a mano.",
-        image: "/images/placeholders/No-Image-Placeholder.webp",
-        location: "Boyacá",
-        rating: 5.0,
-        reviewCount: 32,
+        description: "Tienda Manidalú Macramé Creativo.",
+        image: "",
+        location: "",
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Alix Marcela Murcia Orjuela",
-            avatar: "/images/artisans/placeholder_author.png",
+            avatar: "",
             initials: "AM",
-            verified: false,
+            verified: false
         }
-    },
+    },*/
     {
         id: "340",
         slug: "luna-glam",
         name: "Luna Glam",
-        description: "Accesorios y moda.",
-        image: "/images/placeholders/No-Image-Placeholder.webp",
+        description: "Tienda Luna Glam.",
+        image: "/images/products/luna-accesorios.webp",
         location: "TOL",
-        rating: 4.7,
-        reviewCount: 19,
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Mayfred Toledo Perez",
-            avatar: "/images/artisans/placeholder_author.png",
+            avatar: "/images/artisans/luna-accesorios-avatar.webp",
             initials: "MT",
-            verified: false,
+            verified: false
         }
     },
-    */
     {
         id: "339",
         slug: "httpswww-instagram-comrouri_col",
         name: "Róuri",
-        description: "Tienda Róuri ubicada en Sogamoso.",
-        image: "/images/products/Rouri.png",
-        location: "Sogamoso, BOY",
-        rating: 4.9,
-        reviewCount: 56,
+        description: "Tienda Róuri en sogamoso.",
+        image: "/images/products/r-uri.webp",
+        location: "sogamoso, BOY",
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Grether Ruiz",
-            avatar: "/images/artisans/placeholder_author.png",
+            avatar: "",
             initials: "GR",
-            verified: false,
+            verified: false
         }
     },
     {
         id: "338",
         slug: "sofi-s-crochetland",
         name: "Sofi`s crochetland",
-        description: "Tejidos a crochet, amigurumis y más.",
-        image: "/images/products/Sofis crochetland.png",
-        location: "Simijaca, CUN",
-        rating: 4.6,
-        reviewCount: 21,
+        description: "Tienda Sofi`s crochetland en SIMIJACA.",
+        image: "/images/products/sofi-s-crochetland.webp",
+        location: "SIMIJACA, CUN",
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "valeria monroy",
-            avatar: "/images/artisans/placeholder_author.png",
+            avatar: "",
             initials: "VM",
-            verified: false,
+            verified: false
         }
     },
     {
         id: "337",
         slug: "inspira-turquesa",
         name: "Inspira Turquesa",
-        description: "Todos nuestros artículos son confeccionados o fabricados a mano con materiales de calidad, pensados para el cuidado del cabello.",
-        image: "/images/products/Inspira-Turquesa.jpg",
+        description: "Todos nuestros artículos son confeccionados o fabricados a mano con materiales de calidad, especialmente pensados para el cuidado del cabello y uso personal. Las imágenes de nuestros productos son de referencia. Debido al proceso artesanal, pueden existir ligeras variaciones en colores, costuras o acabados. En productos personalizados (como pulseras o kits especiales), no se aceptan modificaciones una vez aprobado el diseño final por el cliente. Nuestros accesorios elaborados en rodio y acero presentan una excelente calidad. Sin embargo, no cuentan con garantía, ya que su durabilidad depende del pH de la piel de cada persona y del cuidado que se les brinde.",
+        image: "/images/products/inspira-turquesa.webp",
         location: "Sogamoso, BOY",
-        rating: 4.3,
-        reviewCount: 11,
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Katherin Andrea Lopez Vija",
-            avatar: "/images/artisans/Inspira-Turquesa-avatar.jpg",
+            avatar: "/images/artisans/inspira-turquesa-avatar.webp",
             initials: "KL",
-            verified: false,
+            verified: false
         }
     },
     {
         id: "336",
         slug: "waypaoficial-com",
         name: "Waypa",
-        description: "Productos exclusivos Waypa.",
+        description: "Tienda Waypa en Bucaramanga.",
         image: "/images/products/calzado-hombre-ref-raices.webp",
         location: "Bucaramanga, SAN",
-        rating: 4.4,
-        reviewCount: 9,
+        rating: 0.0,
+        reviewCount: 0,
         emprendedor: {
             name: "Walter Jesus Rivera Morad",
-            avatar: "/images/artisans/placeholder_author.png",
+            avatar: "",
             initials: "WR",
-            verified: false,
+            verified: false
+        }
+    },
+    /* {
+         id: "334",
+         slug: "donum",
+         name: "Donum",
+         description: "Tienda Donum en Sogamoso.",
+         image: "",
+         location: "Sogamoso, BOY",
+         rating: 0.0,
+         reviewCount: 0,
+         emprendedor: {
+             name: "Xiomara Castañeda",
+             avatar: "",
+             initials: "XC",
+             verified: false
+         }
+     },*/
+    /*{
+        id: "333",
+        slug: "severo-man",
+        name: "SEVERO man",
+        description: "Tienda SEVERO man.",
+        image: "",
+        location: "",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Lizeth Eliana Torres Alba",
+            avatar: "",
+            initials: "LT",
+            verified: false
+        }
+    },*/
+    {
+        id: "332",
+        slug: "nextgen-3dlasersolutions",
+        name: "NextGen 3D",
+        description: "Tienda NextGen 3D en Diutama.",
+        image: "/images/products/nextgen-3d.webp",
+        location: "Diutama, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "MAYRA ALEJANDRA MARTINEZ HERRERA",
+            avatar: "",
+            initials: "MM",
+            verified: false
+        }
+    },
+    {
+        id: "326",
+        slug: "carolinda",
+        name: "Carolinda",
+        description: "Tienda Carolinda en Tuta.",
+        image: "/images/products/carolinda.webp",
+        location: "Tuta, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Carolina Prieto",
+            avatar: "/images/artisans/carolinda-avatar.webp",
+            initials: "CP",
+            verified: false
+        }
+    },
+    {
+        id: "321",
+        slug: "3d-land",
+        name: "3D-Land",
+        description: "Tienda 3D-Land en Firavitoba.",
+        image: "/images/products/3d-land.webp",
+        location: "Firavitoba, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Fabian Andres Salamanca F.",
+            avatar: "/images/artisans/3d-land-avatar.webp",
+            initials: "FS",
+            verified: false
+        }
+    },
+    {
+        id: "319",
+        slug: "upin-pines-metalicos",
+        name: "UPin Pines Metálicos",
+        description: "Tienda UPin Pines Metálicos en Sogamoso.",
+        image: "/images/products/upin-pines-met-licos.webp",
+        location: "Sogamoso, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Sebastian Camargo Cuesto",
+            avatar: "/images/artisans/upin-pines-met-licos-avatar.webp",
+            initials: "SC",
+            verified: false
+        }
+    },
+    {
+        id: "318",
+        slug: "licores-artesanales-jb",
+        name: "Licores Artesanales JB",
+        description: "Tienda Licores Artesanales JB en Duitama.",
+        image: "/images/products/ancheta-jb-licores.webp",
+        location: "Duitama, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Jaider Fabian Blanco Becerra",
+            avatar: "/images/artisans/licores-artesanales-jb-avatar.webp",
+            initials: "JB",
+            verified: false
+        }
+    },
+    {
+        id: "317",
+        slug: "httpswww-facebook-comprofile-phpid61553130868135",
+        name: "LUX DENT ODONTOLOGIA Y ESTETICA S.A.S",
+        description: "Tienda LUX DENT ODONTOLOGIA Y ESTETICA S.A.S en SOGAMOSO.",
+        image: "/images/products/lux-dent-odontologia-y-estetica-s-a-s.webp",
+        location: "SOGAMOSO, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Ivonne Alejandra Quiceno Zamora",
+            avatar: "",
+            initials: "IQ",
+            verified: false
+        }
+    },
+    {
+        id: "296",
+        slug: "angela-saavedra-mentora-de-negocios",
+        name: "Ángela Saavedra Mentora de negocios",
+        description: "Tienda Ángela Saavedra Mentora de negocios.",
+        image: "/images/products/asesoria.jpeg",
+        location: "",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Angela Saavedra",
+            avatar: "",
+            initials: "AS",
+            verified: false
+        }
+    },
+    {
+        id: "271",
+        slug: "httpswww-instagram-comcrochetaretes",
+        name: "Crochetaretes",
+        description: "Tienda Crochetaretes.",
+        image: "/images/products/arete.png",
+        location: "x",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Diana Ximena Ladino Morales",
+            avatar: "",
+            initials: "DL",
+            verified: false
+        }
+    },
+    {
+        id: "137",
+        slug: "uvihatu_esencial",
+        name: "Uvihatu_esencial",
+        description: "Tienda Uvihatu_esencial en Sogamoso.",
+        image: "/images/products/uvihatu-esencial.webp",
+        location: "Sogamoso, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Leidy Marcela León Tellez",
+            avatar: "/images/artisans/uvihatu-esencial-avatar.webp",
+            initials: "LL",
+            verified: false
+        }
+    },
+    {
+        id: "106",
+        slug: "makadamia-velas-y-aromas",
+        name: "Makadamia - Velas y aromas",
+        description: "Tienda Makadamia - Velas y aromas en Duitama.",
+        image: "/images/products/makadamia-velas-y-aromas.webp",
+        location: "Duitama, Boyacá",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Monica Murcia",
+            avatar: "/images/artisans/makadamia-velas-y-aromas-avatar.webp",
+            initials: "MM",
+            verified: false
+        }
+    },
+    {
+        id: "84",
+        slug: "arttemacu",
+        name: "MACU",
+        description: "Tienda MACU en Bogota D.c.",
+        image: "/images/products/macu.webp",
+        location: "Bogota D.c",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Maria Castro",
+            avatar: "/images/artisans/macu-avatar.webp",
+            initials: "MC",
+            verified: false
+        }
+    },
+    {
+        id: "36",
+        slug: "julio-cesar-gonzalez-mejia-abogados-asesores",
+        name: "Julio César González Mejía Abogados Asesores",
+        description: "Tienda Julio César González Mejía Abogados Asesores en Sogamoso.",
+        image: "/images/products/julio-c-sar-gonz-lez-mej-a-abogados-asesores.webp",
+        location: "Sogamoso, Boyacá",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Julio César González Mejía",
+            avatar: "/images/artisans/julio-c-sar-gonz-lez-mej-a-abogados-asesores-avatar.webp",
+            initials: "JG",
+            verified: false
+        }
+    },
+    {
+        id: "30",
+        slug: "uzesuamox",
+        name: "UZE Suamox",
+        description: "Tienda UZE Suamox.",
+        image: "/images/products/collar.png",
+        location: "",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Astrid Constanza Castro Gordillo",
+            avatar: "",
+            initials: "AC",
+            verified: false
+        }
+    },
+    {
+        id: "25",
+        slug: "tuarte",
+        name: "TuArte",
+        description: "Tienda TuArte en Sogamoso.",
+        image: "/images/products/tuarte.webp",
+        location: "Sogamoso, Boyacá",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Javier Mojica",
+            avatar: "/images/artisans/tuarte-avatar.webp",
+            initials: "JM",
+            verified: false
+        }
+    },
+    /*{
+        id: "21",
+        slug: "empaques-y-cartonaje-quigsy",
+        name: "Empaques y cartonaje Quigsy",
+        description: "Tienda Empaques y cartonaje Quigsy en Sogamoso.",
+        image: "",
+        location: "Sogamoso, BOY",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Carolayn Castillo Gutierrez",
+            avatar: "/images/artisans/empaques-y-cartonaje-quigsy-avatar.webp",
+            initials: "CC",
+            verified: false
+        }
+    },*/
+    {
+        id: "20",
+        slug: "gricellarts",
+        name: "Gricellarts",
+        description: "Tienda Gricellarts en Bogota.",
+        image: "/images/products/gricellarts.webp",
+        location: "Bogota, CUN",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "CLAUDIA EMILSEN LOPEZ RIAÑO",
+            avatar: "/images/artisans/gricellarts-avatar.webp",
+            initials: "CL",
+            verified: false
+        }
+    },
+    {
+        id: "16",
+        slug: "muiscafe",
+        name: "MUISCAFE",
+        description: "Tienda MUISCAFE en Sogamoso.",
+        image: "/images/products/muiscafe.webp",
+        location: "Sogamoso",
+        rating: 0.0,
+        reviewCount: 0,
+        emprendedor: {
+            name: "Gonzalo Chaparro Mongui",
+            avatar: "/images/artisans/muiscafe-avatar.webp",
+            initials: "GC",
+            verified: false
         }
     }
+
 ];
 
 // --------------------------------------------

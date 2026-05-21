@@ -77,11 +77,11 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                     {/* Layout Vertical */}
                     <div className={storeCardFullMediaVariants()}>
                         <img
-                            src={store.image}
+                            src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
                             alt={store.name}
                             className={storeCardImageVariants()}
                             onError={(e) => {
-                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webg";
+                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
                             }}
                         />
                     </div>
@@ -149,11 +149,11 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
 
                     <div className={storeCardMinMediaVariants()}>
                         <img
-                            src={store.image}
+                            src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
                             alt={store.name}
                             className={storeCardImageVariants()}
                             onError={(e) => {
-                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webg";
+                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
                             }}
                         />
                     </div>
@@ -184,7 +184,7 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                 {...cardProps}
             >
                 <img
-                    src={store.image}
+                    src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
                     alt={store.name}
                     className={cn(storeCardImageVariants(), "absolute inset-0")}
                     onError={(e) => {
