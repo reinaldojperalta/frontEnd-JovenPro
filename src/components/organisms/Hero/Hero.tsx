@@ -3,7 +3,8 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text, GradientText } from "@/components/atoms/Typography";
 import { Badge } from "@/components/atoms/Badge";
@@ -156,8 +157,9 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                         isFull && "flex flex-col justify-end h-full pb-20"
                     )}
                 >
+                    <LazyMotion features={domAnimation} strict>
                     {/* Contenido textual */}
-                    <motion.div
+                    <m.div
                         {...(isCentered ? fadeInUp : fadeInLeft)}
                         className={cn(
                             "space-y-8",
@@ -223,11 +225,11 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                             gap="sm"
                             className="pt-4"
                         />
-                    </motion.div>
+                    </m.div>
 
                     {/* Imagen destacada (solo en split) */}
                     {isSplit && featuredItem && (
-                        <motion.div
+                        <m.div
                             {...scaleIn}
                             className="lg:w-1/2 w-full relative"
                         >
@@ -258,8 +260,9 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                                     ),
                                 }}
                             />
-                        </motion.div>
+                        </m.div>
                     )}
+                    </LazyMotion>
                 </Container>
 
                 {/* Background decorativo opcional */}

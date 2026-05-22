@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading } from "@/components/atoms/Typography";
 import { cn } from "@/lib/utils";
@@ -85,7 +86,7 @@ export function VideosSection({
                 key={`${isMobile ? "m" : "d"}-${video.id}`}
                 className={isMobile ? videosSectionMobileItemVariants() : videosSectionItemVariants()}
             >
-                <motion.div
+                <m.div
                     initial={isMobile ? undefined : { opacity: 0, y: 20 }}
                     whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                     viewport={isMobile ? undefined : { once: true }}
@@ -134,7 +135,7 @@ export function VideosSection({
                         )}
                     </div>
                     <h4 className={videosSectionTitleVariants()}>{video.title}</h4>
-                </motion.div>
+                </m.div>
             </div>
         );
     };
@@ -148,6 +149,7 @@ export function VideosSection({
                     </Heading>
                 )}
 
+                <LazyMotion features={domAnimation} strict>
                 {/* Solo se renderiza UN layout a la vez */}
                 {isDesktop ? (
                     <div className={videosSectionGridVariants()}>
@@ -158,6 +160,7 @@ export function VideosSection({
                         {videos.map((video, i) => renderVideoCard(video, i, true))}
                     </div>
                 )}
+                </LazyMotion>
             </Container>
         </Section>
     );

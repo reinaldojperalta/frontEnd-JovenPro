@@ -1,6 +1,6 @@
 // components/molecules/VideoCard/VideoCardSkeleton.tsx
 
-"use client";
+
 
 import React from "react";
 import { SkeletonBlock } from "@/components/atoms/Skeleton";

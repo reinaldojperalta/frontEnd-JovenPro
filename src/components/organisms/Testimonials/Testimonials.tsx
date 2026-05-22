@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { IconButton } from "@/components/atoms/IconButton";
@@ -94,8 +95,9 @@ export function Testimonials({
 
                     {/* Card */}
                     <div className={testimonialsCardWrapperVariants()}>
+                        <LazyMotion features={domAnimation} strict>
                         <AnimatePresence mode="wait">
-                            <motion.div
+                            <m.div
                                 key={active.id}
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -138,8 +140,9 @@ export function Testimonials({
                                         />
                                     </div>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         </AnimatePresence>
+                        </LazyMotion>
 
                         {/* Controles */}
                         <div className={testimonialsControlsVariants()}>

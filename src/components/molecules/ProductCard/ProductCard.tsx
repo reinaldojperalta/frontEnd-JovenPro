@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Badge } from "@/components/atoms/Badge";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Heading, Text } from "@/components/atoms/Typography";
@@ -57,7 +57,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
 
         const productHref = `https://jovenpro.com/producto/${product.slug}/`;
 
-        const CardWrapper = animate ? motion.div : "div";
+        const CardWrapper = animate ? m.div : "div";
         const cardProps = animate ? { layoutId: `card-${product.id}` } : {};
 
         // FAMILIA A: card-full

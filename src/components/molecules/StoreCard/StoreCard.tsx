@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -48,7 +48,7 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
 
         const storeHref = `https://jovenpro.com/store/${store.slug}/`;
 
-        const CardWrapper = animate ? motion.div : "div";
+        const CardWrapper = animate ? m.div : "div";
         const cardProps = animate ? { layoutId: `card-${store.id}` } : {};
 
         // FAMILIA A: card-full
@@ -188,7 +188,7 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                     alt={store.name}
                     className={cn(storeCardImageVariants(), "absolute inset-0")}
                     onError={(e) => {
-                        e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webg";
+                        e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
                     }}
                 />
                 <div className={storeCardThumbnailGlassVariants()}>

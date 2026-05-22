@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Heading } from "@/components/atoms/Typography";
 import { Text } from "@/components/atoms/Typography";
 import { Container } from "@/components/atoms/Container";
@@ -103,9 +104,10 @@ export function NewsSection({
     return (
         <Section id="journal" spacing="md" background="transparent" className={className}>
             <Container size="lg" padding="md">
+                <LazyMotion features={domAnimation} strict>
                 {/* Header */}
                 <div className={newsSectionHeaderVariants()}>
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
@@ -114,8 +116,8 @@ export function NewsSection({
                         <Heading level="h2" className={newsSectionTitleVariants()}>
                             {title}
                         </Heading>
-                    </motion.div>
-                    <motion.div
+                    </m.div>
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
@@ -124,12 +126,12 @@ export function NewsSection({
                         <Text variant="lead" size="lg" className={newsSectionSubtitleVariants()}>
                             {subtitle}
                         </Text>
-                    </motion.div>
+                    </m.div>
                 </div>
 
                 {/* Desktop: Grid 6×6 con NewsCard */}
                 <AnimatePresence mode="wait">
-                    <motion.div
+                    <m.div
                         key={currentPage}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -150,7 +152,7 @@ export function NewsSection({
                                     )}
                                 >
                                     <AnimatePresence mode="wait" initial={false}>
-                                        <motion.div
+                                        <m.div
                                             key={item.id}
                                             initial={NEWS_DIRECTIONS.up.enter}
                                             animate={{ y: 0, opacity: 1 }}
@@ -172,13 +174,14 @@ export function NewsSection({
                                                 variant={slot.variant === "featured" ? "featured" : "preview"}
                                                 onClick={() => handleSlotClick(slot)}
                                             />
-                                        </motion.div>
+                                        </m.div>
                                     </AnimatePresence>
                                 </div>
                             );
                         })}
-                    </motion.div>
+                    </m.div>
                 </AnimatePresence>
+                </LazyMotion>
 
                 {/* PaginationDots (desktop) */}
                 {totalPages > 1 && (

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Logo } from "@/components/atoms/Logo";
 import { cn } from "@/lib/utils";
 import { Section } from "@/components/atoms/Section";
@@ -74,8 +75,9 @@ export function HeroSplit({
             />
 
             {/* Logo Centrado Flotante con Glass Effect */}
+            <LazyMotion features={domAnimation} strict>
             <div className={heroSplitLogoWrapperVariants()}>
-                <motion.div
+                <m.div
                     className={heroSplitLogoContainerVariants()}
                     initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -98,8 +100,9 @@ export function HeroSplit({
                             className="h-20 md:h-28 w-auto"
                         />
                     )}
-                </motion.div>
+                </m.div>
             </div>
+            </LazyMotion>
         </Section>
     );
 }
@@ -116,7 +119,8 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
     const isLeft = position === "left";
 
     return (
-        <motion.div
+        <LazyMotion features={domAnimation} strict>
+        <m.div
             className={heroSplitSideVariants()}
             onClick={onClick}
             initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
@@ -146,7 +150,7 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                     align: isLeft ? "left" : "right",
                 })}
             >
-                <motion.h2
+                <m.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -157,9 +161,9 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                     className={heroSplitTitleVariants()}
                 >
                     {data.title}
-                </motion.h2>
+                </m.h2>
 
-                <motion.p
+                <m.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -172,9 +176,9 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                     })}
                 >
                     {data.subtitle}
-                </motion.p>
+                </m.p>
 
-                <motion.span
+                <m.span
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -198,8 +202,9 @@ function HeroSide({ data, position, onClick }: HeroSideProps) {
                             d="M17 8l4 4m0 0l-4 4m4-4H3"
                         />
                     </svg>
-                </motion.span>
+                </m.span>
             </div>
-        </motion.div>
+        </m.div>
+        </LazyMotion>
     );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, forwardRef } from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { FormField } from "@/components/molecules/FormField";
@@ -128,8 +129,9 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                             contactSectionCardVariants({ layout: variant })
                         )}
                     >
+                        <LazyMotion features={domAnimation} strict>
                         {/* Contenido */}
-                        <motion.div
+                        <m.div
                             {...fadeInLeft}
                             className={contactSectionContentVariants({
                                 layout: variant,
@@ -174,10 +176,10 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                                     ))}
                                 </div>
                             )}
-                        </motion.div>
+                        </m.div>
 
                         {/* Formulario */}
-                        <motion.div
+                        <m.div
                             {...fadeInRight}
                             className={contactSectionFormVariants({
                                 layout: variant,
@@ -234,7 +236,8 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                                     </div>
                                 </form>
                             </Container>
-                        </motion.div>
+                        </m.div>
+                        </LazyMotion>
 
                         {/* Background accents */}
                         <div className={contactSectionAccentTopVariants()} />

@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Logo } from "@/components/atoms/Logo";
 import { IconButton } from "@/components/atoms/IconButton";
 import { Button } from "@/components/atoms/Button";
 import { SearchBar } from "@/components/molecules/SearchBar";
 import { cn } from "@/lib/utils";
-import { Menu, X, ShoppingCart, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import type { NavItem } from "@/lib/data";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import {
@@ -72,7 +73,10 @@ export function NavbarSticky({
     const handleNavClick = (href: string) => {
         setMobileOpen(false);
         setSearchActive(false);
-        scrollToSection(href);
+        // Espera a que la animación de cierre del drawer (300ms) termine antes de hacer scroll.
+        // Esto evita el race condition donde scrollIntoView se ejecuta mientras el menú
+        // todavía está superpuesto en pantalla y bloquea el viewport.
+        setTimeout(() => scrollToSection(href), 350);
     };
 
     const toggleSearch = () => {
@@ -82,7 +86,8 @@ export function NavbarSticky({
 
     return (
         <>
-            <motion.nav
+            <LazyMotion features={domAnimation} strict>
+            <m.nav
                 className={cn(navbarStickyVariants({ state: navState }), className)}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
@@ -195,7 +200,7 @@ export function NavbarSticky({
                 {/* Mobile Search Overlay */}
                 <AnimatePresence>
                     {searchActive && (
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
@@ -214,23 +219,23 @@ export function NavbarSticky({
                                     />
                                 </div>
                             </Container>
-                        </motion.div>
+                        </m.div>
                     )}
                 </AnimatePresence>
 
                 <AnimatePresence>
                     {mobileOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                        <m.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
                             className={navbarStickyMobileMenuVariants()}
                         >
                             <Container size="lg" padding="md">
                                 <ul className={navbarStickyMobileListVariants()}>
                                     {items.map((item, i) => (
-                                        <motion.li
+                                        <m.li
                                             key={item.href}
                                             initial={{ opacity: 0, x: -20 }}
                                             animate={{ opacity: 1, x: 0 }}
@@ -246,14 +251,15 @@ export function NavbarSticky({
                                             >
                                                 {item.label}
                                             </a>
-                                        </motion.li>
+                                        </m.li>
                                     ))}
                                 </ul>
                             </Container>
-                        </motion.div>
+                        </m.div>
                     )}
                 </AnimatePresence>
-            </motion.nav>
+            </m.nav>
+            </LazyMotion>
         </>
     );
 }

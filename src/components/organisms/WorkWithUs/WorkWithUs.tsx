@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
 import { Container } from "@/components/atoms/Container";
 import { Heading } from "@/components/atoms/Typography";
@@ -101,7 +102,8 @@ export function WorkWithUs({
                                 {data.sectionLabel}
                             </Text>
 
-                            <motion.div
+                            <LazyMotion features={domAnimation} strict>
+                            <m.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -114,9 +116,9 @@ export function WorkWithUs({
                                 >
                                     {data.headline}
                                 </Heading>
-                            </motion.div>
+                            </m.div>
 
-                            <motion.div
+                            <m.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -129,9 +131,9 @@ export function WorkWithUs({
                                 <p className={workWithUsDescriptionVariants()}>
                                     {data.subheadline}
                                 </p>
-                            </motion.div>
+                            </m.div>
 
-                            <motion.div
+                            <m.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -147,7 +149,8 @@ export function WorkWithUs({
                                 >
                                     {data.whatsappDisplayLabel}
                                 </button>
-                            </motion.div>
+                            </m.div>
+                            </LazyMotion>
 
                             <div className={workWithUsDividerVariants()}>
                                 <Text

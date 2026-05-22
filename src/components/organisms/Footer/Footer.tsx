@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Instagram, Facebook, MessageCircle, Send } from "lucide-react";
@@ -39,8 +39,6 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
     const handleOpen = (url: string) => {
         if (onOpenLink) {
             onOpenLink(url);
-        } else {
-            window.open(url, "_blank");
         }
     };
 
@@ -71,10 +69,8 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
                             <li key={link.label}>
                                 <a
                                     href={link.href}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleOpen(link.href);
-                                    }}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className={footerNavItemVariants()}
                                 >
                                     {link.label}
@@ -86,14 +82,14 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
                     {/* Socials */}
                     <div className={footerSocialsVariants()}>
                         {data.socials.map((social) => (
-                            <IconButton
-                                key={social.label}
-                                icon={socialIcons[social.label] || null}
-                                variant="social"
-                                size="sm"
-                                aria-label={social.label}
-                                onClick={() => handleOpen(social.href)}
-                            />
+                                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer">
+                                    <IconButton
+                                        icon={socialIcons[social.label] || null}
+                                        variant="social"
+                                        size="sm"
+                                        aria-label={social.label}
+                                    />
+                                </a>
                         ))}
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 // components/molecules/TestimonialCard/TestimonialCardSkeleton.tsx
 
-"use client";
+
 
 import React from "react";
 import { SkeletonCircle } from "@/components/atoms/Skeleton";

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Heading } from "@/components/atoms/Typography";
 import { Text } from "@/components/atoms/Typography";
 import { Container } from "@/components/atoms/Container";
@@ -78,8 +79,9 @@ export function ProductGrid({
     return (
         <section id="productos" className={cn("py-24 md:py-32", className)}>
             <Container size="lg" padding="md">
+                <LazyMotion features={domAnimation} strict>
                 <div className="mb-12 md:mb-16">
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
@@ -88,8 +90,8 @@ export function ProductGrid({
                         <Heading level="h2" className="mb-4">
                             {title}
                         </Heading>
-                    </motion.div>
-                    <motion.div
+                    </m.div>
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
@@ -98,10 +100,10 @@ export function ProductGrid({
                         <Text variant="lead" size="lg">
                             {subtitle}
                         </Text>
-                    </motion.div>
+                    </m.div>
                 </div>
 
-                <motion.div
+                <m.div
                     className="flex flex-wrap gap-3 mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -122,11 +124,11 @@ export function ProductGrid({
                             {cat.name}
                         </button>
                     ))}
-                </motion.div>
+                </m.div>
 
                 <div className="hidden md:block">
                     <AnimatePresence mode="wait">
-                        <motion.div
+                        <m.div
                             key={`${activeCategory}-${currentPage}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -180,7 +182,7 @@ export function ProductGrid({
                                     ))}
                                 </div>
                             )}
-                        </motion.div>
+                        </m.div>
                     </AnimatePresence>
                 </div>
 
@@ -224,6 +226,7 @@ export function ProductGrid({
                         </div>
                     )}
                 </div>
+                </LazyMotion>
             </Container>
         </section>
     );

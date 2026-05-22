@@ -90,7 +90,7 @@ export const navbarStickyLoginButtonVariants = cva("flex", {
 export const navbarStickyMobileToggleVariants = cva("lg:hidden");
 
 export const navbarStickyMobileMenuVariants = cva(
-    "lg:hidden bg-background/95 backdrop-blur-md border-t border-surface-variant overflow-hidden"
+    "lg:hidden absolute left-0 right-0 top-full bg-background border-t border-surface-variant shadow-clay-lg"
 );
 
 export const navbarStickyMobileListVariants = cva("flex flex-col gap-4 py-4");

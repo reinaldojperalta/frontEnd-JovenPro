@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion } from "framer-motion";
+import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Button } from "@/components/atoms/Button";
@@ -209,7 +210,7 @@ export function BentoCarousel({
             >
                 <AnimatePresence mode="wait" initial={false}>
                     {item ? (
-                        <motion.div
+                        <m.div
                             key={item.id}
                             initial={animations.enter}
                             animate={{ x: 0, y: 0, scale: 1, opacity: 1 }}
@@ -226,9 +227,9 @@ export function BentoCarousel({
                                 animate={false}
                                 onStoreClick={openExternal}
                             />
-                        </motion.div>
+                        </m.div>
                     ) : (
-                        <motion.div
+                        <m.div
                             key="placeholder"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -251,7 +252,8 @@ export function BentoCarousel({
     return (
         <Section id="productos" spacing="xl" background="background" className={className}>
             <Container size="xl" padding="md">
-                <BentoGrid
+                <LazyMotion features={domAnimation} strict>
+                    <BentoGrid
                     layout="carousel"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
@@ -323,6 +325,7 @@ export function BentoCarousel({
                         </div>
                     </BentoItem>
                 </BentoGrid>
+                </LazyMotion>
 
                 {/* Info label debajo del grid */}
                 <div className={bentoCarouselInfoVariants()}>
