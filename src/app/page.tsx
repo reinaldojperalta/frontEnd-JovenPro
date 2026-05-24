@@ -5,6 +5,7 @@ import {
   navItems,
   // categories, // Eliminado
   stores,
+  featuredProducts,
   newsItems,
   testimonials,
   videos,
@@ -20,6 +21,7 @@ export default function HomePage() {
       heroData={heroSplitData}
       stores={stores}
       products={[]}
+      featuredProducts={featuredProducts}
       // categories={categories} // Eliminado
       newsItems={newsItems}
       videos={videos}

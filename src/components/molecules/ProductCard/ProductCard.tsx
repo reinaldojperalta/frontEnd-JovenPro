@@ -35,6 +35,15 @@ import {
     productCardMinEmprendedorNameVariants,
     productCardMinDescriptionVariants,
     productCardMinPriceVariants,
+    productCardEditorialMediaVariants,
+    productCardEditorialContentVariants,
+    productCardEditorialTitleVariants,
+    productCardEditorialEmprendedorRowVariants,
+    productCardEditorialEmprendedorVariants,
+    productCardEditorialPriceRowVariants,
+    productCardEditorialPriceVariants,
+    productCardEditorialOldPriceVariants,
+    productCardEditorialBadgeVariants,
     type ProductCardVariant,
 } from "./ProductCard.variants";
 
@@ -187,6 +196,67 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                     <div className={productCardMinFooterVariants()}>
                         <div className={productCardMinPriceVariants()}>
                             ${product.price.toLocaleString()}
+                        </div>
+                    </div>
+                </CardWrapper>
+            );
+        }
+
+        // FAMILIA C: Editorial
+        if (variant === "editorial") {
+            return (
+                <CardWrapper
+                    ref={ref as any}
+                    className={cn(productCardVariants({ variant }), className)}
+                    onClick={(e: React.MouseEvent) => {
+                        if (onProductClick) {
+                            e.preventDefault();
+                            onProductClick(productHref);
+                        }
+                    }}
+                    {...cardProps}
+                >
+                    <div className={productCardEditorialMediaVariants()}>
+                        {hasDiscount && (
+                            <div className={productCardEditorialBadgeVariants()}>
+                                <Badge
+                                    variant="sale"
+                                    size="sm"
+                                    uppercase={false}
+                                >
+                                    -{discountPercent}%
+                                </Badge>
+                            </div>
+                        )}
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className={productCardImageVariants()}
+                        />
+                    </div>
+                    <div className={productCardEditorialContentVariants()}>
+                        <h4 className={productCardEditorialTitleVariants()}>
+                            {product.name}
+                        </h4>
+                        <div className={productCardEditorialEmprendedorRowVariants()}>
+                            <Avatar
+                                size="xs"
+                                src={product.emprendedor.avatar}
+                                fallback={product.emprendedor.initials}
+                            />
+                            <p className={productCardEditorialEmprendedorVariants()}>
+                                {product.emprendedor.name}
+                            </p>
+                        </div>
+                        <div className={productCardEditorialPriceRowVariants()}>
+                            <span className={productCardEditorialPriceVariants()}>
+                                ${product.price.toLocaleString()}
+                            </span>
+                            {hasDiscount && (
+                                <span className={productCardEditorialOldPriceVariants()}>
+                                    ${product.oldPrice!.toLocaleString()}
+                                </span>
+                            )}
                         </div>
                     </div>
                 </CardWrapper>

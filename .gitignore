@@ -40,3 +40,8 @@ next-env.d.ts
 .agent
 ARCHITECTURE.md
 temp_products.json
+
+# Playwright
+playwright-report/
+test-results/
+.playwright/

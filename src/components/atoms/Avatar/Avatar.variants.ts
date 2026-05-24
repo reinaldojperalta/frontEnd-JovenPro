@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export type AvatarSize = "sm" | "md" | "lg" | "xl";
+export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type AvatarVariant = "default" | "solid" | "outline";
 
 export const avatarVariants = cva(
@@ -8,6 +8,7 @@ export const avatarVariants = cva(
     {
         variants: {
             size: {
+                xs: "w-6 h-6 text-[10px]",
                 sm: "w-8 h-8 text-xs",
                 md: "w-10 h-10 text-sm",
                 lg: "w-14 h-14 text-base",

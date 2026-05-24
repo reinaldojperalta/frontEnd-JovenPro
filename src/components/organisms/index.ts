@@ -11,6 +11,7 @@ export * from "./HeroSplit";
 export * from "./NavbarSticky";
 export * from "./NewsSection";
 export * from "./ProductGrid";
+export * from "./ProductCarousel";
 //export * from "./Skeleton";
 export * from "./Testimonials";
 export * from "./VideosSection";

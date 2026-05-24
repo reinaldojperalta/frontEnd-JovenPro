@@ -5,6 +5,7 @@ import { NavbarSticky, NavbarSearchSuggestion } from "@/components/organisms/Nav
 import { HeroSplit } from "@/components/organisms/HeroSplit";
 import { BentoCarousel } from "@/components/organisms/BentoCarousel";
 import { NewsSection } from "@/components/organisms/NewsSection";
+import { ProductCarousel } from "@/components/organisms/ProductCarousel";
 import { VideosSection } from "@/components/organisms/VideosSection";
 import { Testimonials } from "@/components/organisms/Testimonials";
 import { WorkWithUs } from "@/components/organisms/WorkWithUs";
@@ -26,6 +27,7 @@ export interface HomeTemplateV2Props {
     navItems: NavItem[];
     heroData: HeroSplitData;
     products: Product[];
+    featuredProducts: Product[];
     stores: Store[];
     newsItems: NewsItem[];
     videos: VideoItem[];
@@ -48,6 +50,7 @@ export function HomeTemplateV2({
     navItems,
     heroData,
     products,
+    featuredProducts,
     stores,
     newsItems,
     videos,
@@ -73,6 +76,9 @@ export function HomeTemplateV2({
 
             <BentoCarousel stores={stores} />
             <NewsSection items={newsItems} />
+            {featuredProducts && featuredProducts.length > 0 && (
+                <ProductCarousel products={featuredProducts} />
+            )}
             <VideosSection videos={videos} />
             <Testimonials testimonials={testimonials} />
             <WorkWithUs data={workWithUsData} />

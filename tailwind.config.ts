@@ -93,10 +93,15 @@ const config: Config = {
         fadein: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
+        },
+        scrollCarousel: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         }
       },
       animation: {
         'fade-in': 'fadein 0.3s ease-in',
+        'scroll-carousel': 'scrollCarousel 160s linear infinite',
       }
     },
   },

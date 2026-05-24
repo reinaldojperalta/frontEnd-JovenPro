@@ -15,6 +15,7 @@ export const productCardVariants = cva(
                 "card-preview-max": "relative rounded-clay bg-surface shadow-clay h-full",
                 "card-preview": "relative rounded-clay bg-surface shadow-clay h-full",
                 "history-slot": "relative rounded-clay-sm bg-surface shadow-clay-sm grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 h-full",
+                "editorial": "flex-shrink-0 w-[calc(100vw-48px)] md:w-[240px] bg-white transition-transform duration-300 ease-smooth hover:-translate-y-1 h-full flex flex-col",
             },
         },
         defaultVariants: {
@@ -72,6 +73,17 @@ export const productCardMinPriceVariants = cva("font-headline font-bold text-for
 export const productCardThumbnailGlassVariants = cva("absolute inset-x-0 bottom-0 bg-white/40 md:bg-white/70 backdrop-blur-xl border-t border-white/50 md:border-white/60 px-3 py-2.5 shadow-lg shadow-black/5");
 export const productCardThumbnailTitleVariants = cva("font-headline font-bold text-secondary md:text-foreground md:font-black leading-tight truncate");
 export const productCardThumbnailPriceVariants = cva("font-headline font-bold text-secondary");
+
+// --- Familia C — Editorial ---
+export const productCardEditorialMediaVariants = cva("relative w-full aspect-square bg-surface flex items-center justify-center overflow-hidden");
+export const productCardEditorialContentVariants = cva("p-4 flex flex-col flex-grow");
+export const productCardEditorialTitleVariants = cva("text-sm font-headline font-bold text-secondary mb-1 leading-snug line-clamp-2");
+export const productCardEditorialEmprendedorRowVariants = cva("flex items-center gap-2 mb-2");
+export const productCardEditorialEmprendedorVariants = cva("text-xs font-body text-muted-foreground truncate");
+export const productCardEditorialPriceRowVariants = cva("flex items-baseline gap-2 mt-auto");
+export const productCardEditorialPriceVariants = cva("text-[15px] font-headline font-bold text-primary");
+export const productCardEditorialOldPriceVariants = cva("text-xs font-body text-muted-foreground line-through");
+export const productCardEditorialBadgeVariants = cva("absolute top-2 left-2 z-10");
 
 // Common Utilities
 export const productCardImageVariants = cva("w-full h-full object-cover transition-transform duration-700 group-hover:scale-105");
