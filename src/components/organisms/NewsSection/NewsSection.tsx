@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { m, AnimatePresence, LazyMotion } from "framer-motion";
 import domAnimation from "@/lib/framer-features";
+import Image from "next/image";
 import { Heading } from "@/components/atoms/Typography";
 import { Text } from "@/components/atoms/Typography";
 import { Container } from "@/components/atoms/Container";
@@ -26,6 +27,10 @@ import {
     newsSectionMobileCardVariants,
     newsSectionMobileMediaVariants,
     newsSectionMobileContentVariants,
+    newsSectionMobileImageVariants,
+    newsSectionMobileBadgeVariants,
+    newsSectionMobileTitleVariants,
+    newsSectionMobileExcerptVariants,
     NEWS_SPRING,
     NEWS_DIRECTIONS,
     NEWS_SLOTS,
@@ -56,8 +61,16 @@ export function NewsSection({
 
     const paginatedItems = useMemo(() => {
         const start = currentPage * itemsPerPage;
-        return items.slice(start, start + itemsPerPage);
-    }, [items, currentPage]);
+        const pageItems = items.slice(start, start + itemsPerPage);
+
+        // GHOST FILL: Completar hasta múltiplo de 3 con nulls
+        const remainder = pageItems.length % itemsPerPage;
+        if (remainder !== 0 && pageItems.length > 0) {
+            const ghostsNeeded = itemsPerPage - remainder;
+            return [...pageItems, ...Array(ghostsNeeded).fill(null)];
+        }
+        return pageItems;
+    }, [items, currentPage, itemsPerPage]);
 
     useEffect(() => {
         setLocalIndex(0);
@@ -107,89 +120,93 @@ export function NewsSection({
         <Section id="journal" spacing="md" background="transparent" className={className}>
             <Container size="lg" padding="md">
                 <LazyMotion features={domAnimation} strict>
-                {/* Header */}
-                <div className={newsSectionHeaderVariants()}>
-                    <m.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-                    >
-                        <Heading level="h2" className={newsSectionTitleVariants()}>
-                            {title}
-                        </Heading>
-                    </m.div>
-                    <m.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
-                    >
-                        <Text variant="lead" size="lg" className={newsSectionSubtitleVariants()}>
-                            {subtitle}
-                        </Text>
-                    </m.div>
-                </div>
+                    {/* Header */}
+                    <div className={newsSectionHeaderVariants()}>
+                        <m.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                        >
+                            <Heading level="h2" className={newsSectionTitleVariants()}>
+                                {title}
+                            </Heading>
+                        </m.div>
+                        <m.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+                        >
+                            <Text variant="lead" size="lg" className={newsSectionSubtitleVariants()}>
+                                {subtitle}
+                            </Text>
+                        </m.div>
+                    </div>
 
-                {/* Desktop: Grid 6×6 con NewsCard */}
-                <AnimatePresence mode="wait">
-                    <m.div
-                        key={currentPage}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                        className={newsSectionGridVariants()}
-                    >
-                        {NEWS_SLOTS.map((slot) => {
-                            const slotClass = cn(
-                                slot.gridClass,
-                                newsSectionSlotVariants({ position: slot.variant as any })
-                            );
+                    {/* Desktop: Grid 6×6 con NewsCard */}
+                    <AnimatePresence mode="wait">
+                        <m.div
+                            key={currentPage}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                            className={newsSectionGridVariants()}
+                        >
+                            {NEWS_SLOTS.map((slot) => {
+                                const slotClass = cn(
+                                    slot.gridClass,
+                                    newsSectionSlotVariants({ position: slot.variant as any })
+                                );
 
-                            if (slot.kind === "allies") {
+                                if (slot.kind === "allies") {
+                                    return (
+                                        <div key={slot.id} className={slotClass}>
+                                            <AlliesLogoRotator className="w-full h-full" />
+                                        </div>
+                                    );
+                                }
+
+                                const item = getItem(slot.offset);
+                                const isGhost = item === null;
+
                                 return (
-                                    <div key={slot.id} className={slotClass}>
-                                        <AlliesLogoRotator className="w-full h-full" />
+                                    <div key={`${slot.id}-${isGhost ? 'ghost' : item?.id}`} className={slotClass}>
+                                        <AnimatePresence mode="wait" initial={false}>
+                                            <m.div
+                                                key={isGhost ? `ghost-${slot.id}` : item.id}
+                                                initial={NEWS_DIRECTIONS.up.enter}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                exit={NEWS_DIRECTIONS.up.exit}
+                                                transition={{ ...NEWS_SPRING, delay: slot.delay }}
+                                                className="w-full h-full"
+                                            >
+                                                {isGhost ? (
+                                                    <NewsCard variant={slot.variant === "featured" ? "ghost" : "ghost"} />
+                                                ) : (
+                                                    <NewsCard
+                                                        data={{
+                                                            id: item.id,
+                                                            title: item.title,
+                                                            excerpt: item.excerpt,
+                                                            image: item.image,
+                                                            category: item.category,
+                                                            date: item.date,
+                                                            readTime: item.readTime,
+                                                            href: item.href,
+                                                        }}
+                                                        variant={slot.variant === "featured" ? "featured" : "preview"}
+                                                        onClick={() => handleSlotClick(slot)}
+                                                    />
+                                                )}
+                                            </m.div>
+                                        </AnimatePresence>
                                     </div>
                                 );
-                            }
-
-                            const item = getItem(slot.offset);
-                            if (!item) return null;
-
-                            return (
-                                <div key={slot.id} className={slotClass}>
-                                    <AnimatePresence mode="wait" initial={false}>
-                                        <m.div
-                                            key={item.id}
-                                            initial={NEWS_DIRECTIONS.up.enter}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            exit={NEWS_DIRECTIONS.up.exit}
-                                            transition={{ ...NEWS_SPRING, delay: slot.delay }}
-                                            className="w-full h-full"
-                                        >
-                                            <NewsCard
-                                                data={{
-                                                    id: item.id,
-                                                    title: item.title,
-                                                    excerpt: item.excerpt,
-                                                    image: item.image,
-                                                    category: item.category,
-                                                    date: item.date,
-                                                    readTime: item.readTime,
-                                                    href: item.href,
-                                                }}
-                                                variant={slot.variant === "featured" ? "featured" : "preview"}
-                                                onClick={() => handleSlotClick(slot)}
-                                            />
-                                        </m.div>
-                                    </AnimatePresence>
-                                </div>
-                            );
-                        })}
-                    </m.div>
-                </AnimatePresence>
+                            })}
+                        </m.div>
+                    </AnimatePresence>
                 </LazyMotion>
 
                 {/* PaginationDots (desktop) */}
@@ -220,22 +237,24 @@ export function NewsSection({
                                         onClick={() => handleSlotClick(NEWS_SLOTS[0])}
                                     >
                                         <div className={newsSectionMobileMediaVariants()}>
-                                            <img
+                                            <Image
                                                 src={mFeatured.image}
                                                 alt={mFeatured.title}
-                                                className="w-full h-full object-cover"
+                                                fill
+                                                sizes="100vw"
+                                                className={newsSectionMobileImageVariants()}
                                             />
-                                            <div className="absolute top-4 left-4">
+                                            <div className={newsSectionMobileBadgeVariants()}>
                                                 <Badge variant="primary" size="sm">
                                                     {mFeatured.category}
                                                 </Badge>
                                             </div>
                                         </div>
                                         <div className={newsSectionMobileContentVariants()}>
-                                            <h3 className="font-headline text-lg font-bold text-secondary mb-2">
+                                            <h3 className={newsSectionMobileTitleVariants()}>
                                                 {mFeatured.title}
                                             </h3>
-                                            <p className="font-body text-sm text-muted-foreground line-clamp-2">
+                                            <p className={newsSectionMobileExcerptVariants()}>
                                                 {mFeatured.excerpt}
                                             </p>
                                         </div>
@@ -249,11 +268,13 @@ export function NewsSection({
                                                 className={newsSectionMobileCardVariants()}
                                                 onClick={() => handleSlotClick(NEWS_SLOTS[idx + 1])}
                                             >
-                                                <div className="aspect-square overflow-hidden">
-                                                    <img
+                                                <div className="relative aspect-square overflow-hidden">
+                                                    <Image
                                                         src={item.image}
                                                         alt={item.title}
-                                                        className="w-full h-full object-cover"
+                                                        fill
+                                                        sizes="80vw"
+                                                        className={newsSectionMobileImageVariants()}
                                                     />
                                                 </div>
                                                 <div className="p-4">

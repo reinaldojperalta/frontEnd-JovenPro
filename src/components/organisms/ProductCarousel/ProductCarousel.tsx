@@ -4,11 +4,6 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/molecules/ProductCard";
 import type { Product } from "@/lib/data";
-import { useAppNavigation } from "@/hooks/useAppNavigation";
-import {
-    SEARCH_FOCUS_PRODUCT_EVENT,
-    type SearchFocusProductDetail,
-} from "@/lib/searchFocus";
 import { cn } from "@/lib/utils";
 import { scrollChildIntoHorizontalContainer } from "@/lib/scrollUtils";
 import {
@@ -19,11 +14,14 @@ import {
     carouselTitleVariants,
     carouselDescriptionVariants,
     carouselCtaVariants,
+    carouselCtaIconVariants,
     carouselDividerVariants,
     carouselRightVariants,
     carouselTrackWrapperVariants,
     carouselTrackVariants,
+    carouselTrackPausedVariants,
     carouselArrowVariants,
+    carouselCardHighlightVariants,
 } from "./ProductCarousel.variants";
 
 export interface ProductCarouselProps {
@@ -33,6 +31,8 @@ export interface ProductCarouselProps {
     description?: string;
     ctaText?: string;
     ctaHref?: string;
+    onNavigate?: (url: string) => void;
+    highlightedSlugFromProps?: string | null;
 }
 
 export function ProductCarousel({
@@ -42,8 +42,9 @@ export function ProductCarousel({
     description = "Cada producto es una selección especial de nuestros emprendedores — piezas con historia, calidad y el sello único de quienes las crean con pasión.",
     ctaText = "Ver productos",
     ctaHref = "https://jovenpro.com/categoria-producto/destacados",
+    onNavigate,
+    highlightedSlugFromProps = null,
 }: ProductCarouselProps) {
-    const { openExternal } = useAppNavigation();
     const trackRef = useRef<HTMLDivElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [isAnimating, setIsAnimating] = useState(true);
@@ -51,7 +52,7 @@ export function ProductCarousel({
     const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // Duplicate products for infinite loop. Usually handled with 2 sets.
+    // Duplicate products for infinite loop
     const displayProducts = [...products, ...products];
 
     const pauseAnimation = useCallback(() => {
@@ -78,7 +79,7 @@ export function ProductCarousel({
         pauseAnimation();
 
         const isMobile = window.innerWidth <= 768;
-        const cardWidth = isMobile ? window.innerWidth - 48 : 264; // 240px card + 24px gap
+        const cardWidth = isMobile ? window.innerWidth - 48 : 264;
 
         wrapperRef.current.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
 
@@ -110,17 +111,15 @@ export function ProductCarousel({
     );
 
     useEffect(() => {
-        const onFocusProduct = (event: Event) => {
-            const { slug } = (event as CustomEvent<SearchFocusProductDetail>).detail;
-            if (slug) focusProductBySlug(slug);
-        };
+        if (highlightedSlugFromProps) {
+            focusProductBySlug(highlightedSlugFromProps);
+        }
+    }, [highlightedSlugFromProps, focusProductBySlug]);
 
-        window.addEventListener(SEARCH_FOCUS_PRODUCT_EVENT, onFocusProduct);
-        return () => {
-            window.removeEventListener(SEARCH_FOCUS_PRODUCT_EVENT, onFocusProduct);
-            if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-        };
-    }, [focusProductBySlug]);
+    const handleProductClick = (url: string) => {
+        if (onNavigate) onNavigate(url);
+        else window.open(url, "_blank");
+    };
 
     return (
         <section id="destacados" className={carouselSectionVariants()}>
@@ -131,9 +130,17 @@ export function ProductCarousel({
                     <div className={carouselCategoryVariants()}>{category}</div>
                     <h2 className={carouselTitleVariants()}>{title}</h2>
                     <p className={carouselDescriptionVariants()}>{description}</p>
-                    <a href={ctaHref} className={carouselCtaVariants()}>
+                    <a
+                        href={ctaHref}
+                        className={carouselCtaVariants()}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (onNavigate) onNavigate(ctaHref);
+                            else window.open(ctaHref, "_blank");
+                        }}
+                    >
                         {ctaText}
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className={carouselCtaIconVariants()} />
                     </a>
                 </div>
 
@@ -159,11 +166,11 @@ export function ProductCarousel({
                         onTouchEnd={resumeAnimation}
                     >
                         <div
-                            className={carouselTrackVariants()}
+                            className={cn(
+                                carouselTrackVariants(),
+                                !isAnimating && carouselTrackPausedVariants()
+                            )}
                             ref={trackRef}
-                            style={{
-                                animationPlayState: isAnimating ? 'running' : 'paused'
-                            }}
                         >
                             {displayProducts.map((product, index) => (
                                 <ProductCard
@@ -171,10 +178,10 @@ export function ProductCarousel({
                                     product={product}
                                     variant="editorial"
                                     animate={false}
-                                    onProductClick={openExternal}
+                                    onProductClick={handleProductClick}
                                     className={cn(
-                                        highlightedSlug === product.slug &&
-                                            "ring-2 ring-primary ring-offset-2 shadow-clay-active"
+                                        "h-[420px]",
+                                        highlightedSlug === product.slug && carouselCardHighlightVariants()
                                     )}
                                     data-product-slug={product.slug}
                                 />

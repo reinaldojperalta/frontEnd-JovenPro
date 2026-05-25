@@ -1,7 +1,8 @@
 "use client";
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { m } from "framer-motion";
+import Image from "next/image";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -21,15 +22,18 @@ import {
     storeCardImageVariants,
     storeCardEmprendedorBadgeVariants,
     storeCardEmprendedorNameVariants,
+    storeCardVerifiedBadgeVariants,
     storeCardFullTitleVariants,
     storeCardFullDescriptionVariants,
     storeCardFullFooterRowVariants,
     storeCardFullLinkVariants,
+    storeCardFullLocationRowVariants,
     storeCardFullLocationVariants,
     storeCardMinHeaderInfoVariants,
     storeCardMinTitleVariants,
     storeCardMinEmprendedorNameVariants,
     storeCardMinDescriptionVariants,
+    storeCardMinLocationRowVariants,
     storeCardMinLocationVariants,
     type StoreCardVariant,
 } from "./StoreCard.variants";
@@ -40,6 +44,36 @@ export interface StoreCardProps {
     className?: string;
     animate?: boolean;
     onStoreClick?: (href: string) => void;
+}
+
+const FALLBACK_IMAGE = "/images/placeholders/No-Image-Placeholder.webp";
+
+function StoreImage({ src, alt, className, fill }: { src: string; alt: string; className?: string; fill?: boolean }) {
+    const [imgSrc, setImgSrc] = useState(src || FALLBACK_IMAGE);
+
+    if (fill) {
+        return (
+            <Image
+                src={imgSrc}
+                alt={alt}
+                fill
+                sizes="(max-width: 768px) 33vw, 150px"
+                className={className}
+                onError={() => setImgSrc(FALLBACK_IMAGE)}
+            />
+        );
+    }
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className={className}
+            onError={() => setImgSrc(FALLBACK_IMAGE)}
+        />
+    );
 }
 
 export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
@@ -70,19 +104,16 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                             {store.emprendedor.name}
                         </span>
                         {store.emprendedor.verified && (
-                            <span className="text-primary text-xs">✓</span>
+                            <span className={storeCardVerifiedBadgeVariants()}>✓</span>
                         )}
                     </div>
 
                     {/* Layout Vertical */}
                     <div className={storeCardFullMediaVariants()}>
-                        <img
-                            src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
+                        <StoreImage
+                            src={store.image}
                             alt={store.name}
                             className={storeCardImageVariants()}
-                            onError={(e) => {
-                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
-                            }}
                         />
                     </div>
 
@@ -90,10 +121,10 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                         <Heading level="h4" className={storeCardFullTitleVariants()}>
                             {store.name}
                         </Heading>
-                        <Text size="sm" variant="muted" className={cn("hidden md:block", storeCardFullDescriptionVariants())}>
+                        <Text size="sm" variant="muted" className={storeCardFullDescriptionVariants()}>
                             {store.description}
                         </Text>
-                        
+
                         <div className={storeCardFullFooterRowVariants()}>
                             <a
                                 href={storeHref}
@@ -109,8 +140,8 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                             >
                                 Ver tienda <ArrowRight className="w-3 h-3" />
                             </a>
-                            
-                            <div className="flex items-center gap-1 text-muted-foreground">
+
+                            <div className={storeCardFullLocationRowVariants()}>
                                 <MapPin className="w-3 h-3" />
                                 <span className={storeCardFullLocationVariants()}>
                                     {store.location}
@@ -148,13 +179,10 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                     </div>
 
                     <div className={storeCardMinMediaVariants()}>
-                        <img
-                            src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
+                        <StoreImage
+                            src={store.image}
                             alt={store.name}
                             className={storeCardImageVariants()}
-                            onError={(e) => {
-                                e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
-                            }}
                         />
                     </div>
 
@@ -165,7 +193,7 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                     </div>
 
                     <div className={storeCardMinFooterVariants()}>
-                        <div className="flex items-center gap-1 text-muted-foreground ml-auto">
+                        <div className={storeCardMinLocationRowVariants()}>
                             <MapPin className="w-3 h-3" />
                             <span className={storeCardMinLocationVariants()}>
                                 {store.location}
@@ -183,13 +211,11 @@ export const StoreCard = forwardRef<HTMLDivElement, StoreCardProps>(
                 className={cn(storeCardVariants({ variant }), className)}
                 {...cardProps}
             >
-                <img
-                    src={store.image || "/images/placeholders/No-Image-Placeholder.webp"}
+                <StoreImage
+                    src={store.image}
                     alt={store.name}
-                    className={cn(storeCardImageVariants(), "absolute inset-0")}
-                    onError={(e) => {
-                        e.currentTarget.src = "/images/placeholders/No-Image-Placeholder.webp";
-                    }}
+                    className={storeCardImageVariants()}
+                    fill
                 />
                 <div className={storeCardThumbnailGlassVariants()}>
                     <p className={storeCardThumbnailTitleVariants()}>

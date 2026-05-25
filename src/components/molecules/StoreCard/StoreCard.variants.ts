@@ -22,20 +22,22 @@ export const storeCardVariants = cva(
 export const storeCardHeaderVariants = cva("flex items-center gap-3 px-4 pt-4 pb-2 flex-shrink-0");
 
 // --- Media/Image Wrappers ---
-export const storeCardFullMediaVariants = cva("flex-1 min-h-0 overflow-hidden");
-export const storeCardMinMediaVariants = cva("flex-1 min-h-0 overflow-hidden");
+export const storeCardFullMediaVariants = cva("relative flex-1 min-h-0 overflow-hidden");
+export const storeCardMinMediaVariants = cva("relative flex-1 min-h-0 overflow-hidden");
 
 // --- Common Sub-components ---
 export const storeCardEmprendedorBadgeVariants = cva("absolute z-30 top-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full");
 export const storeCardEmprendedorNameVariants = cva("text-xs font-semibold text-foreground");
+export const storeCardVerifiedBadgeVariants = cva("text-primary text-xs");
 export const storeCardBadgeVariants = cva("absolute z-30 top-4 left-4");
 
 // --- Familia A — Material Design (card-full, card-min) ---
 export const storeCardFullContentVariants = cva("px-5 pt-4 pb-5 flex-shrink-0 space-y-1");
 export const storeCardFullTitleVariants = cva("font-headline font-bold text-foreground text-lg md:text-3xl md:tracking-tight leading-tight truncate");
-export const storeCardFullDescriptionVariants = cva("hidden md:[display:-webkit-box] line-clamp-3 md:text-base md:text-foreground/80 md:leading-relaxed");
+export const storeCardFullDescriptionVariants = cva("hidden md:block md:[display:-webkit-box] line-clamp-3 md:text-base md:text-foreground/80 md:leading-relaxed");
 export const storeCardFullFooterRowVariants = cva("flex items-center justify-between gap-2 pt-2");
 export const storeCardFullLinkVariants = cva("inline-flex items-center gap-1 font-body text-xs md:text-sm font-bold uppercase tracking-widest text-primary hover:text-primary-dim transition-all duration-300 group-hover:gap-2");
+export const storeCardFullLocationRowVariants = cva("flex items-center gap-1 text-muted-foreground");
 export const storeCardFullLocationVariants = cva("font-body text-sm font-medium text-muted-foreground");
 
 export const storeCardMinHeaderInfoVariants = cva("flex-1 min-w-0");
@@ -44,6 +46,7 @@ export const storeCardMinEmprendedorNameVariants = cva("truncate");
 export const storeCardMinContentVariants = cva("px-4 pt-2 pb-1 flex-shrink-0");
 export const storeCardMinDescriptionVariants = cva("line-clamp-1");
 export const storeCardMinFooterVariants = cva("px-4 pb-4 flex-shrink-0 flex items-center justify-between");
+export const storeCardMinLocationRowVariants = cva("flex items-center gap-1 text-muted-foreground ml-auto");
 export const storeCardMinLocationVariants = cva("font-body text-xs font-medium text-muted-foreground truncate");
 
 // --- Familia B — Thumbnail (preview-max, preview, history) ---

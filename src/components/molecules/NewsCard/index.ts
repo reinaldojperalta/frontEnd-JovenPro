@@ -12,12 +12,17 @@ export {
     newsCardBadgePositionVariants,
     newsCardContentVariants,
     newsCardMetaVariants,
+    newsCardMetaItemVariants,
     newsCardMetaDotVariants,
     newsCardTitleVariants,
     newsCardExcerptVariants,
     newsCardLinkVariants,
     newsCardLinkIconVariants,
     newsCardCategoryBadgeVariants,
+    newsCardGhostMediaVariants,
+    newsCardGhostContentVariants,
+    newsCardGhostLineVariants,
+    newsCardGhostLineShortVariants,
 } from "./NewsCard.variants";
 
 export type {

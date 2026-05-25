@@ -21,6 +21,8 @@ export {
     productCardEmprendedorBadgeVariants,
     productCardEmprendedorNameVariants,
     productCardDiscountBadgeVariants,
+    productCardDiscountBadgeInnerVariants,
+    productCardVerifiedBadgeVariants,
     productCardFullTitleVariants,
     productCardFullDescriptionVariants,
     productCardFullFooterRowVariants,
@@ -37,6 +39,15 @@ export {
     productCardLinkIconVariants,
     productCardCornerIconVariants,
     productCardCornerIconInnerVariants,
+    productCardEditorialMediaVariants,
+    productCardEditorialContentVariants,
+    productCardEditorialTitleVariants,
+    productCardEditorialEmprendedorRowVariants,
+    productCardEditorialEmprendedorVariants,
+    productCardEditorialPriceRowVariants,
+    productCardEditorialPriceVariants,
+    productCardEditorialOldPriceVariants,
+    productCardEditorialBadgeVariants,
 } from "./ProductCard.variants";
 
 export type {

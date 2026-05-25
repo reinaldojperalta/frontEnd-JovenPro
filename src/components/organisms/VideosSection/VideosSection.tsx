@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { m, LazyMotion } from "framer-motion";
+import Image from "next/image";
 import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
 import { Heading } from "@/components/atoms/Typography";
@@ -26,15 +27,7 @@ import {
 } from "./VideosSection.variants";
 
 /* ============================================================
- * VideosSection — Refactor V3 | Zero Inline Policy
- * ============================================================
- * FIX: Bug de audio fantasma (doble reproducción)
- * • Antes: Desktop y Mobile renderizaban simultáneamente en el DOM,
- *   ocultos por CSS. Al hacer play, ambos layouts creaban un iframe
- *   con autoplay=1. El layout oculto seguía reproduciendo audio.
- * • Ahora: Solo el layout activo se renderiza (useMediaQuery).
- *   Cuando cambia el breakpoint, el layout anterior se desmonta
- *   completamente, destruyendo su iframe.
+ * VideosSection — Refactor V5 | next/image + Zero Inline
  * ============================================================ */
 
 export interface VideosSectionProps {
@@ -43,7 +36,7 @@ export interface VideosSectionProps {
     className?: string;
 }
 
-/** Hook simple para detectar breakpoint sin dependencias externas */
+/** Hook simple para detectar breakpoint */
 function useMediaQuery(query: string): boolean {
     const [matches, setMatches] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -57,7 +50,6 @@ function useMediaQuery(query: string): boolean {
         return () => mql.removeEventListener("change", handler);
     }, [query]);
 
-    // Durante SSR/hidratación, asumimos desktop para evitar mismatch
     if (!mounted) return true;
     return matches;
 }
@@ -80,6 +72,7 @@ export function VideosSection({
 
     const renderVideoCard = (video: VideoItem, index: number, isMobile: boolean) => {
         const isPlaying = playingId === video.id;
+        const thumbnailUrl = getThumbnail(video.youtubeId);
 
         return (
             <div
@@ -108,14 +101,17 @@ export function VideosSection({
                             />
                         ) : (
                             <>
-                                <img
-                                    src={getThumbnail(video.youtubeId)}
+                                <Image
+                                    src={thumbnailUrl}
                                     alt={video.title}
+                                    fill
+                                    sizes={isMobile ? "85vw" : "(max-width: 768px) 100vw, 50vw"}
                                     className={
                                         isMobile
                                             ? videosSectionMobileThumbnailVariants()
                                             : videosSectionThumbnailVariants()
                                     }
+                                    unoptimized // YouTube thumbnails no están en next.config.ts
                                 />
                                 <div
                                     className={videosSectionPlayOverlayVariants()}
@@ -150,7 +146,6 @@ export function VideosSection({
                 )}
 
                 <LazyMotion features={domAnimation} strict>
-                    {/* Solo se renderiza UN layout a la vez */}
                     {isDesktop ? (
                         <div className={videosSectionGridVariants()}>
                             {videos.map((video, i) => renderVideoCard(video, i, false))}

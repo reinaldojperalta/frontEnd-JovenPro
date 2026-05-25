@@ -11,8 +11,8 @@ import { PaginationDots } from "@/components/molecules/PaginationDots";
 import { BentoGrid, BentoItem } from "@/components/atoms/BentoGrid";
 import { cn } from "@/lib/utils";
 import type { Store } from "@/lib/data";
-import { useAppNavigation } from "@/hooks/useAppNavigation";
 import { Section } from "@/components/atoms/Section";
+import Image from "next/image";
 import {
     BENTO_SLOTS,
     BENTO_SPRING,
@@ -40,6 +40,7 @@ export interface BentoCarouselProps {
     interval?: number;
     paginationSize?: "compact" | "standard";
     catalogHref?: string;
+    onStoreClick?: (url: string) => void;
 }
 
 export function BentoCarousel({
@@ -50,6 +51,7 @@ export function BentoCarousel({
     interval = 4000,
     paginationSize = "standard",
     catalogHref = "https://jovenpro.com/tienda/",
+    onStoreClick,
 }: BentoCarouselProps) {
     const [idx, setIdx] = useState(0);
     const [direction, setDirection] = useState<"next" | "prev">("next");
@@ -58,7 +60,14 @@ export function BentoCarousel({
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const touchStartX = useRef(0);
     const touchEndX = useRef(0);
-    const { openExternal } = useAppNavigation();
+
+    const handleNavigation = useCallback((url: string) => {
+        if (onStoreClick) {
+            onStoreClick(url);
+        } else {
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+    }, [onStoreClick]);
 
     const safeStores =
         stores.length >= 9
@@ -225,7 +234,7 @@ export function BentoCarousel({
                                 store={item}
                                 variant={slot.variant}
                                 animate={false}
-                                onStoreClick={openExternal}
+                                onStoreClick={handleNavigation}
                             />
                         </m.div>
                     ) : (
@@ -246,7 +255,7 @@ export function BentoCarousel({
     };
 
     const handleCatalogClick = () => {
-        openExternal(catalogHref);
+        handleNavigation(catalogHref);
     };
 
     return (
@@ -254,77 +263,80 @@ export function BentoCarousel({
             <Container size="xl" padding="md">
                 <LazyMotion features={domAnimation} strict>
                     <BentoGrid
-                    layout="carousel"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}
-                >
-                    {/* ── TEXTOS ── */}
-                    <BentoItem position="subtitle2" type="text" background="transparent" className="hidden md:flex">
-                        <img
-                            src="/images/logo/JovenPro-by-ZonaPro.png"
-                            alt="JovenPro by ZonaPro"
-                            className="w-auto h-12 object-contain opacity-80"
-                        />
-                    </BentoItem>
-
-                    <BentoItem position="subtitle" type="text" background="primary" className="hidden md:flex">
-                        <Text
-                            variant="inverted"
-                            size="md"
-                        >
-                            {subtitle}
-                        </Text>
-                    </BentoItem>
-
-                    <BentoItem position="title" type="text" background="primary">
-                        <Heading
-                            level="h3"
-                            className="text-white"
-                        >
-                            {title}
-                        </Heading>
-                    </BentoItem>
-
-                    {/* ── PRODUCTOS ── */}
-                    {BENTO_SLOTS.map(renderSlot)}
-
-                    {/* ── CONTROLES ── */}
-                    <BentoItem position="dots" type="control" background="glass" className="hidden md:flex shadow-sm">
-                        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-                            <span className="text-xs uppercase tracking-widest font-bold text-foreground/50">Navegar</span>
-                            <PaginationDots
-                                size={paginationSize}
-                                currentOffset={0}
-                                onOffsetChange={handleDotOffsetChange}
-                                total={total}
-                                currentIndex={idx}
-                                previewLabels={previewLabels}
+                        layout="carousel"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                    >
+                        {/* ── TEXTOS ── */}
+                        <BentoItem position="subtitle2" type="text" background="transparent" className="hidden md:flex">
+                            <Image
+                                src="/images/logo/JovenPro-by-ZonaPro.png"
+                                alt="JovenPro by ZonaPro"
+                                width={200}
+                                height={48}
+                                className="w-auto h-12 object-contain opacity-80"
+                                priority
                             />
-                        </div>
-                    </BentoItem>
+                        </BentoItem>
 
-                    <BentoItem position="catalogo" type="control" background="glass" className="shadow-xl shadow-primary/20">
-                        <div className="w-full h-full flex items-center justify-center">
-                            <Button
-                                asChild
-                                variant="primary"
+                        <BentoItem position="subtitle" type="text" background="primary" className="hidden md:flex">
+                            <Text
+                                variant="inverted"
                                 size="md"
-                                className="w-full sm:w-auto"
-                                onClick={handleCatalogClick}
                             >
-                                <a
-                                    href={catalogHref}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                {subtitle}
+                            </Text>
+                        </BentoItem>
+
+                        <BentoItem position="title" type="text" background="primary">
+                            <Heading
+                                level="h3"
+                                className="text-white"
+                            >
+                                {title}
+                            </Heading>
+                        </BentoItem>
+
+                        {/* ── PRODUCTOS ── */}
+                        {BENTO_SLOTS.map(renderSlot)}
+
+                        {/* ── CONTROLES ── */}
+                        <BentoItem position="dots" type="control" background="glass" className="hidden md:flex shadow-sm">
+                            <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+                                <span className="text-xs uppercase tracking-widest font-bold text-foreground/50">Navegar</span>
+                                <PaginationDots
+                                    size={paginationSize}
+                                    currentOffset={0}
+                                    onOffsetChange={handleDotOffsetChange}
+                                    total={total}
+                                    currentIndex={idx}
+                                    previewLabels={previewLabels}
+                                />
+                            </div>
+                        </BentoItem>
+
+                        <BentoItem position="catalogo" type="control" background="glass" className="shadow-xl shadow-primary/20">
+                            <div className="w-full h-full flex items-center justify-center">
+                                <Button
+                                    asChild
+                                    variant="primary"
+                                    size="md"
+                                    className="w-full sm:w-auto"
+                                    onClick={handleCatalogClick}
                                 >
-                                    Ver catálogo
-                                </a>
-                            </Button>
-                        </div>
-                    </BentoItem>
-                </BentoGrid>
+                                    <a
+                                        href={catalogHref}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Ver catálogo
+                                    </a>
+                                </Button>
+                            </div>
+                        </BentoItem>
+                    </BentoGrid>
                 </LazyMotion>
 
                 {/* Info label debajo del grid */}

@@ -1,15 +1,6 @@
 // ============================================================================
 // NEWS CARD VARIANTS — Molécula de tarjeta de noticia
 // ============================================================================
-// REFACTOR V3:
-// - Variantes: featured (hero grande) | preview (horizontal compacto)
-// - Muy parecido a ProductCard pero con estructura de noticia
-// - Preview en horizontal (imagen lateral + contenido)
-// - Tokens fantasmas eliminados:
-//   • text-jp-navy → text-secondary
-//   • text-jp-sky → text-primary
-//   • text-jp-text-secondary → text-muted-foreground
-// ============================================================================
 
 import { cva } from "class-variance-authority";
 
@@ -21,6 +12,7 @@ export const newsCardVariants = cva(
             variant: {
                 featured: "flex flex-col h-full",
                 preview: "flex flex-row h-full",
+                ghost: "flex flex-col h-full pointer-events-none",
             },
         },
         defaultVariants: {
@@ -33,8 +25,9 @@ export const newsCardVariants = cva(
 export const newsCardMediaVariants = cva("relative overflow-hidden", {
     variants: {
         variant: {
-            featured: "h-72 sm:h-96 flex-shrink-0",
-            preview: "w-2/5 flex-shrink-0",
+            featured: "relative h-72 sm:h-96 flex-shrink-0",
+            preview: "relative w-2/5 flex-shrink-0",
+            ghost: "hidden",
         },
     },
     defaultVariants: {
@@ -56,6 +49,7 @@ export const newsCardContentVariants = cva("flex flex-col", {
         variant: {
             featured: "p-8 flex-1 justify-between",
             preview: "w-3/5 p-6 justify-center",
+            ghost: "hidden",
         },
     },
     defaultVariants: {
@@ -68,6 +62,9 @@ export const newsCardMetaVariants = cva(
     "flex items-center gap-3 mb-3 text-sm text-muted-foreground"
 );
 
+/** Item individual de metadata */
+export const newsCardMetaItemVariants = cva("flex items-center gap-1");
+
 /** Separador punto */
 export const newsCardMetaDotVariants = cva("w-1 h-1 rounded-full bg-border");
 
@@ -79,6 +76,7 @@ export const newsCardTitleVariants = cva(
             variant: {
                 featured: "text-2xl mb-3",
                 preview: "text-base leading-tight mb-2",
+                ghost: "hidden",
             },
         },
         defaultVariants: {
@@ -95,6 +93,7 @@ export const newsCardExcerptVariants = cva(
             variant: {
                 featured: "text-sm",
                 preview: "text-xs line-clamp-2",
+                ghost: "hidden",
             },
         },
         defaultVariants: {
@@ -111,6 +110,7 @@ export const newsCardLinkVariants = cva(
             variant: {
                 featured: "mt-6 text-xs uppercase tracking-wider",
                 preview: "mt-3 text-xs hover:underline",
+                ghost: "hidden",
             },
         },
         defaultVariants: {
@@ -122,8 +122,36 @@ export const newsCardLinkVariants = cva(
 /** Icono del link */
 export const newsCardLinkIconVariants = cva("w-4 h-4");
 
-/** Badge de categoría (preview, reemplaza text-[10px] inline) */
+/** Badge de categoría (preview) */
 export const newsCardCategoryBadgeVariants = cva("mb-2 w-max");
 
+// --- GHOST CARD VARIANTS ---
+export const newsCardGhostMediaVariants = cva("relative overflow-hidden", {
+    variants: {
+        variant: {
+            featured: "h-72 sm:h-96 flex-shrink-0",
+            preview: "w-2/5 flex-shrink-0",
+        },
+    },
+    defaultVariants: {
+        variant: "featured",
+    },
+});
+
+export const newsCardGhostContentVariants = cva("flex flex-col justify-center", {
+    variants: {
+        variant: {
+            featured: "p-8 flex-1",
+            preview: "w-3/5 p-6",
+        },
+    },
+    defaultVariants: {
+        variant: "featured",
+    },
+});
+
+export const newsCardGhostLineVariants = cva("h-4 skeleton-pulse skeleton-block rounded-sm");
+export const newsCardGhostLineShortVariants = cva("h-4 w-2/3 skeleton-pulse skeleton-block rounded-sm");
+
 // Tipos
-export type NewsCardVariant = "featured" | "preview";
+export type NewsCardVariant = "featured" | "preview" | "ghost";

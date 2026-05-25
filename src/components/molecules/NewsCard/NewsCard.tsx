@@ -2,12 +2,12 @@
 // NEWS CARD — Molécula de tarjeta de noticia
 // ============================================================================
 // - Zero Inline Policy
-// - Consumo de átomos: Badge, Text (implícito via variantes)
+// - Server Component (sin "use client")
+// - Variantes: featured | preview | ghost
 // ============================================================================
 
-"use client";
-
 import React, { forwardRef } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/atoms/Badge";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -18,12 +18,17 @@ import {
     newsCardBadgePositionVariants,
     newsCardContentVariants,
     newsCardMetaVariants,
+    newsCardMetaItemVariants,
     newsCardMetaDotVariants,
     newsCardTitleVariants,
     newsCardExcerptVariants,
     newsCardLinkVariants,
     newsCardLinkIconVariants,
     newsCardCategoryBadgeVariants,
+    newsCardGhostMediaVariants,
+    newsCardGhostContentVariants,
+    newsCardGhostLineVariants,
+    newsCardGhostLineShortVariants,
     type NewsCardVariant,
 } from "./NewsCard.variants";
 
@@ -39,7 +44,7 @@ export interface NewsCardData {
 }
 
 export interface NewsCardProps {
-    data: NewsCardData;
+    data?: NewsCardData;
     variant?: NewsCardVariant;
     className?: string;
     onClick?: () => void;
@@ -48,6 +53,31 @@ export interface NewsCardProps {
 export const NewsCard = forwardRef<HTMLDivElement, NewsCardProps>(
     ({ data, variant = "featured", className, onClick }, ref) => {
         const isFeatured = variant === "featured";
+        const isGhost = variant === "ghost";
+
+        // GHOST CARD — Renderiza esqueleto visual sin datos
+        if (isGhost) {
+            return (
+                <article
+                    ref={ref}
+                    className={cn(newsCardVariants({ variant }), className)}
+                >
+                    <div className={newsCardGhostMediaVariants({ variant: isFeatured ? "featured" : "preview" })}>
+                        <div className="w-full h-full skeleton-pulse skeleton-block" />
+                    </div>
+                    <div className={newsCardGhostContentVariants({ variant: isFeatured ? "featured" : "preview" })}>
+                        <div className="space-y-3">
+                            <div className={newsCardGhostLineVariants()} />
+                            <div className={newsCardGhostLineShortVariants()} />
+                            <div className={newsCardGhostLineVariants()} />
+                        </div>
+                    </div>
+                </article>
+            );
+        }
+
+        // Normal cards (featured | preview)
+        if (!data) return null;
 
         return (
             <article
@@ -57,9 +87,11 @@ export const NewsCard = forwardRef<HTMLDivElement, NewsCardProps>(
             >
                 {/* MEDIA */}
                 <div className={newsCardMediaVariants({ variant })}>
-                    <img
+                    <Image
                         src={data.image}
                         alt={data.title}
+                        fill
+                        sizes={isFeatured ? "(max-width: 768px) 100vw, 600px" : "200px"}
                         className={newsCardImageVariants()}
                     />
                     {isFeatured && (
@@ -77,12 +109,12 @@ export const NewsCard = forwardRef<HTMLDivElement, NewsCardProps>(
                         {/* Meta: fecha + tiempo (solo featured) */}
                         {isFeatured && data.date && (
                             <div className={newsCardMetaVariants()}>
-                                <span className="flex items-center gap-1">
+                                <span className={newsCardMetaItemVariants()}>
                                     <Calendar className="w-4 h-4" />
                                     {data.date}
                                 </span>
                                 <span className={newsCardMetaDotVariants()} />
-                                <span className="flex items-center gap-1">
+                                <span className={newsCardMetaItemVariants()}>
                                     <Clock className="w-4 h-4" />
                                     {data.readTime}
                                 </span>

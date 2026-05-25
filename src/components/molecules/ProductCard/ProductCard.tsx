@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react";
 import { m } from "framer-motion";
+import Image from "next/image";
 import { Badge } from "@/components/atoms/Badge";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Heading, Text } from "@/components/atoms/Typography";
@@ -23,6 +24,8 @@ import {
     productCardEmprendedorBadgeVariants,
     productCardEmprendedorNameVariants,
     productCardDiscountBadgeVariants,
+    productCardDiscountBadgeInnerVariants,
+    productCardVerifiedBadgeVariants,
     productCardFullTitleVariants,
     productCardFullDescriptionVariants,
     productCardFullFooterRowVariants,
@@ -99,7 +102,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                             {product.emprendedor.name}
                         </span>
                         {product.emprendedor.verified && (
-                            <span className="text-primary text-xs">✓</span>
+                            <span className={productCardVerifiedBadgeVariants()}>✓</span>
                         )}
                     </div>
 
@@ -109,7 +112,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                                 variant="sale"
                                 size="md"
                                 uppercase={false}
-                                className="px-4 py-2 text-xs rounded-clay"
+                                className={productCardDiscountBadgeInnerVariants()}
                             >
                                 -{discountPercent}%
                             </Badge>
@@ -118,9 +121,11 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
 
                     {/* Layout Vertical */}
                     <div className={productCardFullMediaVariants()}>
-                        <img
+                        <Image
                             src={product.image}
                             alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 400px"
                             className={productCardImageVariants()}
                         />
                     </div>
@@ -129,10 +134,10 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                         <Heading level="h4" className={productCardFullTitleVariants()}>
                             {product.name}
                         </Heading>
-                        <Text size="sm" variant="muted" className={cn("hidden md:block", productCardFullDescriptionVariants())}>
+                        <Text size="sm" variant="muted" className={productCardFullDescriptionVariants()}>
                             {product.description}
                         </Text>
-                        
+
                         <div className={productCardFullFooterRowVariants()}>
                             <a
                                 href={productHref}
@@ -148,7 +153,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                             >
                                 Ver detalle <ArrowRight className="w-3 h-3" />
                             </a>
-                            
+
                             <div className={productCardFullPriceRowVariants()}>
                                 <span className={productCardFullPriceVariants()}>
                                     ${product.price.toLocaleString()}
@@ -191,9 +196,11 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                     </div>
 
                     <div className={productCardMinMediaVariants()}>
-                        <img
+                        <Image
                             src={product.image}
                             alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 300px"
                             className={productCardImageVariants()}
                         />
                     </div>
@@ -240,9 +247,11 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                                 </Badge>
                             </div>
                         )}
-                        <img
+                        <Image
                             src={product.image}
                             alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 50vw, 240px"
                             className={productCardImageVariants()}
                         />
                     </div>
@@ -282,10 +291,12 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                 className={cn(productCardVariants({ variant }), className)}
                 {...cardProps}
             >
-                <img
+                <Image
                     src={product.image}
                     alt={product.name}
-                    className={cn(productCardImageVariants(), "absolute inset-0")}
+                    fill
+                    sizes="(max-width: 768px) 33vw, 150px"
+                    className={productCardImageVariants()}
                 />
                 <div className={productCardThumbnailGlassVariants()}>
                     <p className={productCardThumbnailTitleVariants()}>
@@ -301,8 +312,5 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
         );
     }
 );
-
-ProductCard.displayName = "ProductCard";
-
 
 ProductCard.displayName = "ProductCard";

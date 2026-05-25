@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 
 /** Divisor vertical centrado (desktop only) */
 export const heroSplitDividerVariants = cva(
-    "hidden md:block absolute left-1/2 top-0 bottom-0 w-px  z-10"
+    "hidden md:block absolute left-1/2 top-0 bottom-0 w-px z-10"
 );
 
 /** Wrapper del logo flotante centrado */
@@ -18,12 +18,12 @@ export const heroSplitLogoWrapperVariants = cva(
 
 /** Contenedor con efecto glass para el logo */
 export const heroSplitLogoContainerVariants = cva(
-    "p-4 sm:p-6 md:p-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
+    "relative w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 p-4 sm:p-6 md:p-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
 );
 
 /** Imagen del logo (cuando se pasa logoSrc) */
 export const heroSplitLogoImageVariants = cva(
-    "h-16 sm:h-24 md:h-32 w-auto object-contain drop-shadow-2xl"
+    "w-full h-full object-contain drop-shadow-2xl"
 );
 
 /** Contenedor motion.div de cada lado */
@@ -38,7 +38,7 @@ export const heroSplitImageContainerVariants = cva(
 
 /** Imagen de fondo con filtros artísticos y hover */
 export const heroSplitImageVariants = cva(
-    "h-full w-full object-cover transition-all duration-500 ease-smooth group-hover:scale-105",
+    "object-cover transition-all duration-500 ease-smooth group-hover:scale-105",
     {
         variants: {
             filter: {
@@ -121,12 +121,7 @@ export const heroSplitArrowVariants = cva(
     {
         variants: {
             direction: {
-                // Si el diseño es "left", la flecha mira a la derecha (normal)
-                // y se mueve hacia la derecha en hover.
                 left: "rotate-0 group-hover:translate-x-1",
-
-                // Si el diseño es "right", la flecha mira a la izquierda (rotada)
-                // y se mueve hacia la izquierda en hover.
                 right: "rotate-180 group-hover:-translate-x-1",
             },
         },

@@ -1,16 +1,12 @@
 "use client";
 
 import React, { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Section } from "@/components/atoms/Section";
 import { cn } from "@/lib/utils";
 import type { Store } from "@/lib/data";
-import { useAppNavigation } from "@/hooks/useAppNavigation";
-import {
-    SEARCH_FOCUS_STORE_EVENT,
-    type SearchFocusStoreDetail,
-} from "@/lib/searchFocus";
 import { scrollChildIntoHorizontalContainer } from "@/lib/scrollUtils";
 import { MOSAIC_CATEGORIES, type MosaicCategoryFilterId } from "./ProductMosaic.constants";
 import {
@@ -33,9 +29,11 @@ import {
     mosaicChipGlassVariants,
     mosaicChipReflectionVariants,
     mosaicChipAvatarVariants,
+    mosaicChipAvatarInnerVariants,
     mosaicChipNameVariants,
     mosaicChipMobileWidthVariants,
     mosaicGridVariants,
+    mosaicGridHighlightVariants,
     mosaicFeaturedVariants,
     mosaicFeaturedImageVariants,
     mosaicFeaturedImgVariants,
@@ -44,20 +42,22 @@ import {
     mosaicFeaturedNameVariants,
     mosaicFeaturedMetaVariants,
     mosaicFeaturedCtaVariants,
-    mosaicMiniVariants,
-    mosaicMiniThumbVariants,
-    mosaicMiniThumbImgVariants,
-    mosaicMiniInfoVariants,
-    mosaicMiniLabelVariants,
-    mosaicMiniNameVariants,
-    mosaicMiniMetaVariants,
-    mosaicMiniDescVariants,
+    mosaicMiniGlassVariants,
+    mosaicMiniGlassImageVariants,
+    mosaicMiniGlassGradientVariants,
+    mosaicMiniGlassSpacerVariants,
+    mosaicMiniGlassPanelVariants,
+    mosaicMiniGlassLabelVariants,
+    mosaicMiniGlassTitleVariants,
+    mosaicMiniGlassSubtitleVariants,
 } from "./ProductMosaic.variants";
 
 export interface ProductMosaicProps {
     stores: Store[];
     catalogHref?: string;
     className?: string;
+    onStoreClick?: (url: string) => void;
+    highlightedStoreSlugFromProps?: string | null;
 }
 
 function getStoresByCategory(stores: Store[], catId: MosaicCategoryFilterId): Store[] {
@@ -74,8 +74,9 @@ export function ProductMosaic({
     stores,
     catalogHref = "https://jovenpro.com/tienda/",
     className,
+    onStoreClick,
+    highlightedStoreSlugFromProps = null,
 }: ProductMosaicProps) {
-    const { openExternal } = useAppNavigation();
     const [activeCatIndex, setActiveCatIndex] = useState(0);
     const [activeStoreIndex, setActiveStoreIndex] = useState(0);
     const [isSearchHighlighted, setIsSearchHighlighted] = useState(false);
@@ -138,17 +139,10 @@ export function ProductMosaic({
     );
 
     useEffect(() => {
-        const onFocusStore = (event: Event) => {
-            const { slug } = (event as CustomEvent<SearchFocusStoreDetail>).detail;
-            if (slug) focusStoreBySlug(slug);
-        };
-
-        window.addEventListener(SEARCH_FOCUS_STORE_EVENT, onFocusStore);
-        return () => {
-            window.removeEventListener(SEARCH_FOCUS_STORE_EVENT, onFocusStore);
-            if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
-        };
-    }, [focusStoreBySlug]);
+        if (highlightedStoreSlugFromProps) {
+            focusStoreBySlug(highlightedStoreSlugFromProps);
+        }
+    }, [highlightedStoreSlugFromProps, focusStoreBySlug]);
 
     useEffect(() => {
         if (activeStoreIndex >= filteredStores.length) {
@@ -223,7 +217,8 @@ export function ProductMosaic({
                         className={mosaicLinkVariants()}
                         onClick={(e) => {
                             e.preventDefault();
-                            openExternal(catalogHref);
+                            if (onStoreClick) onStoreClick(catalogHref);
+                            else window.open(catalogHref, "_blank");
                         }}
                     >
                         Ver catálogo
@@ -298,12 +293,19 @@ export function ProductMosaic({
                                         mosaicChipMobileWidthVariants(),
                                         "group"
                                     )}
-                                    style={{ backgroundImage: `url(${store.image})` }}
                                     onClick={() => {
                                         enableInlineScroll();
                                         selectStore(i);
                                     }}
                                 >
+                                    <Image
+                                        src={store.image}
+                                        alt={store.name}
+                                        fill
+                                        sizes="200px"
+                                        className="absolute inset-0 object-cover z-0"
+                                        aria-hidden
+                                    />
                                     <span
                                         className={mosaicChipGlassVariants({ active: isActive })}
                                         aria-hidden
@@ -318,7 +320,7 @@ export function ProductMosaic({
                                             alt={store.emprendedor.name}
                                             fallback={store.emprendedor.initials}
                                             size="sm"
-                                            className="w-full h-full border-0"
+                                            className={mosaicChipAvatarInnerVariants()}
                                         />
                                     </div>
                                     <span className={mosaicChipNameVariants()}>{store.name}</span>
@@ -333,72 +335,62 @@ export function ProductMosaic({
                     <div
                         className={cn(
                             mosaicGridVariants(),
-                            isSearchHighlighted &&
-                                "ring-2 ring-primary ring-offset-2 ring-offset-background rounded-clay transition-shadow duration-300"
+                            isSearchHighlighted && mosaicGridHighlightVariants()
                         )}
                     >
-                        {/* Mini — El Emprendedor */}
-                        <article
-                            className={cn(
-                                mosaicMiniVariants({ area: "emprendedor", layout: "desktop" }),
-                                "max-md:flex-col"
-                            )}
-                        >
-                            <div
-                                className={cn(
-                                    mosaicMiniThumbVariants({ layout: "desktop" }),
-                                    "max-md:w-full max-md:h-[120px]"
-                                )}
-                            >
-                                <Avatar
-                                    src={activeStore.emprendedor.avatar || undefined}
-                                    alt={activeStore.emprendedor.name}
-                                    fallback={activeStore.emprendedor.initials}
-                                    size="lg"
-                                    className="w-full h-full rounded-none"
-                                />
-                            </div>
-                            <div className={mosaicMiniInfoVariants()}>
-                                <span className={mosaicMiniLabelVariants()}>El Emprendedor</span>
-                                <p className={mosaicMiniNameVariants()}>{activeStore.emprendedor.name}</p>
-                                {activeStore.location ? (
-                                    <p className={mosaicMiniMetaVariants()}>{activeStore.location}</p>
-                                ) : null}
+                        {/* Mini 1 — El Emprendedor (Glass Card Horizontal) */}
+                        <article className={mosaicMiniGlassVariants({ area: "emprendedor" })}>
+                            <Image
+                                src={activeStore.emprendedor.avatar || "/images/placeholders/avatar-placeholder.webp"}
+                                alt={activeStore.emprendedor.name}
+                                fill
+                                sizes="200px"
+                                className={mosaicMiniGlassImageVariants()}
+                            />
+                            <div className={mosaicMiniGlassGradientVariants()} />
+                            <div className={mosaicMiniGlassSpacerVariants()} />
+                            <div className={mosaicMiniGlassPanelVariants()}>
+                                <span className={mosaicMiniGlassLabelVariants()}>El Emprendedor</span>
+                                <h3 className={mosaicMiniGlassTitleVariants()}>
+                                    {activeStore.emprendedor.name}
+                                </h3>
+                                <p className={mosaicMiniGlassSubtitleVariants()}>
+                                    {activeStore.location || activeStore.name}
+                                </p>
                             </div>
                         </article>
 
-                        {/* Mini — La Tienda */}
-                        <article
-                            className={cn(
-                                mosaicMiniVariants({ area: "tienda", layout: "desktop" }),
-                                "max-md:flex-col"
-                            )}
-                        >
-                            <div
-                                className={cn(
-                                    mosaicMiniThumbVariants({ layout: "desktop" }),
-                                    "max-md:w-full max-md:h-[120px]"
-                                )}
-                            >
-                                <img
-                                    src={activeStore.image}
-                                    alt={activeStore.name}
-                                    className={mosaicMiniThumbImgVariants()}
-                                />
-                            </div>
-                            <div className={mosaicMiniInfoVariants()}>
-                                <span className={mosaicMiniLabelVariants()}>La Tienda</span>
-                                <p className={mosaicMiniNameVariants()}>{activeStore.name}</p>
-                                <p className={mosaicMiniDescVariants()}>{activeStore.description}</p>
+                        {/* Mini 2 — La Tienda (Glass Card Horizontal) */}
+                        <article className={mosaicMiniGlassVariants({ area: "tienda" })}>
+                            <Image
+                                src={activeStore.image}
+                                alt={activeStore.name}
+                                fill
+                                sizes="200px"
+                                className={mosaicMiniGlassImageVariants()}
+                            />
+                            <div className={mosaicMiniGlassGradientVariants()} />
+                            <div className={mosaicMiniGlassSpacerVariants()} />
+                            <div className={mosaicMiniGlassPanelVariants()}>
+                                <span className={mosaicMiniGlassLabelVariants()}>La Tienda</span>
+                                <h3 className={mosaicMiniGlassTitleVariants()}>
+                                    {activeStore.name}
+                                </h3>
+                                <p className={mosaicMiniGlassSubtitleVariants()}>
+                                    {activeStore.description.substring(0, 80)}
+                                    {activeStore.description.length > 80 ? "..." : ""}
+                                </p>
                             </div>
                         </article>
 
                         {/* Featured */}
                         <article className={mosaicFeaturedVariants()}>
                             <div className={mosaicFeaturedImageVariants()}>
-                                <img
+                                <Image
                                     src={activeStore.image}
                                     alt={activeStore.name}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     className={mosaicFeaturedImgVariants()}
                                 />
                             </div>
@@ -414,7 +406,8 @@ export function ProductMosaic({
                                     className={mosaicFeaturedCtaVariants()}
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        openExternal(storeHref);
+                                        if (onStoreClick) onStoreClick(storeHref);
+                                        else window.open(storeHref, "_blank");
                                     }}
                                 >
                                     Visitar tienda

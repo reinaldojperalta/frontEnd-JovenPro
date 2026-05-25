@@ -1,11 +1,6 @@
 // ============================================================================
 // NEWS SECTION VARIANTS — Organismo de sección de noticias
 // ============================================================================
-// REFACTOR V3:
-// - Grid CSS custom 6×6 via globals.css (layout puro)
-// - NewsCard como molécula base
-// - Zero Inline Policy
-// ============================================================================
 
 import { cva } from "class-variance-authority";
 
@@ -16,10 +11,10 @@ export const newsSectionHeaderVariants = cva("mb-12 md:mb-16");
 export const newsSectionTitleVariants = cva("mb-4");
 export const newsSectionSubtitleVariants = cva("");
 
-/** Wrapper del grid desktop (usa .news-grid-container de globals.css) */
+/** Wrapper del grid desktop */
 export const newsSectionGridVariants = cva("news-grid-container hidden md:grid");
 
-/** Estilos visuales del slot (colores, bordes, hover) */
+/** Estilos visuales del slot */
 export const newsSectionSlotVariants = cva("news-slot", {
     variants: {
         position: {
@@ -56,7 +51,21 @@ export const newsSectionMobileMediaVariants = cva(
     "h-56 overflow-hidden relative"
 );
 
+export const newsSectionMobileImageVariants = cva(
+    "h-56 overflow-hidden relative"
+);
+
 export const newsSectionMobileContentVariants = cva("p-6");
+
+export const newsSectionMobileBadgeVariants = cva("absolute top-4 left-4");
+
+export const newsSectionMobileTitleVariants = cva(
+    "font-headline text-lg font-bold text-secondary mb-2"
+);
+
+export const newsSectionMobileExcerptVariants = cva(
+    "font-body text-sm text-muted-foreground line-clamp-2"
+);
 
 export const NEWS_SPRING = {
     type: "spring" as const,
@@ -82,7 +91,6 @@ export type NewsSlotKind = "news" | "allies";
 export interface NewsSlotConfig {
     id: string;
     variant: NewsSlotVariant;
-    /** Índice en la página de noticias; ignorado si kind === "allies" */
     offset: number;
     delay: number;
     gridClass: string;
@@ -96,5 +104,4 @@ export const NEWS_SLOTS: NewsSlotConfig[] = [
     { id: "preview-3", variant: "preview-3", offset: -1, delay: 0, gridClass: "news-slot-preview-3", kind: "allies" },
 ];
 
-/** Noticias rotativas por página (sin el slot estático de alianzas) */
 export const NEWS_ITEMS_PER_PAGE = 3;

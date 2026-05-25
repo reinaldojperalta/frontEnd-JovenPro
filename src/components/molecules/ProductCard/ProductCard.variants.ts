@@ -43,18 +43,21 @@ export const productCardMediaVariants = cva("relative overflow-hidden", {
     },
 });
 
-export const productCardFullMediaVariants = cva("flex-1 min-h-0 overflow-hidden");
-export const productCardMinMediaVariants = cva("flex-1 min-h-0 overflow-hidden");
+export const productCardFullMediaVariants = cva("relative flex-1 min-h-0 overflow-hidden");
+export const productCardMinMediaVariants = cva("relative flex-1 min-h-0 overflow-hidden");
+
 
 // --- Common Sub-components ---
 export const productCardEmprendedorBadgeVariants = cva("absolute z-30 top-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full");
 export const productCardEmprendedorNameVariants = cva("text-xs font-semibold text-foreground");
 export const productCardDiscountBadgeVariants = cva("absolute z-30 top-4 left-4");
+export const productCardDiscountBadgeInnerVariants = cva("px-4 py-2 text-xs rounded-clay");
+export const productCardVerifiedBadgeVariants = cva("text-primary text-xs");
 
 // --- Familia A — Material Design (card-full, card-min) ---
 export const productCardFullContentVariants = cva("px-5 pt-4 pb-5 flex-shrink-0 space-y-1");
 export const productCardFullTitleVariants = cva("font-headline font-bold text-foreground text-lg md:text-3xl md:tracking-tight leading-tight truncate");
-export const productCardFullDescriptionVariants = cva("hidden md:[display:-webkit-box] line-clamp-3 md:text-base md:text-foreground/80 md:leading-relaxed");
+export const productCardFullDescriptionVariants = cva("hidden md:block md:[display:-webkit-box] line-clamp-3 md:text-base md:text-foreground/80 md:leading-relaxed");
 export const productCardFullFooterRowVariants = cva("flex items-center justify-between gap-2 pt-2");
 export const productCardFullLinkVariants = cva("inline-flex items-center gap-1 font-body text-xs md:text-sm font-bold uppercase tracking-widest text-primary hover:text-primary-dim transition-all duration-300 group-hover:gap-2");
 export const productCardFullPriceRowVariants = cva("flex items-baseline gap-2 flex-wrap");
@@ -81,7 +84,7 @@ export const productCardEditorialTitleVariants = cva("text-sm font-headline font
 export const productCardEditorialEmprendedorRowVariants = cva("flex items-center gap-2 mb-2");
 export const productCardEditorialEmprendedorVariants = cva("text-xs font-body text-muted-foreground truncate");
 export const productCardEditorialPriceRowVariants = cva("flex items-baseline gap-2 mt-auto");
-export const productCardEditorialPriceVariants = cva("text-[15px] font-headline font-bold text-primary");
+export const productCardEditorialPriceVariants = cva("text-sm font-headline font-bold text-primary");
 export const productCardEditorialOldPriceVariants = cva("text-xs font-body text-muted-foreground line-through");
 export const productCardEditorialBadgeVariants = cva("absolute top-2 left-2 z-10");
 
@@ -94,6 +97,4 @@ export const productCardLinkIconVariants = cva("w-3 h-3");
 export const productCardCornerIconVariants = cva("absolute bottom-4 right-4 z-30");
 export const productCardCornerIconInnerVariants = cva("w-5 h-5 text-white");
 
-export type ProductCardVariant = NonNullable<
-    Parameters<typeof productCardVariants>[0]
->["variant"];
+export type ProductCardVariant = NonNullable<Parameters<typeof productCardVariants>[0]>["variant"];
