@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
+import { ScrollRestoration } from "@/components/atoms/ScrollRestoration";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -80,6 +81,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="light">
       <body className={`${montserrat.variable} ${inter.variable} font-body bg-background text-foreground antialiased`}>
+        <ScrollRestoration />
         {children}
       </body>
     </html>

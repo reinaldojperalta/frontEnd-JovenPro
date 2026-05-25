@@ -15,6 +15,7 @@ import { useAppNavigation } from "@/hooks/useAppNavigation";
 import {
     dispatchSearchFocusProduct,
     dispatchSearchFocusStore,
+    SECTION_VITRINA,
 } from "@/lib/searchFocus";
 import type { SearchSuggestion } from "@/components/molecules/SearchBar";
 import {
@@ -92,13 +93,15 @@ export function NavbarSticky({
         const { sectionHref, targetSlug, kind } = suggestion;
         if (sectionHref && targetSlug && kind) {
             scrollToSection(sectionHref);
+
+            const focusDelay = sectionHref === SECTION_VITRINA ? 700 : 500;
             window.setTimeout(() => {
                 if (kind === "store") {
                     dispatchSearchFocusStore(targetSlug);
                 } else if (kind === "product") {
                     dispatchSearchFocusProduct(targetSlug);
                 }
-            }, 450);
+            }, focusDelay);
         }
     };
 

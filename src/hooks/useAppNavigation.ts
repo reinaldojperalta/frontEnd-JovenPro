@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { scrollToPageSection } from "@/lib/scrollUtils";
 
 export function useAppNavigation() {
     const openExternal = useCallback((url: string) => {
@@ -20,11 +21,7 @@ export function useAppNavigation() {
 
     const scrollToSection = useCallback((href: string) => {
         if (href.startsWith("#")) {
-            const el = document.querySelector(href);
-            if (el) {
-                el.scrollIntoView({ behavior: "smooth" });
-                return;
-            }
+            if (scrollToPageSection(href)) return;
         }
         openExternal(href);
     }, [openExternal]);

@@ -11,6 +11,7 @@ import {
     SEARCH_FOCUS_STORE_EVENT,
     type SearchFocusStoreDetail,
 } from "@/lib/searchFocus";
+import { scrollChildIntoHorizontalContainer } from "@/lib/scrollUtils";
 import { MOSAIC_CATEGORIES, type MosaicCategoryFilterId } from "./ProductMosaic.constants";
 import {
     mosaicSectionVariants,
@@ -81,6 +82,17 @@ export function ProductMosaic({
     const tabsRef = useRef<HTMLDivElement>(null);
     const chipsRef = useRef<HTMLDivElement>(null);
     const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const allowInlineScrollRef = useRef(false);
+
+    const scrollActiveTabIntoView = useCallback(() => {
+        const activeTab = tabsRef.current?.querySelector('[data-active="true"]') as HTMLElement | null;
+        scrollChildIntoHorizontalContainer(tabsRef.current, activeTab);
+    }, []);
+
+    const scrollActiveChipIntoView = useCallback(() => {
+        const activeChip = chipsRef.current?.querySelector('[data-active="true"]') as HTMLElement | null;
+        scrollChildIntoHorizontalContainer(chipsRef.current, activeChip);
+    }, []);
 
     const activeCategory = MOSAIC_CATEGORIES[activeCatIndex];
     const filteredStores = useMemo(
@@ -112,11 +124,17 @@ export function ProductMosaic({
             setActiveCatIndex(resolvedCatIndex);
             setActiveStoreIndex(storeIndex >= 0 ? storeIndex : 0);
 
+            allowInlineScrollRef.current = true;
+            requestAnimationFrame(() => {
+                scrollActiveTabIntoView();
+                scrollActiveChipIntoView();
+            });
+
             setIsSearchHighlighted(true);
             if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
             highlightTimeoutRef.current = setTimeout(() => setIsSearchHighlighted(false), 2200);
         },
-        [stores]
+        [stores, scrollActiveTabIntoView, scrollActiveChipIntoView]
     );
 
     useEffect(() => {
@@ -154,14 +172,18 @@ export function ProductMosaic({
     }, []);
 
     useEffect(() => {
-        const activeTab = tabsRef.current?.querySelector('[data-active="true"]');
-        activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }, [activeCatIndex]);
+        if (!allowInlineScrollRef.current) return;
+        scrollActiveTabIntoView();
+    }, [activeCatIndex, scrollActiveTabIntoView]);
 
     useEffect(() => {
-        const activeChip = chipsRef.current?.querySelector('[data-active="true"]');
-        activeChip?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }, [activeStoreIndex, activeCatIndex]);
+        if (!allowInlineScrollRef.current) return;
+        scrollActiveChipIntoView();
+    }, [activeStoreIndex, activeCatIndex, scrollActiveChipIntoView]);
+
+    const enableInlineScroll = useCallback(() => {
+        allowInlineScrollRef.current = true;
+    }, []);
 
     const scrollTabs = (dir: -1 | 1) => {
         const amount = typeof window !== "undefined" && window.innerWidth <= 768 ? 150 : 200;
@@ -232,7 +254,10 @@ export function ProductMosaic({
                                     aria-selected={isActive}
                                     data-active={isActive ? "true" : undefined}
                                     className={mosaicTabVariants({ active: isActive })}
-                                    onClick={() => resetStoreOnCategoryChange(i)}
+                                    onClick={() => {
+                                        enableInlineScroll();
+                                        resetStoreOnCategoryChange(i);
+                                    }}
                                 >
                                     <Icon className={mosaicTabIconVariants()} aria-hidden />
                                     <span className={mosaicTabNameVariants()}>{cat.name}</span>
@@ -274,7 +299,10 @@ export function ProductMosaic({
                                         "group"
                                     )}
                                     style={{ backgroundImage: `url(${store.image})` }}
-                                    onClick={() => selectStore(i)}
+                                    onClick={() => {
+                                        enableInlineScroll();
+                                        selectStore(i);
+                                    }}
                                 >
                                     <span
                                         className={mosaicChipGlassVariants({ active: isActive })}

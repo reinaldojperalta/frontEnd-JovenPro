@@ -10,6 +10,7 @@ import {
     type SearchFocusProductDetail,
 } from "@/lib/searchFocus";
 import { cn } from "@/lib/utils";
+import { scrollChildIntoHorizontalContainer } from "@/lib/scrollUtils";
 import {
     carouselSectionVariants,
     carouselContainerVariants,
@@ -95,8 +96,8 @@ export function ProductCarousel({
             window.setTimeout(() => {
                 const card = wrapperRef.current?.querySelector(
                     `[data-product-slug="${CSS.escape(slug)}"]`
-                );
-                card?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+                ) as HTMLElement | null;
+                scrollChildIntoHorizontalContainer(wrapperRef.current, card);
             }, 100);
 
             if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
