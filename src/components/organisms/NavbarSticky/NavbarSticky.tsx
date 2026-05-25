@@ -13,6 +13,11 @@ import { Menu, X, Search } from "lucide-react";
 import type { NavItem } from "@/lib/data";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import {
+    dispatchSearchFocusProduct,
+    dispatchSearchFocusStore,
+} from "@/lib/searchFocus";
+import type { SearchSuggestion } from "@/components/molecules/SearchBar";
+import {
     navbarStickyVariants,
     navbarStickyInnerVariants,
     navbarStickyLogoVariants,
@@ -29,12 +34,7 @@ import {
     navbarStickyMobileLinkVariants,
 } from "./NavbarSticky.variants";
 
-export interface NavbarSearchSuggestion {
-    id: string | number;
-    label: string;
-    category?: string;
-    href?: string;
-}
+export type NavbarSearchSuggestion = SearchSuggestion;
 
 export interface NavbarStickyProps {
     items: NavItem[];
@@ -84,6 +84,24 @@ export function NavbarSticky({
         setMobileOpen(false);
     };
 
+    const handleSearchSelect = (suggestion: SearchSuggestion) => {
+        setSearchActive(false);
+        setMobileOpen(false);
+        setSearchValue(suggestion.label);
+
+        const { sectionHref, targetSlug, kind } = suggestion;
+        if (sectionHref && targetSlug && kind) {
+            scrollToSection(sectionHref);
+            window.setTimeout(() => {
+                if (kind === "store") {
+                    dispatchSearchFocusStore(targetSlug);
+                } else if (kind === "product") {
+                    dispatchSearchFocusProduct(targetSlug);
+                }
+            }, 450);
+        }
+    };
+
     return (
         <>
             <LazyMotion features={domAnimation} strict>
@@ -128,7 +146,7 @@ export function NavbarSticky({
                                 value={searchValue}
                                 onChange={setSearchValue}
                                 onSubmit={searchStore}
-                                onSelect={(s) => s.href && openExternal(s.href)}
+                                onSelect={handleSearchSelect}
                                 suggestions={searchSuggestions}
                                 size="md"
                                 autoFocus={searchActive}
@@ -212,7 +230,7 @@ export function NavbarSticky({
                                         value={searchValue}
                                         onChange={setSearchValue}
                                         onSubmit={searchStore}
-                                        onSelect={(s) => s.href && openExternal(s.href)}
+                                        onSelect={handleSearchSelect}
                                         suggestions={searchSuggestions}
                                         size="md"
                                         autoFocus

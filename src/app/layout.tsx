@@ -55,6 +55,10 @@ export const metadata: Metadata = {
     description: "Marketplace premium para el talento emprendedor.",
     images: ["/images/logo/JovenPro-by-ZonaPro.png"],
   },
+  icons: {
+    icon: [{ url: "/images/iconpro.png", type: "image/png" }],
+    apple: [{ url: "/images/iconpro.png", type: "image/png" }],
+  },
   robots: {
     index: true,
     follow: true,

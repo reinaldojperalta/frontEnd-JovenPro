@@ -53,10 +53,21 @@ export interface ProductCardProps {
     className?: string;
     animate?: boolean;
     onProductClick?: (href: string) => void;
+    "data-product-slug"?: string;
 }
 
 export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
-    ({ product, variant = "card-preview", className, animate = true, onProductClick }, ref) => {
+    (
+        {
+            product,
+            variant = "card-preview",
+            className,
+            animate = true,
+            onProductClick,
+            "data-product-slug": dataProductSlug,
+        },
+        ref
+    ) => {
         const isHistory = variant === "history-slot";
 
         const hasDiscount = product.oldPrice && product.oldPrice > product.price;
@@ -215,6 +226,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                         }
                     }}
                     {...cardProps}
+                    data-product-slug={dataProductSlug}
                 >
                     <div className={productCardEditorialMediaVariants()}>
                         {hasDiscount && (

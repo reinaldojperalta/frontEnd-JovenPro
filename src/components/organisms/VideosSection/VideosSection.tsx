@@ -141,7 +141,7 @@ export function VideosSection({
     };
 
     return (
-        <Section id="videos" background="background" spacing="lg" className={className}>
+        <Section id="videos" spacing="lg" className={className}>
             <Container size="lg" padding="md">
                 {title && (
                     <Heading level="h2" className="mb-8 md:mb-12">
@@ -150,16 +150,16 @@ export function VideosSection({
                 )}
 
                 <LazyMotion features={domAnimation} strict>
-                {/* Solo se renderiza UN layout a la vez */}
-                {isDesktop ? (
-                    <div className={videosSectionGridVariants()}>
-                        {videos.map((video, i) => renderVideoCard(video, i, false))}
-                    </div>
-                ) : (
-                    <div className={videosSectionMobileScrollVariants()}>
-                        {videos.map((video, i) => renderVideoCard(video, i, true))}
-                    </div>
-                )}
+                    {/* Solo se renderiza UN layout a la vez */}
+                    {isDesktop ? (
+                        <div className={videosSectionGridVariants()}>
+                            {videos.map((video, i) => renderVideoCard(video, i, false))}
+                        </div>
+                    ) : (
+                        <div className={videosSectionMobileScrollVariants()}>
+                            {videos.map((video, i) => renderVideoCard(video, i, true))}
+                        </div>
+                    )}
                 </LazyMotion>
             </Container>
         </Section>

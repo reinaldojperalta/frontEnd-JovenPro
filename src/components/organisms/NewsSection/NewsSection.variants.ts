@@ -77,17 +77,24 @@ export const NEWS_DIRECTIONS = {
 
 export type NewsSlotVariant = "featured" | "preview-1" | "preview-2" | "preview-3";
 
+export type NewsSlotKind = "news" | "allies";
+
 export interface NewsSlotConfig {
     id: string;
     variant: NewsSlotVariant;
+    /** Índice en la página de noticias; ignorado si kind === "allies" */
     offset: number;
     delay: number;
     gridClass: string;
+    kind?: NewsSlotKind;
 }
 
 export const NEWS_SLOTS: NewsSlotConfig[] = [
-    { id: "featured", variant: "featured", offset: 0, delay: 0, gridClass: "news-slot-featured" },
-    { id: "preview-1", variant: "preview-1", offset: 1, delay: 0.1, gridClass: "news-slot-preview-1" },
-    { id: "preview-2", variant: "preview-2", offset: 2, delay: 0.15, gridClass: "news-slot-preview-2" },
-    { id: "preview-3", variant: "preview-3", offset: 3, delay: 0.2, gridClass: "news-slot-preview-3" },
+    { id: "featured", variant: "featured", offset: 0, delay: 0, gridClass: "news-slot-featured", kind: "news" },
+    { id: "preview-1", variant: "preview-1", offset: 1, delay: 0.1, gridClass: "news-slot-preview-1", kind: "news" },
+    { id: "preview-2", variant: "preview-2", offset: 2, delay: 0.15, gridClass: "news-slot-preview-2", kind: "news" },
+    { id: "preview-3", variant: "preview-3", offset: -1, delay: 0, gridClass: "news-slot-preview-3", kind: "allies" },
 ];
+
+/** Noticias rotativas por página (sin el slot estático de alianzas) */
+export const NEWS_ITEMS_PER_PAGE = 3;

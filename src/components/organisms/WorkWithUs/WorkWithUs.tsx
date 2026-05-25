@@ -87,7 +87,7 @@ export function WorkWithUs({
     ];
 
     return (
-        <Section id="contacto" background="background" spacing="lg" className={className}>
+        <Section id="contacto" spacing="lg" className={className}>
             <Container size="lg" padding="md">
                 <div className={workWithUsCardVariants()}>
                     {/* Columna izquierda: contenido */}
@@ -103,53 +103,71 @@ export function WorkWithUs({
                             </Text>
 
                             <LazyMotion features={domAnimation} strict>
-                            <m.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-                            >
-                                <Heading
-                                    level="h2"
-                                    variant="primary"
-                                    className={workWithUsTitleVariants()}
+                                <m.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                                 >
-                                    {data.headline}
-                                </Heading>
-                            </m.div>
+                                    <Heading
+                                        level="h2"
+                                        variant="primary"
+                                        className={workWithUsTitleVariants()}
+                                    >
+                                        {data.headline}
+                                    </Heading>
+                                </m.div>
 
-                            <m.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: 0.1,
-                                    ease: [0.25, 1, 0.5, 1],
-                                }}
-                            >
-                                <p className={workWithUsDescriptionVariants()}>
-                                    {data.subheadline}
-                                </p>
-                            </m.div>
-
-                            <m.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    duration: 0.6,
-                                    delay: 0.2,
-                                    ease: [0.25, 1, 0.5, 1],
-                                }}
-                            >
-                                <button
-                                    onClick={() => handleOpen(`https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(data.whatsappMessage)}`)}
-                                    className={workWithUsWhatsappLinkVariants()}
+                                <m.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 0.1,
+                                        ease: [0.25, 1, 0.5, 1],
+                                    }}
                                 >
-                                    {data.whatsappDisplayLabel}
-                                </button>
-                            </m.div>
+                                    <p className={workWithUsDescriptionVariants()}>
+                                        {data.subheadline}
+                                    </p>
+                                </m.div>
+
+                                <m.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 0.2,
+                                        ease: [0.25, 1, 0.5, 1],
+                                    }}
+                                >
+                                    <button
+                                        onClick={() => handleOpen(data.membershipsUrl)}
+                                        className={workWithUsWhatsappLinkVariants()}
+                                    >
+                                        {data.membershipsDisplayLabel}
+                                    </button>
+                                </m.div>
+
+                                <m.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 0.3,
+                                        ease: [0.25, 1, 0.5, 1],
+                                    }}
+                                >
+                                    <button
+                                        onClick={() => handleOpen(`https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(data.whatsappMessage)}`)}
+                                        className={workWithUsWhatsappLinkVariants()}
+                                    >
+                                        {data.whatsappDisplayLabel}
+                                    </button>
+                                </m.div>
                             </LazyMotion>
 
                             <div className={workWithUsDividerVariants()}>

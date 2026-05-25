@@ -61,6 +61,12 @@ export interface VideoItem {
     emprendedor: string;
 }
 
+export type StoreCategoryId =
+    | "artesanias"
+    | "alimentos"
+    | "moda_belleza"
+    | "servicios";
+
 export interface Store {
     id: string;
     slug: string;
@@ -68,6 +74,7 @@ export interface Store {
     description: string;
     image: string;
     location: string;
+    category: StoreCategoryId;
     rating: number;
     reviewCount: number;
     emprendedor: {
@@ -110,6 +117,8 @@ export interface WorkWithUsData {
     sectionLabel: string;          // Etiqueta overline de la sección (ej. "Maker Hub")
     socialsLabel: string;          // Label sobre los iconos sociales (ej. "Conecta con nosotros")
     whatsappDisplayLabel: string;  // Texto visible del enlace de WhatsApp
+    membershipsDisplayLabel: string; // NUEVO: Texto visible del enlace de membresías
+    membershipsUrl: string;          // NUEVO: URL de membresías
     instagramUrl: string;
     facebookUrl: string;
     whatsappNumber: string;
@@ -165,8 +174,9 @@ export const stores: Store[] = [
         slug: "fragola-premium",
         name: "Fragola Premium",
         description: "Condiciones de entrega y conservación La entrega del producto se realiza a domicilio, por lo cual el cliente debe proporcionar una dirección exacta y completa, o indicar un lugar específico y seguro donde el pedido pueda ser recibido o dejado. Una vez entregado, es responsabilidad del cliente garantizar su adecuada conservación.  El producto debe mantenerse en un lugar fresco y seco. No es necesario refrigerarlo; sin embargo, en caso de hacerlo, se recomienda no someterlo a temperaturas muy bajas, ya que esto puede afectar su textura y calidad original. Se aconseja evitar la exposición directa al sol, al calor excesivo o a la humedad para conservar el producto en óptimas condiciones.",
-        image: "/images/products/fragola-premium.webp",
+        image: "/images/products/fragola.jpeg",
         location: "Firavitoba, BOY",
+        category: "alimentos",
         rating: 0.0,
         reviewCount: 0,
         emprendedor: {
@@ -177,29 +187,14 @@ export const stores: Store[] = [
         }
     },
     {
-        id: "340",
-        slug: "luna-glam",
-        name: "Luna Glam",
-        description: "Tienda Luna Glam.",
-        image: "/images/products/luna-accesorios.webp",
-        location: "TOL",
-        rating: 0.0,
-        reviewCount: 0,
-        emprendedor: {
-            name: "Mayfred Toledo Perez",
-            avatar: "/images/artisans/luna-accesorios-avatar.webp",
-            initials: "MT",
-            verified: false
-        }
-    },
-    {
         id: "339",
         slug: "httpswww-instagram-comrouri_col",
         name: "Róuri",
         description: "Tienda Róuri en sogamoso.",
-        image: "/images/products/r-uri.webp",
+        image: "/images/products/rouri.png",
         location: "sogamoso, BOY",
         rating: 0.0,
+        category: "moda_belleza",
         reviewCount: 0,
         emprendedor: {
             name: "Grether Ruiz",
@@ -213,8 +208,9 @@ export const stores: Store[] = [
         slug: "inspira-turquesa",
         name: "Inspira Turquesa",
         description: "Todos nuestros artículos son confeccionados o fabricados a mano con materiales de calidad, especialmente pensados para el cuidado del cabello y uso personal. Las imágenes de nuestros productos son de referencia. Debido al proceso artesanal, pueden existir ligeras variaciones en colores, costuras o acabados. En productos personalizados (como pulseras o kits especiales), no se aceptan modificaciones una vez aprobado el diseño final por el cliente. Nuestros accesorios elaborados en rodio y acero presentan una excelente calidad. Sin embargo, no cuentan con garantía, ya que su durabilidad depende del pH de la piel de cada persona y del cuidado que se les brinde.",
-        image: "/images/products/inspira-turquesa.webp",
+        image: "/images/products/inspira.png",
         location: "Sogamoso, BOY",
+        category: "moda_belleza",
         rating: 0.0,
         reviewCount: 0,
         emprendedor: {
@@ -229,9 +225,10 @@ export const stores: Store[] = [
         slug: "waypaoficial-com",
         name: "Waypa",
         description: "Tienda Waypa en Bucaramanga.",
-        image: "/images/products/calzado-hombre-ref-raices.webp",
+        image: "/images/products/uze.png",
         location: "Bucaramanga, SAN",
         rating: 0.0,
+        category: "moda_belleza",
         reviewCount: 0,
         emprendedor: {
             name: "Walter Jesus Rivera Morad",
@@ -245,9 +242,10 @@ export const stores: Store[] = [
         slug: "nextgen-3dlasersolutions",
         name: "NextGen 3D",
         description: "Tienda NextGen 3D en Diutama.",
-        image: "/images/products/nextgen-3d.webp",
+        image: "/images/products/nextgen.png",
         location: "Diutama, BOY",
         rating: 0.0,
+        category: "servicios",
         reviewCount: 0,
         emprendedor: {
             name: "MAYRA ALEJANDRA MARTINEZ HERRERA",
@@ -261,9 +259,10 @@ export const stores: Store[] = [
         slug: "carolinda",
         name: "Carolinda",
         description: "Tienda Carolinda en Tuta.",
-        image: "/images/products/carolinda.webp",
+        image: "/images/products/Carolinda.png",
         location: "Tuta, BOY",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Carolina Prieto",
@@ -277,9 +276,10 @@ export const stores: Store[] = [
         slug: "3d-land",
         name: "3D-Land",
         description: "Tienda 3D-Land en Firavitoba.",
-        image: "/images/products/3d-land.webp",
+        image: "/images/products/3dland.png",
         location: "Firavitoba, BOY",
         rating: 0.0,
+        category: "servicios",
         reviewCount: 0,
         emprendedor: {
             name: "Fabian Andres Salamanca F.",
@@ -293,9 +293,10 @@ export const stores: Store[] = [
         slug: "upin-pines-metalicos",
         name: "UPin Pines Metálicos",
         description: "Tienda UPin Pines Metálicos en Sogamoso.",
-        image: "/images/products/upin-pines-met-licos.webp",
+        image: "/images/products/unpines.png",
         location: "Sogamoso, BOY",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Sebastian Camargo Cuesto",
@@ -309,9 +310,10 @@ export const stores: Store[] = [
         slug: "licores-artesanales-jb",
         name: "Licores Artesanales JB",
         description: "Tienda Licores Artesanales JB en Duitama.",
-        image: "/images/products/ancheta-jb-licores.webp",
+        image: "/images/products/licorjb.png",
         location: "Duitama, BOY",
         rating: 0.0,
+        category: "alimentos",
         reviewCount: 0,
         emprendedor: {
             name: "Jaider Fabian Blanco Becerra",
@@ -328,6 +330,7 @@ export const stores: Store[] = [
         image: "/images/products/lux-dent-odontologia-y-estetica-s-a-s.webp",
         location: "SOGAMOSO, BOY",
         rating: 0.0,
+        category: "servicios",
         reviewCount: 0,
         emprendedor: {
             name: "Ivonne Alejandra Quiceno Zamora",
@@ -341,9 +344,10 @@ export const stores: Store[] = [
         slug: "angela-saavedra-mentora-de-negocios",
         name: "Ángela Saavedra Mentora de negocios",
         description: "Tienda Ángela Saavedra Mentora de negocios.",
-        image: "/images/products/Asesoria.jpeg",
+        image: "/images/products/angela.jpeg",
         location: "",
         rating: 0.0,
+        category: "servicios",
         reviewCount: 0,
         emprendedor: {
             name: "Angela Saavedra",
@@ -357,9 +361,10 @@ export const stores: Store[] = [
         slug: "httpswww-instagram-comcrochetaretes",
         name: "Crochetaretes",
         description: "Tienda Crochetaretes.",
-        image: "/images/products/arete.png",
+        image: "/images/products/crochete.png",
         location: "x",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Diana Ximena Ladino Morales",
@@ -373,9 +378,10 @@ export const stores: Store[] = [
         slug: "uvihatu_esencial",
         name: "Uvihatu_esencial",
         description: "Tienda Uvihatu_esencial en Sogamoso.",
-        image: "/images/products/uvihatu-esencial.webp",
+        image: "/images/products/uvihatu.png",
         location: "Sogamoso, BOY",
         rating: 0.0,
+        category: "alimentos",
         reviewCount: 0,
         emprendedor: {
             name: "Leidy Marcela León Tellez",
@@ -389,9 +395,10 @@ export const stores: Store[] = [
         slug: "makadamia-velas-y-aromas",
         name: "Makadamia - Velas y aromas",
         description: "Tienda Makadamia - Velas y aromas en Duitama.",
-        image: "/images/products/makadamia-velas-y-aromas.webp",
+        image: "/images/products/makadamia.jpeg",
         location: "Duitama, Boyacá",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Monica Murcia",
@@ -405,9 +412,10 @@ export const stores: Store[] = [
         slug: "arttemacu",
         name: "MACU",
         description: "Tienda MACU en Bogota D.c.",
-        image: "/images/products/macu.webp",
+        image: "/images/products/macu.png",
         location: "Bogota D.c",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Maria Castro",
@@ -421,9 +429,10 @@ export const stores: Store[] = [
         slug: "julio-cesar-gonzalez-mejia-abogados-asesores",
         name: "Julio César González Mejía Abogados Asesores",
         description: "Tienda Julio César González Mejía Abogados Asesores en Sogamoso.",
-        image: "/images/products/julio-c-sar-gonz-lez-mej-a-abogados-asesores.webp",
+        image: "/images/products/julio.jpg",
         location: "Sogamoso, Boyacá",
         rating: 0.0,
+        category: "servicios",
         reviewCount: 0,
         emprendedor: {
             name: "Julio César González Mejía",
@@ -440,6 +449,7 @@ export const stores: Store[] = [
         image: "/images/products/collar.png",
         location: "",
         rating: 0.0,
+        category: "artesanias",
         reviewCount: 0,
         emprendedor: {
             name: "Astrid Constanza Castro Gordillo",
@@ -453,10 +463,11 @@ export const stores: Store[] = [
         slug: "tuarte",
         name: "TuArte",
         description: "Tienda TuArte en Sogamoso.",
-        image: "/images/products/tuarte.webp",
+        image: "/images/products/tuarte.jpg",
         location: "Sogamoso, Boyacá",
         rating: 0.0,
         reviewCount: 0,
+        category: "artesanias",
         emprendedor: {
             name: "Javier Mojica",
             avatar: "/images/artisans/tuarte-avatar.webp",
@@ -469,8 +480,9 @@ export const stores: Store[] = [
         slug: "gricellarts",
         name: "Gricellarts",
         description: "Tienda Gricellarts en Bogota.",
-        image: "/images/products/gricellarts.webp",
+        image: "/images/products/gricellarts.png",
         location: "Bogota, CUN",
+        category: "moda_belleza",
         rating: 0.0,
         reviewCount: 0,
         emprendedor: {
@@ -485,8 +497,9 @@ export const stores: Store[] = [
         slug: "muiscafe",
         name: "MUISCAFE",
         description: "Tienda MUISCAFE en Sogamoso.",
-        image: "/images/products/muiscafe.webp",
+        image: "/images/products/muiscafe.png",
         location: "Sogamoso",
+        category: "alimentos",
         rating: 0.0,
         reviewCount: 0,
         emprendedor: {
@@ -545,16 +558,7 @@ export const newsItems: NewsItem[] = [
         readTime: "3 min",
         href: "https://jovenpro.com/",
     },
-    {
-        id: "news-005",
-        title: "Cerámica raku: fuego y alma colombiana",
-        excerpt: "La técnica milenaria del raku llega a los talleres de JovenPro. Descubre cómo nuestros artesanos fusionan la tradición japonesa con la identidad boyacense.",
-        category: "Cerámica",
-        image: "/images/news/madera-andes.jpg",
-        date: "10 Abr 2026",
-        readTime: "5 min",
-        href: "https://jovenpro.com/",
-    },
+
 ];
 
 export const featuredProducts: Product[] = [
@@ -1009,6 +1013,8 @@ export const workWithUsData: WorkWithUsData = {
     sectionLabel: "Maker Hub",
     socialsLabel: "Conecta con nosotros",
     whatsappDisplayLabel: "WhatsApp: +57 302 484 0101",
+    membershipsDisplayLabel: "Membresías", // AÑADIDO
+    membershipsUrl: "https://jovenpro.com/membresias", // AÑADIDO (cambiar por URL real)
     instagramUrl: "https://www.instagram.com/jovenprocolombia",
     facebookUrl: "https://www.facebook.com/jovenprocolombia",
     whatsappNumber: "573024840101",

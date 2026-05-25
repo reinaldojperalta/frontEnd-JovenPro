@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export const carouselSectionVariants = cva("w-full bg-surface py-10 md:py-20 overflow-hidden");
+export const carouselSectionVariants = cva("w-full bg-primary/10 py-10 md:py-20 overflow-hidden");
 export const carouselContainerVariants = cva("max-w-[1280px] mx-auto px-4 md:px-12 flex items-stretch gap-0");
 
 export const carouselEditorialVariants = cva("hidden md:flex w-[320px] flex-shrink-0 pr-12 flex-col justify-center");

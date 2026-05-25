@@ -8,6 +8,7 @@ import { Text } from "@/components/atoms/Typography";
 import { Container } from "@/components/atoms/Container";
 import { Badge } from "@/components/atoms/Badge";
 import { NewsCard } from "@/components/molecules/NewsCard";
+import { AlliesLogoRotator } from "@/components/molecules/AlliesLogoRotator";
 import { PaginationDots } from "@/components/molecules/PaginationDots";
 import { cn } from "@/lib/utils";
 import type { NewsItem } from "@/lib/data";
@@ -28,6 +29,7 @@ import {
     NEWS_SPRING,
     NEWS_DIRECTIONS,
     NEWS_SLOTS,
+    NEWS_ITEMS_PER_PAGE,
     type NewsSlotConfig,
 } from "./NewsSection.variants";
 
@@ -48,7 +50,7 @@ export function NewsSection({
 }: NewsSectionProps) {
     const [currentPage, setCurrentPage] = useState(0);
     const [localIndex, setLocalIndex] = useState(0);
-    const itemsPerPage = 4;
+    const itemsPerPage = NEWS_ITEMS_PER_PAGE;
 
     const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -140,17 +142,24 @@ export function NewsSection({
                         className={newsSectionGridVariants()}
                     >
                         {NEWS_SLOTS.map((slot) => {
+                            const slotClass = cn(
+                                slot.gridClass,
+                                newsSectionSlotVariants({ position: slot.variant as any })
+                            );
+
+                            if (slot.kind === "allies") {
+                                return (
+                                    <div key={slot.id} className={slotClass}>
+                                        <AlliesLogoRotator className="w-full h-full" />
+                                    </div>
+                                );
+                            }
+
                             const item = getItem(slot.offset);
                             if (!item) return null;
 
                             return (
-                                <div
-                                    key={slot.id}
-                                    className={cn(
-                                        slot.gridClass,
-                                        newsSectionSlotVariants({ position: slot.variant as any })
-                                    )}
-                                >
+                                <div key={slot.id} className={slotClass}>
                                     <AnimatePresence mode="wait" initial={false}>
                                         <m.div
                                             key={item.id}
@@ -201,8 +210,8 @@ export function NewsSection({
                 <div className="md:hidden space-y-4">
                     {(() => {
                         const mFeatured = getItem(0);
-                        const mPreviews = [getItem(1), getItem(2), getItem(3)].filter(Boolean) as NewsItem[];
-                        
+                        const mPreviews = [getItem(1), getItem(2)].filter(Boolean) as NewsItem[];
+
                         return (
                             <>
                                 {mFeatured && (
@@ -258,6 +267,11 @@ export function NewsSection({
                                             </div>
                                         </div>
                                     ))}
+                                    <div className={newsSectionMobileItemVariants()}>
+                                        <div className="aspect-square w-full overflow-hidden rounded-2xl">
+                                            <AlliesLogoRotator className="w-full h-full min-h-[280px]" />
+                                        </div>
+                                    </div>
                                 </div>
                             </>
                         );

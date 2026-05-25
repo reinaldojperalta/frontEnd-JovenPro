@@ -73,7 +73,7 @@ export function Testimonials({
     const active = testimonials[activeIndex];
 
     return (
-        <Section id="testimonios" spacing="lg" background="surface-container-low" className={className}>
+        <Section id="testimonios" spacing="lg" background="background" className={className}>
             <Container size="lg" padding="md">
                 <div className={testimonialsGridVariants()}>
                     {/* Header */}
@@ -96,52 +96,52 @@ export function Testimonials({
                     {/* Card */}
                     <div className={testimonialsCardWrapperVariants()}>
                         <LazyMotion features={domAnimation} strict>
-                        <AnimatePresence mode="wait">
-                            <m.div
-                                key={active.id}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                                className={testimonialsCardVariants()}
-                            >
-                                <p className={testimonialsQuoteVariants()}>
-                                    &ldquo;{active.text}&rdquo;
-                                </p>
+                            <AnimatePresence mode="wait">
+                                <m.div
+                                    key={active.id}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                                    className={testimonialsCardVariants()}
+                                >
+                                    <p className={testimonialsQuoteVariants()}>
+                                        &ldquo;{active.text}&rdquo;
+                                    </p>
 
-                                <div className={testimonialsFooterVariants()}>
-                                    <div className={testimonialsAuthorVariants()}>
-                                        <Avatar
-                                            src={active.avatar}
-                                            alt={active.name}
-                                            size="lg"
-                                        />
-                                        <div className={testimonialsAuthorInfoVariants()}>
-                                            <p className={testimonialsNameVariants()}>
-                                                {active.name}
-                                            </p>
-                                            <p className={testimonialsRoleVariants()}>
-                                                {active.role}
-                                            </p>
+                                    <div className={testimonialsFooterVariants()}>
+                                        <div className={testimonialsAuthorVariants()}>
+                                            <Avatar
+                                                src={active.avatar}
+                                                alt={active.name}
+                                                size="lg"
+                                            />
+                                            <div className={testimonialsAuthorInfoVariants()}>
+                                                <p className={testimonialsNameVariants()}>
+                                                    {active.name}
+                                                </p>
+                                                <p className={testimonialsRoleVariants()}>
+                                                    {active.role}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className={testimonialsProductVariants()}>
+                                            {active.productImage && (
+                                                <img
+                                                    src={active.productImage}
+                                                    alt="Producto"
+                                                    className={testimonialsProductImageVariants()}
+                                                />
+                                            )}
+                                            <StarRating
+                                                value={active.rating}
+                                                size="sm"
+                                            />
                                         </div>
                                     </div>
-
-                                    <div className={testimonialsProductVariants()}>
-                                        {active.productImage && (
-                                            <img
-                                                src={active.productImage}
-                                                alt="Producto"
-                                                className={testimonialsProductImageVariants()}
-                                            />
-                                        )}
-                                        <StarRating
-                                            value={active.rating}
-                                            size="sm"
-                                        />
-                                    </div>
-                                </div>
-                            </m.div>
-                        </AnimatePresence>
+                                </m.div>
+                            </AnimatePresence>
                         </LazyMotion>
 
                         {/* Controles */}

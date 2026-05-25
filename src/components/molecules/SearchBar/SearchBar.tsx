@@ -56,6 +56,9 @@ export interface SearchSuggestion {
     icon?: React.ReactNode;
     href?: string;
     onClick?: () => void;
+    kind?: "store" | "product";
+    sectionHref?: string;
+    targetSlug?: string;
 }
 
 export interface SearchBarProps {

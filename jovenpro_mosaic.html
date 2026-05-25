@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JovenPro — Mosaic Vitrina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+
+        /* ============================================
+           MOSAIC SECTION
+           ============================================ */
+        .mosaic-section {
+            padding: 80px 0;
+        }
+        .mosaic-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        /* ── Header ── */
+        .mosaic-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .mosaic-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mosaic-overline {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .mosaic-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .mosaic-link {
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── Category Tabs (minimal + icon) ── */
+        .tabs-nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .cat-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 4px 2px;
+            flex: 1;
+            scroll-behavior: smooth;
+        }
+        .cat-tabs::-webkit-scrollbar { display: none; }
+
+        .cat-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 1.5px solid;
+            background: transparent;
+            transition: all 0.2s ease;
+        }
+        .cat-tab .tab-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .cat-tab .tab-name {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .cat-tab .tab-count {
+            font-size: 11px;
+            font-weight: 500;
+            margin-left: 2px;
+        }
+
+        .tabs-arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .tabs-arrow svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ── Store Chips (liquid glass + avatar) ── */
+        .store-selector {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 4px 0 20px;
+        }
+        .store-selector::-webkit-scrollbar { display: none; }
+
+        .store-chip {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            min-width: 160px;
+            height: 56px;
+            flex-shrink: 0;
+            cursor: pointer;
+            overflow: hidden;
+            border: none;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.25s ease;
+        }
+        .store-chip::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            transition: all 0.25s ease;
+            z-index: 1;
+        }
+        .store-chip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.5) 0%,
+                rgba(255,255,255,0.1) 50%,
+                rgba(255,255,255,0.0) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+        .store-chip:hover::after {
+            background: rgba(255, 255, 255, 0.55);
+        }
+        .store-chip.active::after {
+            background: rgba(41, 128, 185, 0.25);
+        }
+        .store-chip.active {
+            transform: translateY(-1px);
+        }
+        .chip-avatar {
+            position: relative;
+            z-index: 3;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+        .chip-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .chip-name {
+            position: relative;
+            z-index: 3;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+        }
+
+        /* ── Grid Desktop ── */
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas:
+                "mini1 featured"
+                "mini2 featured";
+            gap: 20px;
+            height: 520px;
+        }
+
+        .mosaic-featured {
+            grid-area: featured;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .mosaic-featured-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            overflow: hidden;
+        }
+        .mosaic-featured-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .mosaic-featured:hover .mosaic-featured-image img {
+            transform: scale(1.03);
+        }
+        .mosaic-featured-info {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+        .featured-name {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .featured-meta {
+            font-size: 14px;
+        }
+        .featured-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .featured-cta:hover {
+            gap: 12px;
+        }
+
+        .mosaic-mini {
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+        .mini-emprendedor { grid-area: mini1; }
+        .mini-tienda { grid-area: mini2; }
+
+        .mini-thumb {
+            width: 140px;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .mini-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .mini-info {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+        }
+        .mini-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .mini-name {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .mini-meta {
+            font-size: 13px;
+        }
+        .mini-desc {
+            font-size: 13px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           RESPONSIVE (< 768px)
+           ============================================ */
+        @media (max-width: 768px) {
+            .mosaic-section {
+                padding: 40px 0;
+            }
+            .mosaic-container {
+                padding: 0 16px;
+            }
+            .mosaic-header {
+                margin-bottom: 16px;
+            }
+            .mosaic-title {
+                font-size: 20px;
+            }
+
+            .tabs-nav {
+                gap: 6px;
+                margin-bottom: 12px;
+            }
+            .cat-tabs {
+                gap: 6px;
+            }
+            .cat-tab {
+                padding: 8px 12px;
+                min-width: 0;
+            }
+            .cat-tab .tab-name {
+                font-size: 12px;
+            }
+            .cat-tab .tab-count {
+                display: none;
+            }
+            .tabs-arrow {
+                width: 32px;
+                height: 32px;
+            }
+
+            .store-selector {
+                padding-bottom: 16px;
+                gap: 8px;
+            }
+            .store-chip {
+                min-width: 0;
+                width: calc((100vw - 80px) / 2.3);
+                height: 52px;
+                padding: 8px 12px;
+            }
+            .chip-avatar {
+                width: 28px;
+                height: 28px;
+            }
+            .chip-name {
+                font-size: 12px;
+            }
+
+            .mosaic-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+                grid-template-areas:
+                    "mini1 mini2"
+                    "featured featured"
+                    "featured featured";
+                gap: 12px;
+                height: auto;
+            }
+            .mosaic-featured {
+                min-height: 380px;
+            }
+            .mosaic-featured-image {
+                padding: 24px;
+            }
+            .mosaic-featured-info {
+                padding: 20px;
+            }
+            .featured-name {
+                font-size: 18px;
+            }
+
+            .mosaic-mini {
+                flex-direction: column;
+            }
+            .mini-thumb {
+                width: 100%;
+                height: 120px;
+            }
+            .mini-info {
+                padding: 14px;
+                gap: 4px;
+            }
+            .mini-name {
+                font-size: 13px;
+            }
+            .mini-desc {
+                -webkit-line-clamp: 2;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="mosaic-section">
+        <div class="mosaic-container">
+            <!-- Header -->
+            <div class="mosaic-header">
+                <div class="mosaic-header-left">
+                    <div class="mosaic-overline">Vitrina de Emprendedores</div>
+                    <h2 class="mosaic-title" id="mosaicTitle">Conoce nuestros emprendedores</h2>
+                </div>
+                <a href="#" class="mosaic-link">Ver catálogo →</a>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="tabs-nav">
+                <button class="tabs-arrow" onclick="scrollTabs(-1)" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="cat-tabs" id="catTabs"></div>
+                <button class="tabs-arrow" onclick="scrollTabs(1)" aria-label="Siguiente">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Store Chips -->
+            <div class="store-selector" id="storeSelector"></div>
+
+            <!-- Grid -->
+            <div class="mosaic-grid" id="mosaicGrid">
+                <div class="mosaic-mini mini-emprendedor" id="miniEmprendedor">
+                    <div class="mini-thumb"><img id="miniEmpImg" src="" alt=""></div>
+                    <div class="mini-info">
+                        <div class="mini-label">El Emprendedor</div>
+                        <div class="mini-name" id="miniEmpName"></div>
+                        <div class="mini-meta" id="miniEmpLoc"></div>
+                    </div>
+                </div>
+                <div class="mosaic-mini mini-tienda" id="miniTienda">
+                    <div class="mini-thumb"><img id="miniTiendaImg" src="" alt=""></div>
+                    <div class="mini-info">
+                        <div class="mini-label">La Tienda</div>
+                        <div class="mini-name" id="miniTiendaName"></div>
+                        <div class="mini-desc" id="miniTiendaDesc"></div>
+                    </div>
+                </div>
+                <div class="mosaic-featured" id="featuredCard">
+                    <div class="mosaic-featured-image"><img id="featImg" src="" alt=""></div>
+                    <div class="mosaic-featured-info">
+                        <div class="featured-badge">Vitrina Destacada</div>
+                        <div class="featured-name" id="featName"></div>
+                        <div class="featured-meta" id="featSeller"></div>
+                        <a href="#" class="featured-cta" id="featCta">Visitar tienda →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Category icons (SVG strings)
+        const icons = {
+            grid: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>',
+            coffee: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>',
+            scissors: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>',
+            gem: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 18 3 22 9 12 22 2 9"></polygon><line x1="12" y1="22" x2="12" y2="9"></line><polyline points="2 9 12 9 22 9"></polyline></svg>',
+            tree: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18L12 22L16 18"></path><path d="M12 12V22"></path><path d="M20 14L12 2L4 14H20Z"></path></svg>',
+            cpu: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
+            briefcase: '<svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>',
+        };
+
+        const categories = [
+            { id: "todos", name: "Todos", icon: icons.grid },
+            { id: "alimentos", name: "Alimentos", icon: icons.coffee },
+            { id: "textil", name: "Textil", icon: icons.scissors },
+            { id: "joyeria", name: "Joyería", icon: icons.gem },
+            { id: "madera", name: "Madera", icon: icons.tree },
+            { id: "tecnologia", name: "Tecnología", icon: icons.cpu },
+            { id: "servicios", name: "Servicios", icon: icons.briefcase },
+        ];
+
+        const stores = [
+            { id: "345", name: "Fragola Premium", slug: "fragola-premium", category: "alimentos", description: "Condiciones de entrega y conservación. El producto debe mantenerse en un lugar fresco y seco.", image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&h=600&fit=crop", location: "Firavitoba, BOY", emprendedor: { name: "Leidy Johana Molano", initials: "LM", avatar: "https://ui-avatars.com/api/?name=Leidy+Molano&background=2980b9&color=fff&size=128" } },
+            { id: "340", name: "Luna Glam", slug: "luna-glam", category: "joyeria", description: "Tienda de accesorios y bisutería artesanal con diseños únicos para cada ocasión.", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220e?w=800&h=600&fit=crop", location: "TOL", emprendedor: { name: "Mayfred Toledo", initials: "MT", avatar: "https://ui-avatars.com/api/?name=Mayfred+Toledo&background=1a3d5c&color=fff&size=128" } },
+            { id: "339", name: "Róuri", slug: "rouri", category: "textil", description: "Tienda Róuri en Sogamoso. Moda sostenible con identidad boyacense.", image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop", location: "Sogamoso, BOY", emprendedor: { name: "Grether Ruiz", initials: "GR", avatar: "https://ui-avatars.com/api/?name=Grether+Ruiz&background=2980b9&color=fff&size=128" } },
+            { id: "337", name: "Inspira Turquesa", slug: "inspira-turquesa", category: "joyeria", description: "Artículos confeccionados a mano para el cuidado del cabello y uso personal.", image: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?w=800&h=600&fit=crop", location: "Sogamoso, BOY", emprendedor: { name: "Katherin Lopez", initials: "KL", avatar: "https://ui-avatars.com/api/?name=Katherin+Lopez&background=1a3d5c&color=fff&size=128" } },
+            { id: "336", name: "Waypa", slug: "waypa", category: "textil", description: "Calzado artesanal para hombre con diseño étnico y materiales locales.", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop", location: "Bucaramanga, SAN", emprendedor: { name: "Walter Rivera", initials: "WR", avatar: "https://ui-avatars.com/api/?name=Walter+Rivera&background=2980b9&color=fff&size=128" } },
+            { id: "332", name: "NextGen 3D", slug: "nextgen-3d", category: "tecnologia", description: "Impresión 3D y diseño digital para prototipos, decoración y piezas funcionales.", image: "https://images.unsplash.com/photo-1631541909061-71e349d1f203?w=800&h=600&fit=crop", location: "Duitama, BOY", emprendedor: { name: "Mayra Martinez", initials: "MM", avatar: "https://ui-avatars.com/api/?name=Mayra+Martinez&background=1a3d5c&color=fff&size=128" } },
+            { id: "326", name: "Carolinda", slug: "carolinda", category: "textil", description: "Artesanías tradicionales de Tuta con un toque moderno y colorido.", image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=800&h=600&fit=crop", location: "Tuta, BOY", emprendedor: { name: "Carolina Prieto", initials: "CP", avatar: "https://ui-avatars.com/api/?name=Carolina+Prieto&background=2980b9&color=fff&size=128" } },
+            { id: "321", name: "3D-Land", slug: "3d-land", category: "tecnologia", description: "Creaciones en impresión 3D desde Firavitoba. Llaveros, figuras y utilitarios.", image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?w=800&h=600&fit=crop", location: "Firavitoba, BOY", emprendedor: { name: "Fabian Salamanca", initials: "FS", avatar: "https://ui-avatars.com/api/?name=Fabian+Salamanca&background=1a3d5c&color=fff&size=128" } },
+            { id: "318", name: "Licores JB", slug: "licores-artesanales-jb", category: "alimentos", description: "Licores artesanales de Duitama con recetas tradicionales y sabores únicos.", image: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800&h=600&fit=crop", location: "Duitama, BOY", emprendedor: { name: "Jaider Blanco", initials: "JB", avatar: "https://ui-avatars.com/api/?name=Jaider+Blanco&background=2980b9&color=fff&size=128" } },
+            { id: "106", name: "Makadamia", slug: "makadamia-velas", category: "madera", description: "Velas y aromas artesanales hechos a mano en Duitama, Boyacá.", image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=800&h=600&fit=crop", location: "Duitama, Boyacá", emprendedor: { name: "Monica Murcia", initials: "MM", avatar: "https://ui-avatars.com/api/?name=Monica+Murcia&background=1a3d5c&color=fff&size=128" } },
+            { id: "25", name: "TuArte", slug: "tuarte", category: "madera", description: "Artesanías en madera y materiales reciclados desde Sogamoso.", image: "https://images.unsplash.com/photo-1589216532372-1c2a367900d9?w=800&h=600&fit=crop", location: "Sogamoso, Boyacá", emprendedor: { name: "Javier Mojica", initials: "JM", avatar: "https://ui-avatars.com/api/?name=Javier+Mojica&background=2980b9&color=fff&size=128" } },
+            { id: "20", name: "Gricellarts", slug: "gricellarts", category: "joyeria", description: "Joyería artesanal y diseños exclusivos desde Bogotá.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&h=600&fit=crop", location: "Bogotá, CUN", emprendedor: { name: "Claudia Lopez", initials: "CL", avatar: "https://ui-avatars.com/api/?name=Claudia+Lopez&background=1a3d5c&color=fff&size=128" } },
+            { id: "16", name: "MUISCAFE", slug: "muiscafe", category: "alimentos", description: "Café de origen boyacense tostado artesanalmente en Sogamoso.", image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&h=600&fit=crop", location: "Sogamoso", emprendedor: { name: "Gonzalo Chaparro", initials: "GC", avatar: "https://ui-avatars.com/api/?name=Gonzalo+Chaparro&background=2980b9&color=fff&size=128" } },
+            { id: "36", name: "Abogados JCGM", slug: "julio-cesar-gonzalez", category: "servicios", description: "Asesoría legal integral para emprendedores y empresas en Sogamoso.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop", location: "Sogamoso, Boyacá", emprendedor: { name: "Julio González", initials: "JG", avatar: "https://ui-avatars.com/api/?name=Julio+Gonzalez&background=1a3d5c&color=fff&size=128" } },
+            { id: "296", name: "Ángela Saavedra", slug: "angela-saavedra", category: "servicios", description: "Mentoría de negocios y capacitación para emprendedores.", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop", location: "", emprendedor: { name: "Ángela Saavedra", initials: "AS", avatar: "https://ui-avatars.com/api/?name=Angela+Saavedra&background=2980b9&color=fff&size=128" } },
+        ];
+
+        let activeCatIndex = 0;
+        let activeStoreIndex = 0;
+
+        function getStoresByCategory(catId) {
+            if (catId === "todos") return stores;
+            return stores.filter(s => s.category === catId);
+        }
+
+        // ── Render Category Tabs ──
+        const catTabs = document.getElementById('catTabs');
+
+        function renderTabs() {
+            catTabs.innerHTML = '';
+            categories.forEach((cat, i) => {
+                const count = getStoresByCategory(cat.id).length;
+                const btn = document.createElement('button');
+                btn.className = 'cat-tab' + (i === activeCatIndex ? ' active' : '');
+                btn.innerHTML = `
+                    ${cat.icon}
+                    <span class="tab-name">${cat.name}</span>
+                    <span class="tab-count">(${count})</span>
+                `;
+                btn.onclick = () => {
+                    activeCatIndex = i;
+                    activeStoreIndex = 0;
+                    renderTabs();
+                    renderStoreSelector();
+                    renderMosaic();
+                };
+                catTabs.appendChild(btn);
+            });
+            setTimeout(() => {
+                const active = catTabs.querySelector('.active');
+                if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }, 10);
+        }
+
+        catTabs.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                e.preventDefault();
+                catTabs.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+
+        function scrollTabs(dir) {
+            const isMobile = window.innerWidth <= 768;
+            const scrollAmount = isMobile ? 150 : 200;
+            catTabs.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+        }
+
+        // ── Render Store Chips ──
+        const storeSelector = document.getElementById('storeSelector');
+
+        function renderStoreSelector() {
+            const cat = categories[activeCatIndex];
+            const catStores = getStoresByCategory(cat.id);
+            storeSelector.innerHTML = '';
+
+            catStores.forEach((store, i) => {
+                const chip = document.createElement('button');
+                chip.className = 'store-chip' + (i === activeStoreIndex ? ' active' : '');
+                chip.style.backgroundImage = `url(${store.image})`;
+                chip.innerHTML = `
+                    <div class="chip-avatar"><img src="${store.emprendedor.avatar}" alt="${store.emprendedor.name}"></div>
+                    <span class="chip-name">${store.name}</span>
+                `;
+                chip.onclick = () => {
+                    activeStoreIndex = i;
+                    renderStoreSelector();
+                    renderMosaic();
+                };
+                storeSelector.appendChild(chip);
+            });
+        }
+
+        // ── Render Mosaic Grid ──
+        function renderMosaic() {
+            const cat = categories[activeCatIndex];
+            const catStores = getStoresByCategory(cat.id);
+            const store = catStores[activeStoreIndex] || catStores[0];
+            if (!store) return;
+
+            document.getElementById('mosaicTitle').textContent = cat.name === "Todos" ? store.name : `${cat.name}: ${store.name}`;
+
+            document.getElementById('miniEmpImg').src = store.emprendedor.avatar;
+            document.getElementById('miniEmpImg').alt = store.emprendedor.name;
+            document.getElementById('miniEmpName').textContent = store.emprendedor.name;
+            document.getElementById('miniEmpLoc').textContent = store.location;
+
+            document.getElementById('miniTiendaImg').src = store.image;
+            document.getElementById('miniTiendaImg').alt = store.name;
+            document.getElementById('miniTiendaName').textContent = store.name;
+            document.getElementById('miniTiendaDesc').textContent = store.description;
+
+            document.getElementById('featImg').src = store.image;
+            document.getElementById('featImg').alt = store.name;
+            document.getElementById('featName').textContent = store.name;
+            document.getElementById('featSeller').textContent = `Por ${store.emprendedor.name} · ${store.location}`;
+            document.getElementById('featCta').href = `https://jovenpro.com/tienda/${store.slug}/`;
+        }
+
+        // Init
+        renderTabs();
+        renderStoreSelector();
+        renderMosaic();
+    </script>
+
+</body>
+</html>

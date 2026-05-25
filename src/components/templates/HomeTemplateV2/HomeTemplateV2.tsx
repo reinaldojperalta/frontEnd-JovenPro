@@ -1,12 +1,14 @@
 // src/components/templates/HomeTemplateV2/HomeTemplateV2.tsx
 
 import React from "react";
-import { NavbarSticky, NavbarSearchSuggestion } from "@/components/organisms/NavbarSticky";
+import { NavbarSticky } from "@/components/organisms/NavbarSticky";
+import { buildHomeSearchSuggestions } from "@/lib/homeSearchSuggestions";
 import { HeroSplit } from "@/components/organisms/HeroSplit";
 import { BentoCarousel } from "@/components/organisms/BentoCarousel";
 import { NewsSection } from "@/components/organisms/NewsSection";
 import { ProductCarousel } from "@/components/organisms/ProductCarousel";
 import { VideosSection } from "@/components/organisms/VideosSection";
+import { ProductMosaic } from "@/components/organisms/ProductMosaic";
 import { Testimonials } from "@/components/organisms/Testimonials";
 import { WorkWithUs } from "@/components/organisms/WorkWithUs";
 import { Footer } from "@/components/organisms/Footer";
@@ -37,15 +39,6 @@ export interface HomeTemplateV2Props {
     className?: string;
 }
 
-function buildSearchSuggestions(products: Product[]): NavbarSearchSuggestion[] {
-    return products.map((p) => ({
-        id: p.id,
-        label: p.name,
-        category: p.category,
-        href: `https://jovenpro.com/producto/${p.slug}/`,
-    }));
-}
-
 export function HomeTemplateV2({
     navItems,
     heroData,
@@ -59,7 +52,7 @@ export function HomeTemplateV2({
     footerData,
     className,
 }: HomeTemplateV2Props) {
-    const searchSuggestions = buildSearchSuggestions(products);
+    const searchSuggestions = buildHomeSearchSuggestions(stores, featuredProducts);
 
     return (
         <div className={cn("min-h-screen bg-background", className)}>
@@ -80,8 +73,10 @@ export function HomeTemplateV2({
                 <ProductCarousel products={featuredProducts} />
             )}
             <VideosSection videos={videos} />
-            <Testimonials testimonials={testimonials} />
+            <ProductMosaic stores={stores} />
+            
             <WorkWithUs data={workWithUsData} />
+            <Testimonials testimonials={testimonials} />
             <Footer data={footerData} />
         </div>
     );
