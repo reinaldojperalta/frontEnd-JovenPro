@@ -45,7 +45,7 @@ export const footerTeamCarouselWrapperVariants = cva(
 );
 
 export const footerTeamTrackVariants = cva(
-    "grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-4"
+    "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 max-w-[1536px] mx-auto justify-center px-4"
 );
 
 export const footerTeamCardVariants = cva(

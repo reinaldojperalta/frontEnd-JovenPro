@@ -67,7 +67,7 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
           1. GRID COMPACTO — EQUIPO JOVENPRO
           ============================================================ */}
             <div className={footerTeamSectionVariants()}>
-                <Container size="lg" padding="md">
+                <Container size="full" padding="md">
                     <Heading level="h3" variant="default" className={footerTeamTitleVariants()}>
                         El equipo que hace crecer el sueño
                     </Heading>

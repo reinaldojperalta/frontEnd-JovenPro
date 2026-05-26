@@ -55,6 +55,9 @@ export function NewsSection({
 }: NewsSectionProps) {
     const [currentPage, setCurrentPage] = useState(0);
     const [localIndex, setLocalIndex] = useState(0);
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const [slideDirection, setSlideDirection] = useState<"left" | "right" | "none">("none");
     const itemsPerPage = NEWS_ITEMS_PER_PAGE;
 
     const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -78,7 +81,8 @@ export function NewsSection({
 
     const getItem = (offset: number) => {
         if (paginatedItems.length === 0) return null;
-        return paginatedItems[(localIndex + offset) % paginatedItems.length];
+        const len = paginatedItems.length;
+        return paginatedItems[(((localIndex + offset) % len) + len) % len];
     };
 
     const handleReadArticle = (href?: string) => {
@@ -90,12 +94,40 @@ export function NewsSection({
         }
     };
 
-    const handleSlotClick = (slot: NewsSlotConfig) => {
+    const handleSlotClick = (slot: { offset: number }) => {
         if (slot.offset === 0) {
             const item = getItem(0);
             if (item) handleReadArticle(item.href);
         } else {
-            setLocalIndex((prev) => (prev + slot.offset) % paginatedItems.length);
+            setSlideDirection(slot.offset > 0 ? "left" : "right");
+            const len = paginatedItems.length;
+            setLocalIndex((prev) => (((prev + slot.offset) % len) + len) % len);
+        }
+    };
+
+    const minSwipeDistance = 50;
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        
+        if (isLeftSwipe) {
+            // Swipe left (next)
+            handleSlotClick({ offset: 1 });
+        } else if (isRightSwipe) {
+            // Swipe right (previous)
+            handleSlotClick({ offset: -1 });
         }
     };
 
@@ -229,17 +261,47 @@ export function NewsSection({
                 )}
 
                 {/* Mobile */}
-                <div className="md:hidden space-y-4">
-                    {(() => {
-                        const mFeatured = getItem(0);
-                        const mPreviews = [getItem(1), getItem(2)].filter(Boolean) as NewsItem[];
+                <div 
+                    className="md:hidden flex flex-col gap-4"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    <style dangerouslySetInnerHTML={{__html: `
+                        @keyframes slideInFromRight {
+                            from { opacity: 0; transform: translateX(30px); }
+                            to { opacity: 1; transform: translateX(0); }
+                        }
+                        @keyframes slideInFromLeft {
+                            from { opacity: 0; transform: translateX(-30px); }
+                            to { opacity: 1; transform: translateX(0); }
+                        }
+                        .animate-slide-left {
+                            animation: slideInFromRight 0.4s ease-out forwards;
+                        }
+                        .animate-slide-right {
+                            animation: slideInFromLeft 0.4s ease-out forwards;
+                        }
+                    `}} />
+                    
+                    <div 
+                        key={localIndex} 
+                        className={cn(
+                            "flex flex-col gap-4 w-full",
+                            slideDirection === "left" ? "animate-slide-left" : slideDirection === "right" ? "animate-slide-right" : ""
+                        )}
+                    >
+                        {(() => {
+                            const mFeatured = getItem(0);
+                            const mPrev = getItem(-1);
+                            const mNext = getItem(1);
 
-                        return (
-                            <>
-                                {mFeatured && (
+                            return (
+                                <>
+                                    {mFeatured && (
                                     <div
                                         className={newsSectionMobileCardVariants()}
-                                        onClick={() => handleSlotClick(NEWS_SLOTS[0])}
+                                        onClick={() => handleSlotClick({ offset: 0 })}
                                     >
                                         <div className={newsSectionMobileMediaVariants()}>
                                             <Image
@@ -266,33 +328,39 @@ export function NewsSection({
                                     </div>
                                 )}
 
-                                <div className={newsSectionMobileScrollVariants()}>
-                                    {mPreviews.map((item, idx) => (
-                                        <div key={item.id} className={newsSectionMobileItemVariants()}>
+                                <div className="grid grid-cols-2 gap-4">
+                                    {[
+                                        { item: mPrev, offset: -1, label: "Anterior" },
+                                        { item: mNext, offset: 1, label: "Siguiente" },
+                                    ].map(({ item, offset, label }) => {
+                                        if (!item) return null;
+                                        return (
                                             <div
-                                                className={newsSectionMobileCardVariants()}
-                                                onClick={() => handleSlotClick(NEWS_SLOTS[idx + 1])}
+                                                key={`${label}-${item.id}`}
+                                                className={cn(newsSectionMobileCardVariants(), "relative group overflow-hidden")}
+                                                onClick={() => handleSlotClick({ offset })}
                                             >
-                                                <div className="relative aspect-square overflow-hidden">
+                                                <div className="relative aspect-[4/5] w-full">
                                                     <Image
                                                         src={item.image}
                                                         alt={item.title}
                                                         fill
-                                                        sizes="80vw"
-                                                        className={newsSectionMobileImageVariants()}
+                                                        sizes="50vw"
+                                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                                                     />
-                                                </div>
-                                                <div className="p-4">
-                                                    <Badge variant="default" size="sm" className="mb-2">
-                                                        {item.category}
-                                                    </Badge>
-                                                    <h4 className="font-headline text-sm font-bold text-secondary mb-1">
-                                                        {item.title}
-                                                    </h4>
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                                                    <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col justify-end">
+                                                        <Badge variant="secondary" size="sm" className="mb-2 self-start bg-white/20 backdrop-blur-md text-white border-none">
+                                                            {item.category}
+                                                        </Badge>
+                                                        <h4 className="font-headline text-sm font-bold text-white line-clamp-2">
+                                                            {item.title}
+                                                        </h4>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
 
                                 {/* Nuestras Alianzas - Debajo de las noticias en móvil */}
@@ -307,6 +375,7 @@ export function NewsSection({
                             </>
                         );
                     })()}
+                    </div>
                 </div>
             </Container>
         </Section>

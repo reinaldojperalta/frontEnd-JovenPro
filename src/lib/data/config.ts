@@ -81,7 +81,7 @@ export const testimonials: Testimonial[] = [
 export const videos: VideoItem[] = [
     {
         id: "vid-001",
-        title: "El Proceso Creativo",
+        title: "Conoce JovenPro local y haz el recorrido en Familia",
         thumbnail: "/images/videos/thumbnail-raku.jpg",
         youtubeId: "VEMl5roUvtM",
         duration: "12:34",
@@ -89,7 +89,7 @@ export const videos: VideoItem[] = [
     },
     {
         id: "vid-002",
-        title: "Comunidad JovenPro",
+        title: "¡JovenPro.com la vitrina con los mejores Emprendedores de la región",
         thumbnail: "/images/videos/thumbnail-wayuu.jpg",
         youtubeId: "ahDnIPYPPgQ",
         duration: "08:21",
