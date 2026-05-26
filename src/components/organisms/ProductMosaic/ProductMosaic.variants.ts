@@ -81,7 +81,7 @@ export const mosaicChipReflectionVariants = cva(
 );
 
 export const mosaicChipAvatarVariants = cva(
-    "relative z-[3] w-7 h-7 md:w-8 md:h-8 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/60"
+    "relative z-[3] w-7 h-7 md:w-8 md:h-8 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/60 bg-secondary"
 );
 
 export const mosaicChipAvatarInnerVariants = cva(
@@ -114,7 +114,7 @@ export const mosaicFeaturedImageVariants = cva(
 );
 
 export const mosaicFeaturedImgVariants = cva(
-    "object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+    "object-cover transition-transform duration-500 group-hover:scale-[1.03] text-transparent"
 );
 
 export const mosaicFeaturedInfoVariants = cva("p-5 md:p-7 flex flex-col gap-2");
@@ -132,7 +132,7 @@ export const mosaicFeaturedCtaVariants = cva(
    ============================================ */
 
 export const mosaicMiniGlassVariants = cva(
-    "relative overflow-hidden rounded-clay cursor-pointer group flex",
+    "relative overflow-hidden rounded-clay cursor-pointer group flex bg-secondary",
     {
         variants: {
             area: {
@@ -146,7 +146,7 @@ export const mosaicMiniGlassVariants = cva(
 
 /** Capa 1 — Imagen de fondo (absolute, inset: 0) */
 export const mosaicMiniGlassImageVariants = cva(
-    "absolute inset-0 object-cover transition-transform duration-500 ease-smooth group-hover:scale-105 z-0"
+    "absolute inset-0 object-cover transition-transform duration-500 ease-smooth group-hover:scale-105 z-0 text-transparent"
 );
 
 /** Capa 2 — Gradiente direccional (oscurece derecha → transparente izquierda) */

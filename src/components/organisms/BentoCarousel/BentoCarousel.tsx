@@ -276,7 +276,7 @@ export function BentoCarousel({
                                 alt="JovenPro by ZonaPro"
                                 width={200}
                                 height={48}
-                                className="w-auto h-12 object-contain opacity-80"
+                                className="object-contain opacity-80"
                                 priority
                             />
                         </BentoItem>

@@ -303,7 +303,7 @@ export function ProductMosaic({
                                         alt={store.name}
                                         fill
                                         sizes="200px"
-                                        className="absolute inset-0 object-cover z-0"
+                                        className="absolute inset-0 object-cover z-0 text-transparent"
                                         aria-hidden
                                     />
                                     <span

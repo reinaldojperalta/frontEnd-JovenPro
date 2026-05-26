@@ -18,7 +18,7 @@ export const heroSplitLogoWrapperVariants = cva(
 
 /** Contenedor con efecto glass para el logo */
 export const heroSplitLogoContainerVariants = cva(
-    "relative w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 p-4 sm:p-6 md:p-10 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
+    "relative w-40 h-20 sm:w-60 sm:h-28 md:w-[336px] md:h-[144px] p-3 sm:p-5 md:p-8 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-700 ease-smooth hover:bg-white/20 hover:scale-110"
 );
 
 /** Imagen del logo (cuando se pasa logoSrc) */
@@ -112,7 +112,7 @@ export const heroSplitSubtitleVariants = cva(
 
 /** Wrapper del CTA (span con icono) */
 export const heroSplitCTAVariants = cva(
-    "inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white group-hover:gap-3 transition-all duration-300"
+    "inline-flex items-center gap-2 text-md font-semibold uppercase tracking-widest text-white group-hover:gap-3 group-hover:text-primary transition-all duration-300"
 );
 
 /** Icono de flecha dentro del CTA */

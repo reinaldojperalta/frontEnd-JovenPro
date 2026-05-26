@@ -48,8 +48,8 @@ export interface NewsSectionProps {
 
 export function NewsSection({
     items,
-    title = "Actualidades",
-    subtitle = "Conoce las últimas novedades y eventos de JovenPro",
+    title = "Novedades",
+    subtitle = "conoce como impactamos a la región",
     className,
     onReadArticle,
 }: NewsSectionProps) {

@@ -21,9 +21,9 @@ export const navItems: NavItem[] = [
     { label: "Inicio", href: "#inicio" },
     { label: "Productos", href: "#productos" },
     { label: "Noticias", href: "#journal" },
-    { label: "Videos", href: "#videos" },
-    { label: "Testimonios", href: "#testimonios" },
-    { label: "emprende", href: "#contacto" },
+    { label: "Membresías", href: "https://jovenpro.com/membresias/" },
+    { label: "Convocatorias", href: "https://jovenpro.com/convocatorias/" },
+    { label: "Contacto", href: "#contacto" },
 ];
 
 // --------------------------------------------
@@ -103,18 +103,18 @@ export const videos: VideoItem[] = [
 
 export const heroSplitData: HeroSplitData = {
     left: {
-        title: "Crea con nosotros",
-        subtitle: "Únete a nuestra plataforma y lleva tus productos a miles de compradores.",
-        cta: "Quiero vender",
+        title: "¡Quiero Unirme!",
+        subtitle: "Soy Emprendedor",
+        cta: " HACER PARTE",
         href: "#contacto",
         image: "/images/hero/imagen_heroSide_emprendedor.webp",
     },
     right: {
-        title: "Apoya lo local",
-        subtitle: "Descubre artesanías únicas, hechas a mano por emprendedores colombianos.",
-        cta: "Explorar tienda.",
+        title: "Apoya lo nuestro",
+        subtitle: "Quiero comprar",
+        cta: "EXPLORAR TIENDA.",
         href: "#productos",
-        image: "/images/hero/emprendedor-mirror.jpg",
+        image: "/images/hero/emprendedor-mirror.png",
     },
     logoSrc: "/images/logo/JovenPro-by-ZonaPro.png",
 };
@@ -124,10 +124,10 @@ export const heroSplitData: HeroSplitData = {
 // --------------------------------------------
 
 export const workWithUsData: WorkWithUsData = {
-    headline: "Únete a los demás emprendedores.",
+    headline: "Únete a la comunidad de Emprendedores.",
     subheadline:
-        "Transforma tu pasión en un negocio próspero. Accede a herramientas exclusivas, visibilidad internacional y una comunidad que respalda tu crecimiento emprendedor.",
-    sectionLabel: "Maker Hub",
+        "Agenda una reunión virtual y/o presencial y únete al mejor ecosistema de emprendedores de la región.",
+    sectionLabel: "Trabaja con Nosotros",
     socialsLabel: "Conecta con nosotros",
     whatsappDisplayLabel: "WhatsApp: +57 302 484 0101",
     membershipsDisplayLabel: "Membresías", // AÑADIDO

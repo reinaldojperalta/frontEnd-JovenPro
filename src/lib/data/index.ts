@@ -11,3 +11,5 @@ export * from "./config";
 export * from "./stores";
 export * from "./products";
 export * from "./news";
+export * from "./entrepreneurs";
+export * from "./team";

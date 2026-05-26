@@ -19,35 +19,14 @@ export const newsItems: NewsItem[] = [
     },
     {
         id: "news-002",
-        title: "Tejiendo tradición: El arte wayúu",
+        title: "En el mes de mamá regalas JovenPro Local",
         excerpt:
-            "Conoce el significado de cada patrón y color en el tejido ancestral del pueblo wayúu.",
-        category: "Textil",
-        image: "/images/news/madera-andes.jpg",
-        date: "25 Abr 2026",
-        readTime: "4 min",
-        href: "https://jovenpro.com/",
-    },
-    {
-        id: "news-003",
-        title: "La madera noble de los Andes",
-        excerpt:
-            "Un recorrido por los talleres de ebanistería que utilizan maderas sostenibles de la región.",
-        category: "Madera",
-        image: "/images/news/madera-andes.jpg",
+            "Regala propósito local. Diseñamos anchetas con productos hechos a mano por emprendedores de la región. Una opción ideal para empresas, familias y regalos con impacto social. -Talleres Creativos: Música, Arte & Salud, 9, 10, 16, 17, 23, 24, 30 y 31 de Mayo en nuestra sede física",
+        category: "Eventos",
+        image: "/images/news/Campaña madres-13.png",
         date: "22 Abr 2026",
-        readTime: "6 min",
-        href: "https://jovenpro.com/",
+        readTime: "2 min",
+        href: "https://maps.app.goo.gl/rW3AzpZDKm4A8YLG8",
     },
-    {
-        id: "news-004",
-        title: "Plata y esmeraldas: la dupla perfecta",
-        excerpt:
-            "Tendencias en joyería artesanal colombiana para esta temporada.",
-        category: "Joyería",
-        image: "/images/news/plata-esmeraldas.jpg",
-        date: "18 Abr 2026",
-        readTime: "3 min",
-        href: "https://jovenpro.com/",
-    },
+
 ];

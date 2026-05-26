@@ -1,20 +1,6 @@
 // ============================================================================
 // FOOTER VARIANTS — Organismo de pie de página
 // ============================================================================
-// REFACTOR V3:
-// - Zero Inline Policy: todas las clases migradas desde .tsx
-// - Tokens fantasmas:
-//   • font-display → font-headline
-// - Nuevos CVA:
-//   • footerVariants: bg + border del footer
-//   • footerInnerVariants: flex layout interno
-//   • footerBrandVariants: logo + copyright
-//   • footerLogoVariants: reemplaza font-display
-//   • footerCopyrightVariants: texto de copyright
-//   • footerNavVariants: lista de links
-//   • footerNavItemVariants: cada link
-//   • footerSocialsVariants: flex de iconos sociales
-// ============================================================================
 
 import { cva } from "class-variance-authority";
 
@@ -43,3 +29,79 @@ export const footerNavItemVariants = cva(
 );
 
 export const footerSocialsVariants = cva("flex gap-3");
+
+// ============================================================================
+// TEAM CAROUSEL VARIANTS
+// ============================================================================
+
+export const footerTeamSectionVariants = cva("py-10 border-t border-border/10");
+
+export const footerTeamTitleVariants = cva(
+    "font-headline text-xl md:text-2xl font-bold text-foreground text-center mb-5"
+);
+
+export const footerTeamCarouselWrapperVariants = cva(
+    "w-full"
+);
+
+export const footerTeamTrackVariants = cva(
+    "grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-4"
+);
+
+export const footerTeamCardVariants = cva(
+    "rounded-lg overflow-hidden bg-surface shadow-sm"
+);
+
+export const footerTeamImageVariants = cva(
+    "w-full aspect-[3/4] object-cover bg-surface-variant"
+);
+
+export const footerTeamInfoVariants = cva("px-2 py-2 text-center");
+
+export const footerTeamNameVariants = cva(
+    "font-headline text-xs md:text-sm font-bold text-foreground block leading-tight truncate"
+);
+
+export const footerTeamRoleVariants = cva(
+    "font-body text-[10px] md:text-xs text-muted-foreground block leading-tight truncate"
+);
+
+// ============================================================================
+// ENTREPRENEURS STRIP VARIANTS
+// ============================================================================
+
+export const footerEntrepreneursSectionVariants = cva(
+    "py-8 border-t border-border/10 bg-surface/50"
+);
+
+export const footerEntrepreneursTitleVariants = cva(
+    "font-headline text-2xl md:text-3xl font-bold text-foreground text-center mb-6"
+);
+
+export const footerEntrepreneursSubtitleVariants = cva(
+    "font-body text-base md:text-lg text-muted-foreground text-center mt-6 max-w-3xl mx-auto"
+);
+
+export const footerEntrepreneursGridVariants = cva(
+    "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+);
+
+export const footerEntrepreneurCardVariants = cva(
+    "relative overflow-hidden group"
+);
+
+export const footerEntrepreneurImageVariants = cva(
+    "w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+);
+
+export const footerEntrepreneurOverlayVariants = cva(
+    "absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
+);
+
+export const footerEntrepreneurNameVariants = cva(
+    "font-headline text-sm font-bold text-white"
+);
+
+export const footerEntrepreneurBusinessVariants = cva(
+    "font-body text-xs text-white/80 mt-0.5"
+);

@@ -1,9 +1,8 @@
-// ============================================================================
-// FOOTER — Barrel export
-// ============================================================================
-
 export { Footer } from "./Footer";
 export type { FooterProps } from "./Footer";
+
+export { FooterSkeleton } from "./FooterSkeleton";
+export type { FooterSkeletonProps } from "./FooterSkeleton";
 
 export {
     footerVariants,
@@ -14,7 +13,22 @@ export {
     footerNavVariants,
     footerNavItemVariants,
     footerSocialsVariants,
+    footerTeamSectionVariants,
+    footerTeamTitleVariants,
+    footerTeamCarouselWrapperVariants,
+    footerTeamTrackVariants,
+    footerTeamCardVariants,
+    footerTeamImageVariants,
+    footerTeamInfoVariants,
+    footerTeamNameVariants,
+    footerTeamRoleVariants,
+    footerEntrepreneursSectionVariants,
+    footerEntrepreneursTitleVariants,
+    footerEntrepreneursSubtitleVariants,
+    footerEntrepreneursGridVariants,
+    footerEntrepreneurCardVariants,
+    footerEntrepreneurImageVariants,
+    footerEntrepreneurOverlayVariants,
+    footerEntrepreneurNameVariants,
+    footerEntrepreneurBusinessVariants,
 } from "./Footer.variants";
-
-export { FooterSkeleton } from "./FooterSkeleton";
-export type { FooterSkeletonProps } from "./FooterSkeleton";
