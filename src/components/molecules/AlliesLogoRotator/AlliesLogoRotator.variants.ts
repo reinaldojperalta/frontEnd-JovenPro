@@ -1,12 +1,11 @@
 import { cva } from "class-variance-authority";
 
 export const alliesRotatorVariants = cva(
-    "relative w-full h-full overflow-hidden rounded-clay bg-primary flex items-center justify-center"
+    "relative w-full h-full overflow-hidden rounded-clay bg-white"
 );
 
-export const alliesRotatorInnerVariants = cva("relative w-full h-full flex items-center justify-center p-2 md:p-2.5");
+export const alliesRotatorInnerVariants = cva("absolute inset-0 p-4 md:p-6");
 
-/** ~40% más que 88%×72%: 88×1.4≈123 → 100%, 72×1.4≈101 → 100% */
 export const alliesRotatorImageVariants = cva(
-    "max-w-full max-h-full w-auto h-auto object-contain pointer-events-none select-none"
+    "max-w-[70%] max-h-[70%] object-contain pointer-events-none select-none"
 );

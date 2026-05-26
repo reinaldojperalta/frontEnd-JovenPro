@@ -162,7 +162,12 @@ export function NewsSection({
 
                                 if (slot.kind === "allies") {
                                     return (
-                                        <div key={slot.id} className={slotClass}>
+                                        <div key={slot.id} className={cn(slotClass, "relative")}>
+                                            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10">
+                                                <Badge variant="primary" size="sm">
+                                                    Nuestras Alianzas
+                                                </Badge>
+                                            </div>
                                             <AlliesLogoRotator className="w-full h-full" />
                                         </div>
                                     );
@@ -288,11 +293,16 @@ export function NewsSection({
                                             </div>
                                         </div>
                                     ))}
-                                    <div className={newsSectionMobileItemVariants()}>
-                                        <div className="aspect-square w-full overflow-hidden rounded-2xl">
-                                            <AlliesLogoRotator className="w-full h-full min-h-[280px]" />
-                                        </div>
+                                </div>
+
+                                {/* Nuestras Alianzas - Debajo de las noticias en móvil */}
+                                <div className="w-full relative overflow-hidden rounded-2xl h-48 bg-white border border-border/30 mt-2">
+                                    <div className="absolute top-3 left-3 z-10">
+                                        <Badge variant="primary" size="sm">
+                                            Nuestras Alianzas
+                                        </Badge>
                                     </div>
+                                    <AlliesLogoRotator className="w-full h-full" />
                                 </div>
                             </>
                         );

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { m, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { ALLIES_LOGO_PATHS } from "./AlliesLogoRotator.constants";
 import {
@@ -15,33 +14,40 @@ export interface AlliesLogoRotatorProps {
     className?: string;
 }
 
+/**
+ * AlliesLogoRotator — CSS-only cross-fade rotator.
+ * Replaces Framer Motion AnimatePresence to avoid the bug where
+ * `display:none` parent containers prevent the animate state from firing.
+ */
 export function AlliesLogoRotator({ intervalMs = 4000, className }: AlliesLogoRotatorProps) {
-    const [index, setIndex] = useState(0);
     const logos = ALLIES_LOGO_PATHS;
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const advance = useCallback(() => {
+        setActiveIndex((prev) => (prev + 1) % logos.length);
+    }, [logos.length]);
 
     useEffect(() => {
         if (logos.length <= 1) return;
-        const id = window.setInterval(() => {
-            setIndex((prev) => (prev + 1) % logos.length);
-        }, intervalMs);
+        const id = window.setInterval(advance, intervalMs);
         return () => window.clearInterval(id);
-    }, [logos.length, intervalMs]);
+    }, [logos.length, intervalMs, advance]);
 
     return (
         <div className={cn(alliesRotatorVariants(), className)} aria-hidden>
             <div className={alliesRotatorInnerVariants()}>
-                <AnimatePresence mode="wait">
-                    <m.img
-                        key={logos[index]}
-                        src={logos[index]}
+                {logos.map((src, i) => (
+                    <img
+                        key={src}
+                        src={src}
                         alt=""
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.02 }}
-                        transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-                        className={alliesRotatorImageVariants()}
+                        className={cn(
+                            alliesRotatorImageVariants(),
+                            "absolute inset-0 m-auto transition-opacity duration-500 ease-out",
+                            i === activeIndex ? "opacity-100" : "opacity-0"
+                        )}
                     />
-                </AnimatePresence>
+                ))}
             </div>
         </div>
     );
