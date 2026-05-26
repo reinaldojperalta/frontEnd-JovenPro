@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { m, AnimatePresence, LazyMotion } from "framer-motion";
 import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
@@ -132,9 +133,11 @@ export function NavbarSticky({
                                 className={navbarStickyLogoVariants()}
                                 onClick={() => handleNavClick("#inicio")}
                             >
-                                <img
+                                <Image
                                     src="/images/logo/jpror.png"
                                     alt="JovenPro Logo"
+                                    width={160}
+                                    height={40}
                                     className="h-8 md:h-10 w-auto object-contain cursor-pointer"
                                 />
                             </div>

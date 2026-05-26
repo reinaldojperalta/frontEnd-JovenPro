@@ -38,7 +38,7 @@ export async function getCategories(): Promise<string[]> {
 
 export async function getFeaturedProduct() {
     return {
-        image: "/placeholders/skillet-01.png",
+        image: "/placeholders/skillet-01.webp",
         title: "Cerámica Ancestral v2",
         subtitle: "Destacado de la Semana",
         author: "Artesanías del Valle",

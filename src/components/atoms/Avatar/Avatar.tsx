@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
     avatarVariants,
@@ -30,11 +31,13 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
                 {...props}
             >
                 {src && !hasError ? (
-                    <img
+                    <Image
                         src={src}
                         alt={alt || "Avatar"}
+                        fill
                         className={cn(avatarImageVariants())}
                         onError={onError}
+                        sizes="80px"
                     />
                 ) : (
                     <span className={cn(avatarFallbackVariants())}>

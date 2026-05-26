@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { m, AnimatePresence, LazyMotion } from "framer-motion";
 import domAnimation from "@/lib/framer-features";
 import { Container } from "@/components/atoms/Container";
@@ -128,10 +129,12 @@ export function Testimonials({
 
                                         <div className={testimonialsProductVariants()}>
                                             {active.productImage && (
-                                                <img
+                                                <Image
                                                     src={active.productImage}
                                                     alt="Producto"
                                                     className={testimonialsProductImageVariants()}
+                                                    width={100}
+                                                    height={100}
                                                 />
                                             )}
                                             <StarRating

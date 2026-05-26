@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Instagram, Facebook, MessageCircle, Send } from "lucide-react";
 import { Container } from "@/components/atoms/Container";
 import { IconButton } from "@/components/atoms/IconButton";
@@ -76,11 +77,12 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
                         <div className={footerTeamTrackVariants()}>
                             {teamMembers.map((member) => (
                                 <div key={member.id} className={footerTeamCardVariants()}>
-                                    <img
+                                    <Image
                                         src={member.image}
                                         alt={member.name}
                                         className={footerTeamImageVariants()}
-                                        loading="lazy"
+                                        width={300}
+                                        height={400}
                                     />
                                     <div className={footerTeamInfoVariants()}>
                                         <span className={footerTeamNameVariants()}>{member.name}</span>
@@ -107,11 +109,12 @@ export function Footer({ data, className, onOpenLink }: FooterProps) {
                 <div className={footerEntrepreneursGridVariants()}>
                     {entrepreneurs.map((emp) => (
                         <div key={emp.id} className={footerEntrepreneurCardVariants()}>
-                            <img
+                            <Image
                                 src={emp.image}
                                 alt={emp.name}
                                 className={footerEntrepreneurImageVariants()}
-                                loading="lazy"
+                                width={600}
+                                height={600}
                             />
                             <div className={footerEntrepreneurOverlayVariants()}>
                                 <span className={footerEntrepreneurNameVariants()}>{emp.name}</span>

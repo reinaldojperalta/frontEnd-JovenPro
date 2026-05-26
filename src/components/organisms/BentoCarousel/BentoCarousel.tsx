@@ -270,7 +270,7 @@ export function BentoCarousel({
                         onTouchEnd={handleTouchEnd}
                     >
                         {/* ── TEXTOS ── */}
-                        <BentoItem position="subtitle2" type="text" background="transparent" className="hidden md:flex">
+                        <BentoItem position="subtitle2" type="text" background="surface" className="hidden md:flex">
                             <Image
                                 src="/images/logo/JovenPro-by-ZonaPro.png"
                                 alt="JovenPro by ZonaPro"

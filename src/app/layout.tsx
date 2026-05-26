@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: "Marketplace premium para el talento emprendedor. Descubre productos y servicios de alta calidad.",
     images: [
       {
-        url: "/images/logo/JovenPro-by-ZonaPro.png",
+        url: "/images/logo/JovenPro-by-ZonaPro.webp",
         width: 1200,
         height: 630,
         alt: "JovenPro by ZonaPro Logo",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "JovenPro by ZonaPro",
     description: "Marketplace premium para el talento emprendedor.",
-    images: ["/images/logo/JovenPro-by-ZonaPro.png"],
+    images: ["/images/logo/JovenPro-by-ZonaPro.webp"],
   },
   icons: {
     icon: [{ url: "/images/iconpro.png", type: "image/png" }],

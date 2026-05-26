@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ALLIES_LOGO_PATHS } from "./AlliesLogoRotator.constants";
 import {
@@ -37,10 +38,12 @@ export function AlliesLogoRotator({ intervalMs = 4000, className }: AlliesLogoRo
         <div className={cn(alliesRotatorVariants(), className)} aria-hidden>
             <div className={alliesRotatorInnerVariants()}>
                 {logos.map((src, i) => (
-                    <img
+                    <Image
                         key={src}
                         src={src}
-                        alt=""
+                        alt="Logo aliado"
+                        width={200}
+                        height={100}
                         className={cn(
                             alliesRotatorImageVariants(),
                             "absolute inset-0 m-auto transition-opacity duration-500 ease-out",

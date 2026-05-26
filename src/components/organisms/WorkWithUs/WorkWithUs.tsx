@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { m, LazyMotion } from "framer-motion";
 import domAnimation from "@/lib/framer-features";
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
@@ -197,9 +198,10 @@ export function WorkWithUs({
 
                     {/* Columna derecha: mapa */}
                     <div className={workWithUsMapVariants()}>
-                        <img
+                        <Image
                             src={data.mapImageUrl}
                             alt="Mapa"
+                            fill
                             className={workWithUsMapImageVariants()}
                         />
                         <div className={workWithUsMapOverlayVariants()} />

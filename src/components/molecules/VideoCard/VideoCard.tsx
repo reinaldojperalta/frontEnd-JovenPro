@@ -40,13 +40,19 @@ export interface VideoCardProps {
 }
 
 export function VideoCard({ video, className }: VideoCardProps) {
+    // Si la miniatura está vacía, construimos manualmente la URL de YouTube CDN
+    // apuntando a hqdefault.jpg que es el estándar de YouTube que siempre existe.
+    const thumbnailUrl =
+        video.thumbnail ||
+        `https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`;
+
     return (
         <article className={cn(videoCardVariants(), className)}>
             <div className={cn(videoCardPlayerVariants())}>
                 <LiteYouTubeEmbed
                     id={video.youtubeId}
                     title={video.title}
-                    thumbnail={video.thumbnail}
+                    thumbnail={thumbnailUrl}
                     wrapperClass="yt-lite-custom"
                 />
                 <span className={cn(videoCardDurationVariants())}>

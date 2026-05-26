@@ -24,6 +24,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Text } from "@/components/atoms/Typography";
 import { StarRating } from "@/components/atoms/StarRating";
@@ -111,11 +112,11 @@ export function TestimonialCard({
                 <StarRating value={testimonial.rating} size="sm" />
                 {testimonial.productImage && (
                     <div className={cn(testimonialCardProductImageVariants())}>
-                        <img
+                        <Image
                             src={testimonial.productImage}
                             alt="Producto comprado"
+                            fill
                             className={cn(testimonialCardProductImgVariants())}
-                            loading="lazy"
                         />
                     </div>
                 )}
