@@ -122,12 +122,14 @@ export function NewsSection({
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
         
-        if (isLeftSwipe) {
-            // Swipe left (next)
-            handleSlotClick({ offset: 1 });
-        } else if (isRightSwipe) {
-            // Swipe right (previous)
-            handleSlotClick({ offset: -1 });
+        if (isLeftSwipe && currentPage < totalPages - 1) {
+            // Swipe left → next page (next 3 news items)
+            setSlideDirection("left");
+            setCurrentPage((prev) => prev + 1);
+        } else if (isRightSwipe && currentPage > 0) {
+            // Swipe right → previous page
+            setSlideDirection("right");
+            setCurrentPage((prev) => prev - 1);
         }
     };
 
@@ -285,7 +287,7 @@ export function NewsSection({
                     `}} />
                     
                     <div 
-                        key={localIndex} 
+                        key={`page-${currentPage}-idx-${localIndex}`} 
                         className={cn(
                             "flex flex-col gap-4 w-full",
                             slideDirection === "left" ? "animate-slide-left" : slideDirection === "right" ? "animate-slide-right" : ""
@@ -372,6 +374,20 @@ export function NewsSection({
                                     </div>
                                     <AlliesLogoRotator className="w-full h-full" />
                                 </div>
+
+                                {/* Mobile Pagination Dots */}
+                                {totalPages > 1 && (
+                                    <div className="flex justify-center pt-2">
+                                        <PaginationDots
+                                            size="compact"
+                                            currentOffset={0}
+                                            onOffsetChange={handleDotOffsetChange}
+                                            total={totalPages}
+                                            currentIndex={currentPage}
+                                            previewLabels={previewLabels}
+                                        />
+                                    </div>
+                                )}
                             </>
                         );
                     })()}
