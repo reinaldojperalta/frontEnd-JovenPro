@@ -88,6 +88,16 @@ export const newsItems: NewsItem[] = [
         readTime: "",
         href: "https://www.instagram.com/jovenprocolombia?igsh=MTcxbzdhcDNtZWlheg==",
     },
+    {
+        id: "news-009",
+        title: "¡En 2026 Emprendes con una comunidad que te impulsa!",
+        excerpt: "Este año el 12 de Julio y el 25 de Octubre se desarrollarán el Bazar de la Confianza, una oportunidad para tejer redes solidarias y fortalecer oportunidades a través de Confiar Coop. Una oportunidad para nuestros Emprendedores que tejen red y trabajan con impacto social",
+        category: "Eventos",
+        image: "/images/news/jovenpro_noticia_7.jpeg",
+        date: "",
+        readTime: "",
+        href: "https://www.instagram.com/jovenprocolombia?igsh=MTcxbzdhcDNtZWlheg==",
+    },
 
 
 ];
